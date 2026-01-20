@@ -1,0 +1,379 @@
+.bien-datepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Input Button */
+.bien-datepicker__input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface-base);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+  text-align: left;
+}
+
+.bien-datepicker__input:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-datepicker__input:focus {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-color: var(--color-brand-base);
+}
+
+.bien-datepicker__input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bien-datepicker__value {
+  color: var(--color-text-primary);
+}
+
+.bien-datepicker__placeholder {
+  color: var(--color-text-secondary);
+}
+
+.bien-datepicker__icon {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+/* Overlay */
+.bien-datepicker__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+/* Dropdown */
+.bien-datepicker__dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  left: 0;
+  z-index: 1000;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-md);
+  min-width: 280px;
+  animation: bien-datepicker-fade-in var(--duration-fast) var(--easing);
+}
+
+@keyframes bien-datepicker-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.bien-datepicker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  gap: var(--space-sm);
+}
+
+.bien-datepicker__month-year-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex: 1;
+  justify-content: center;
+}
+
+.bien-datepicker__month-button,
+.bien-datepicker__year-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  padding: var(--space-xs) var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-datepicker__month-button:hover,
+.bien-datepicker__year-button:hover {
+  background-color: var(--color-interactive-hover);
+  border-color: var(--color-brand-base);
+}
+
+.bien-datepicker__month-year {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Calendar */
+.bien-datepicker__calendar {
+  margin-bottom: var(--space-md);
+}
+
+.bien-datepicker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.bien-datepicker__weekday {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  padding: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bien-datepicker__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-xs);
+}
+
+.bien-datepicker__day-cell {
+  aspect-ratio: 1;
+}
+
+.bien-datepicker__day {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+  position: relative;
+}
+
+.bien-datepicker__day:hover:not(:disabled) {
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-datepicker__day--today {
+  color: var(--color-brand-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.bien-datepicker__day--today::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-brand-base);
+}
+
+.bien-datepicker__day--selected {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(2, 140, 134, 0.15) 100%
+  );
+  color: var(--color-brand-base);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 0 0 2px rgba(29, 117, 188, 0.3);
+}
+
+.bien-datepicker__day--selected:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.2) 0%,
+    rgba(2, 140, 134, 0.2) 100%
+  );
+}
+
+.bien-datepicker__day--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Range Selection */
+.bien-datepicker__day--range-start,
+.bien-datepicker__day--range-end {
+  background: linear-gradient(
+    135deg,
+    var(--color-blue) 0%,
+    var(--color-teal) 100%
+  );
+  color: white;
+  font-weight: var(--font-weight-bold);
+  box-shadow: none;
+}
+
+.bien-datepicker__day--range-start:hover,
+.bien-datepicker__day--range-end:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-blue) 0%,
+    var(--color-teal) 100%
+  );
+  opacity: 0.9;
+}
+
+/* Month Picker Grid */
+.bien-datepicker__month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 0;
+}
+
+.bien-datepicker__month-option {
+  padding: var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-datepicker__month-option:hover {
+  background-color: var(--color-interactive-hover);
+  border-color: var(--color-brand-base);
+}
+
+.bien-datepicker__month-option--active {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(2, 140, 134, 0.15) 100%
+  );
+  color: var(--color-brand-base);
+  border-color: var(--color-brand-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Year Picker Grid */
+.bien-datepicker__year-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.bien-datepicker__year-option {
+  padding: var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-datepicker__year-option:hover {
+  background-color: var(--color-interactive-hover);
+  border-color: var(--color-brand-base);
+}
+
+.bien-datepicker__year-option--active {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(2, 140, 134, 0.15) 100%
+  );
+  color: var(--color-brand-base);
+  border-color: var(--color-brand-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Footer */
+.bien-datepicker__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.bien-datepicker__today-button {
+  padding: var(--space-xs) var(--space-md);
+  background: transparent;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-base);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-datepicker__today-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.1) 0%,
+    rgba(2, 140, 134, 0.1) 100%
+  );
+  border-color: var(--color-brand-base);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-datepicker__day--selected {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.25) 0%,
+    rgba(2, 140, 134, 0.25) 100%
+  );
+  box-shadow: 0 0 0 2px rgba(29, 117, 188, 0.4);
+}
+
+[data-theme='dark'] .bien-datepicker__day--selected:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.3) 0%,
+    rgba(2, 140, 134, 0.3) 100%
+  );
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bien-datepicker__dropdown {
+    min-width: 100%;
+    max-width: 320px;
+  }
+}

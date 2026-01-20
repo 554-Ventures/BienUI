@@ -1,0 +1,274 @@
+.bien-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bien-avatar__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-bg-subtle);
+  transition: all var(--duration-fast) var(--easing);
+}
+
+/* Sizes */
+.bien-avatar--xs {
+  width: 24px;
+  height: 24px;
+}
+
+.bien-avatar--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.bien-avatar--md {
+  width: 40px;
+  height: 40px;
+}
+
+.bien-avatar--lg {
+  width: 48px;
+  height: 48px;
+}
+
+.bien-avatar--xl {
+  width: 64px;
+  height: 64px;
+}
+
+.bien-avatar--2xl {
+  width: 96px;
+  height: 96px;
+}
+
+/* Shapes */
+.bien-avatar--circle .bien-avatar__container {
+  border-radius: var(--radius-full);
+}
+
+.bien-avatar--square .bien-avatar__container {
+  border-radius: var(--radius-md);
+}
+
+/* Image */
+.bien-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Initials */
+.bien-avatar__initials {
+  color: white;
+  font-weight: var(--font-weight-semibold);
+  user-select: none;
+  text-transform: uppercase;
+}
+
+.bien-avatar--xs .bien-avatar__initials {
+  font-size: 10px;
+}
+
+.bien-avatar--sm .bien-avatar__initials {
+  font-size: 12px;
+}
+
+.bien-avatar--md .bien-avatar__initials {
+  font-size: 14px;
+}
+
+.bien-avatar--lg .bien-avatar__initials {
+  font-size: 16px;
+}
+
+.bien-avatar--xl .bien-avatar__initials {
+  font-size: 20px;
+}
+
+.bien-avatar--2xl .bien-avatar__initials {
+  font-size: 32px;
+}
+
+/* Icon */
+.bien-avatar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
+
+.bien-avatar--xs .bien-avatar__icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.bien-avatar--sm .bien-avatar__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bien-avatar--md .bien-avatar__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bien-avatar--lg .bien-avatar__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bien-avatar--xl .bien-avatar__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.bien-avatar--2xl .bien-avatar__icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* Overflow counter */
+.bien-avatar__overflow {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(2, 140, 134, 0.15) 100%
+  );
+  border: 2px solid var(--color-surface-base);
+}
+
+.bien-avatar__overflow .bien-avatar__initials {
+  color: var(--color-brand-base);
+}
+
+/* Status Indicator */
+.bien-avatar__status {
+  position: absolute;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-surface-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.bien-avatar--xs .bien-avatar__status {
+  width: 8px;
+  height: 8px;
+  bottom: -1px;
+  right: -1px;
+}
+
+.bien-avatar--sm .bien-avatar__status,
+.bien-avatar--md .bien-avatar__status {
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+}
+
+.bien-avatar--lg .bien-avatar__status,
+.bien-avatar--xl .bien-avatar__status {
+  width: 12px;
+  height: 12px;
+  bottom: 2px;
+  right: 2px;
+}
+
+.bien-avatar--2xl .bien-avatar__status {
+  width: 16px;
+  height: 16px;
+  bottom: 4px;
+  right: 4px;
+}
+
+.bien-avatar__status--online {
+  background-color: #22c55e;
+}
+
+.bien-avatar__status--offline {
+  background-color: var(--color-border-base);
+}
+
+.bien-avatar__status--away {
+  background-color: #f59e0b;
+}
+
+.bien-avatar__status--busy {
+  background-color: #ef4444;
+}
+
+/* Avatar Group */
+.bien-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.bien-avatar-group .bien-avatar {
+  margin-left: -8px;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-avatar-group .bien-avatar:first-child {
+  margin-left: 0;
+}
+
+.bien-avatar-group .bien-avatar .bien-avatar__container {
+  border: 2px solid var(--color-surface-base);
+}
+
+.bien-avatar-group .bien-avatar:hover {
+  transform: translateY(-2px);
+  z-index: 10;
+}
+
+.bien-avatar-group .bien-avatar:hover .bien-avatar__container {
+  box-shadow: var(--shadow-md);
+}
+
+.bien-avatar-group--xs .bien-avatar {
+  margin-left: -6px;
+}
+
+.bien-avatar-group--sm .bien-avatar {
+  margin-left: -8px;
+}
+
+.bien-avatar-group--md .bien-avatar {
+  margin-left: -10px;
+}
+
+.bien-avatar-group--lg .bien-avatar {
+  margin-left: -12px;
+}
+
+.bien-avatar-group--xl .bien-avatar {
+  margin-left: -16px;
+}
+
+.bien-avatar-group--2xl .bien-avatar {
+  margin-left: -24px;
+}
+
+/* Hover effect */
+.bien-avatar:hover .bien-avatar__container {
+  transform: scale(1.05);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-avatar__overflow {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.25) 0%,
+    rgba(2, 140, 134, 0.25) 100%
+  );
+  border-color: var(--color-surface-raised);
+}
+
+[data-theme='dark'] .bien-avatar-group .bien-avatar .bien-avatar__container {
+  border-color: var(--color-surface-raised);
+}

@@ -1,0 +1,64 @@
+.bien-color-swatch {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border-base);
+  background-color: var(--color-surface-base);
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-color-swatch:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.bien-color-swatch__preview {
+  height: 100px;
+  width: 100%;
+  position: relative;
+}
+
+.bien-color-swatch__info {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bien-color-swatch__name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.bien-color-swatch__value {
+  font-size: var(--font-size-sm);
+  font-family: monospace;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.bien-color-swatch__rgb {
+  font-size: var(--font-size-xs);
+  font-family: monospace;
+  color: var(--color-text-tertiary);
+}
+
+.bien-color-swatch__usage {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bien-color-swatch__preview {
+    height: 80px;
+  }
+
+  .bien-color-swatch__info {
+    padding: var(--space-sm);
+  }
+}

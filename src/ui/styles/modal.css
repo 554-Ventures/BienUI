@@ -1,0 +1,347 @@
+.bien-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: var(--space-lg);
+  animation: bien-modal-overlay-in var(--duration-normal) var(--easing);
+  overflow-y: auto;
+}
+
+.bien-modal-overlay--fullscreen {
+  padding: 0;
+  background-color: var(--color-surface-base);
+  backdrop-filter: none;
+}
+
+@keyframes bien-modal-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bien-modal {
+  background-color: var(--color-surface-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 4rem);
+  animation: bien-modal-in var(--duration-normal) var(--easing);
+  width: 100%;
+}
+
+@keyframes bien-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Sizes */
+.bien-modal--sm {
+  max-width: 400px;
+}
+
+.bien-modal--md {
+  max-width: 600px;
+}
+
+.bien-modal--lg {
+  max-width: 800px;
+}
+
+.bien-modal--xl {
+  max-width: 1200px;
+}
+
+.bien-modal--fullscreen {
+  max-width: 100%;
+  max-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+}
+
+/* Variants */
+.bien-modal--centered .bien-modal__content {
+  text-align: center;
+}
+
+/* Gradient Backgrounds */
+.bien-modal--gradient-primary {
+  background: var(--gradient-primary);
+  color: var(--color-text-inverse);
+  border: none;
+}
+
+.bien-modal--gradient-purple {
+  background: var(--gradient-purple);
+  color: var(--color-text-inverse);
+  border: none;
+}
+
+.bien-modal--gradient-accent {
+  background: var(--gradient-accent);
+  color: var(--color-accent-text);
+  border: none;
+}
+
+.bien-modal--gradient-blue {
+  background: var(--gradient-blue);
+  color: var(--color-text-inverse);
+  border: none;
+}
+
+.bien-modal--gradient-rainbow {
+  background: var(--gradient-rainbow);
+  color: var(--color-text-inverse);
+  border: none;
+}
+
+/* Close Button */
+.bien-modal__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  color: var(--color-text-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--easing);
+  z-index: 1;
+}
+
+.bien-modal__close:hover {
+  background-color: var(--color-interactive-hover);
+  color: var(--color-text-primary);
+}
+
+.bien-modal__close:active {
+  background-color: var(--color-interactive-active);
+}
+
+.bien-modal--gradient-primary .bien-modal__close,
+.bien-modal--gradient-purple .bien-modal__close,
+.bien-modal--gradient-blue .bien-modal__close,
+.bien-modal--gradient-rainbow .bien-modal__close {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bien-modal--gradient-primary .bien-modal__close:hover,
+.bien-modal--gradient-purple .bien-modal__close:hover,
+.bien-modal--gradient-blue .bien-modal__close:hover,
+.bien-modal--gradient-rainbow .bien-modal__close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.bien-modal--gradient-accent .bien-modal__close {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.bien-modal--gradient-accent .bien-modal__close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-accent-text);
+}
+
+/* Header */
+.bien-modal__header {
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.bien-modal__header--default {
+  background-color: transparent;
+}
+
+.bien-modal__header--glass-frost {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.bien-modal__header--glass-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.1) 0%,
+    rgba(2, 140, 134, 0.1) 100%
+  );
+  border-bottom: 1px solid rgba(29, 117, 188, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.bien-modal--gradient-primary .bien-modal__header,
+.bien-modal--gradient-purple .bien-modal__header,
+.bien-modal--gradient-blue .bien-modal__header,
+.bien-modal--gradient-rainbow .bien-modal__header {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.bien-modal--gradient-accent .bien-modal__header {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.bien-modal__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding-right: 2rem;
+}
+
+.bien-modal--gradient-primary .bien-modal__title,
+.bien-modal--gradient-purple .bien-modal__title,
+.bien-modal--gradient-blue .bien-modal__title,
+.bien-modal--gradient-rainbow .bien-modal__title {
+  color: var(--color-text-inverse);
+}
+
+.bien-modal--gradient-accent .bien-modal__title {
+  color: var(--color-accent-text);
+}
+
+.bien-modal__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+.bien-modal--gradient-primary .bien-modal__subtitle,
+.bien-modal--gradient-purple .bien-modal__subtitle,
+.bien-modal--gradient-blue .bien-modal__subtitle,
+.bien-modal--gradient-rainbow .bien-modal__subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bien-modal--gradient-accent .bien-modal__subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Content */
+.bien-modal__content {
+  padding: var(--space-xl);
+  overflow-y: auto;
+  flex: 1;
+  color: var(--color-text-primary);
+}
+
+.bien-modal--gradient-primary .bien-modal__content,
+.bien-modal--gradient-purple .bien-modal__content,
+.bien-modal--gradient-blue .bien-modal__content,
+.bien-modal--gradient-rainbow .bien-modal__content {
+  color: var(--color-text-inverse);
+}
+
+.bien-modal--gradient-accent .bien-modal__content {
+  color: var(--color-accent-text);
+}
+
+/* Custom scrollbar for modal content */
+.bien-modal__content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bien-modal__content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bien-modal__content::-webkit-scrollbar-thumb {
+  background: var(--color-border-base);
+  border-radius: 4px;
+}
+
+.bien-modal__content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
+}
+
+/* Footer */
+.bien-modal__footer {
+  padding: var(--space-md) var(--space-xl) var(--space-xl);
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+}
+
+.bien-modal--gradient-primary .bien-modal__footer,
+.bien-modal--gradient-purple .bien-modal__footer,
+.bien-modal--gradient-blue .bien-modal__footer,
+.bien-modal--gradient-rainbow .bien-modal__footer {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.bien-modal--gradient-accent .bien-modal__footer {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bien-modal-overlay {
+    padding: var(--space-sm);
+  }
+
+  .bien-modal--sm,
+  .bien-modal--md,
+  .bien-modal--lg,
+  .bien-modal--xl {
+    max-width: 100%;
+  }
+
+  .bien-modal__header,
+  .bien-modal__content {
+    padding: var(--space-md);
+  }
+
+  .bien-modal__footer {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    flex-direction: column;
+  }
+
+  .bien-modal__footer > * {
+    width: 100%;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-modal__header--glass-frost {
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .bien-modal__header--glass-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.2) 0%,
+    rgba(2, 140, 134, 0.2) 100%
+  );
+  border-bottom: 1px solid rgba(29, 117, 188, 0.3);
+}

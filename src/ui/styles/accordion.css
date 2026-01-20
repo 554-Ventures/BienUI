@@ -1,0 +1,187 @@
+.bien-accordion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bien-accordion--default {
+  gap: var(--space-sm);
+}
+
+.bien-accordion--bordered,
+.bien-accordion--filled,
+.bien-accordion--ai {
+  gap: var(--space-md);
+}
+
+/* Accordion Item */
+.bien-accordion-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+/* Variants */
+.bien-accordion-item--default {
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.bien-accordion-item--default:last-child {
+  border-bottom: none;
+}
+
+.bien-accordion-item--bordered {
+  background-color: var(--color-surface-base);
+  border: 2px solid var(--color-border-base);
+}
+
+.bien-accordion-item--filled {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bien-accordion-item--ai {
+  background-color: var(--color-surface-raised);
+  border: none;
+  overflow: visible;
+}
+
+/* AI Border */
+.bien-accordion-item__ai-border {
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: linear-gradient(
+    135deg,
+    #1d75bc 0%,
+    #a94f9e 33%,
+    #e7c067 66%,
+    #016d77 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Trigger Button */
+.bien-accordion-item__trigger {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  display: block;
+}
+
+.bien-accordion-item--disabled .bien-accordion-item__trigger {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Header */
+.bien-accordion-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  transition: background-color var(--duration-fast) var(--easing);
+}
+
+.bien-accordion-item__trigger:hover:not(:disabled)
+  .bien-accordion-item__header {
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-accordion-item__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.bien-accordion-item__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.bien-accordion-item__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+/* Icon */
+.bien-accordion-item__icon {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  transition:
+    transform var(--duration-fast) var(--easing),
+    color var(--duration-fast) var(--easing);
+}
+
+.bien-accordion-item__icon--expanded {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.bien-accordion-item__trigger:hover:not(:disabled) .bien-accordion-item__icon {
+  color: var(--color-text-primary);
+}
+
+/* Content */
+.bien-accordion-item__content {
+  overflow: hidden;
+  transition:
+    max-height var(--duration-normal) var(--easing),
+    opacity var(--duration-fast) var(--easing);
+}
+
+.bien-accordion-item__content--collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.bien-accordion-item__content--expanded {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.bien-accordion-item__content-inner {
+  padding: 0 var(--space-md) var(--space-md);
+  color: var(--color-text-primary);
+}
+
+/* Expanded state styling */
+.bien-accordion-item--expanded.bien-accordion-item--bordered {
+  border-color: var(--color-primary);
+}
+
+.bien-accordion-item--expanded.bien-accordion-item--filled {
+  background-color: var(--color-brand-subtle);
+}
+
+/* Focus styles */
+.bien-accordion-item__trigger:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bien-accordion-item__header {
+    padding: var(--space-sm);
+  }
+
+  .bien-accordion-item__content-inner {
+    padding: 0 var(--space-sm) var(--space-sm);
+  }
+}

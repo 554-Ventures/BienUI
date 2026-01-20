@@ -1,0 +1,200 @@
+/* Meter Container */
+.bien-meter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Meter Header */
+.bien-meter__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.bien-meter__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.bien-meter__value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Meter Track */
+.bien-meter__track {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-bg-subtle);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Meter Sizes */
+.bien-meter--sm .bien-meter__track {
+  height: 4px;
+}
+
+.bien-meter--md .bien-meter__track {
+  height: 8px;
+}
+
+.bien-meter--lg .bien-meter__track {
+  height: 12px;
+}
+
+/* Meter Fill */
+.bien-meter__fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width var(--duration-normal) var(--easing);
+}
+
+.bien-meter--animated .bien-meter__fill {
+  transition: width var(--duration-normal) var(--easing);
+}
+
+/* Variants */
+.bien-meter--default .bien-meter__fill {
+  background-color: var(--color-primary);
+}
+
+.bien-meter--primary .bien-meter__fill {
+  background-color: #1d75bc;
+}
+
+.bien-meter--secondary .bien-meter__fill {
+  background-color: #016d77;
+}
+
+.bien-meter--success .bien-meter__fill {
+  background-color: #14b8a6;
+}
+
+.bien-meter--warning .bien-meter__fill {
+  background-color: #fbbf24;
+}
+
+.bien-meter--error .bien-meter__fill {
+  background-color: #d4183d;
+}
+
+.bien-meter--gradient-primary .bien-meter__fill {
+  background: var(--gradient-primary);
+}
+
+.bien-meter--gradient-purple .bien-meter__fill {
+  background: var(--gradient-purple);
+}
+
+/* Circular Meter */
+.bien-circular-meter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bien-circular-meter svg {
+  display: block;
+}
+
+.bien-circular-meter__track {
+  fill: none;
+  stroke: var(--color-bg-subtle);
+}
+
+.bien-circular-meter__fill {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--duration-normal) var(--easing);
+}
+
+.bien-circular-meter--animated .bien-circular-meter__fill {
+  transition: stroke-dashoffset var(--duration-normal) var(--easing);
+}
+
+/* Circular Meter Content */
+.bien-circular-meter__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bien-circular-meter__value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bien-circular-meter__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* Circular Variants */
+.bien-circular-meter--default .bien-circular-meter__fill {
+  stroke: var(--color-primary);
+}
+
+.bien-circular-meter--primary .bien-circular-meter__fill {
+  stroke: #1d75bc;
+}
+
+.bien-circular-meter--secondary .bien-circular-meter__fill {
+  stroke: #016d77;
+}
+
+.bien-circular-meter--success .bien-circular-meter__fill {
+  stroke: #14b8a6;
+}
+
+.bien-circular-meter--warning .bien-circular-meter__fill {
+  stroke: #fbbf24;
+}
+
+.bien-circular-meter--error .bien-circular-meter__fill {
+  stroke: #d4183d;
+}
+
+.bien-circular-meter--gradient-primary .bien-circular-meter__fill {
+  stroke: url(#gradient-primary);
+}
+
+.bien-circular-meter--gradient-purple .bien-circular-meter__fill {
+  stroke: url(#gradient-purple);
+}
+
+/* SVG Gradients */
+svg defs {
+  position: absolute;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-meter__track {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .bien-circular-meter__track {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+/* Accessibility */
+.bien-meter__fill[role='meter'] {
+  /* Ensure meter is announced properly by screen readers */
+}

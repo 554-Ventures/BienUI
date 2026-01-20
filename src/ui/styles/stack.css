@@ -1,0 +1,84 @@
+.bien-stack {
+  display: flex;
+}
+
+/* Direction */
+.bien-stack--vertical {
+  flex-direction: column;
+}
+
+.bien-stack--horizontal {
+  flex-direction: row;
+}
+
+/* Gap */
+.bien-stack--gap-xs {
+  gap: var(--space-xs);
+}
+
+.bien-stack--gap-sm {
+  gap: var(--space-sm);
+}
+
+.bien-stack--gap-md {
+  gap: var(--space-md);
+}
+
+.bien-stack--gap-lg {
+  gap: var(--space-lg);
+}
+
+.bien-stack--gap-xl {
+  gap: var(--space-xl);
+}
+
+/* Alignment */
+.bien-stack--align-start {
+  align-items: flex-start;
+}
+
+.bien-stack--align-center {
+  align-items: center;
+}
+
+.bien-stack--align-end {
+  align-items: flex-end;
+}
+
+.bien-stack--align-stretch {
+  align-items: stretch;
+}
+
+.bien-stack--align-baseline {
+  align-items: baseline;
+}
+
+/* Justify */
+.bien-stack--justify-start {
+  justify-content: flex-start;
+}
+
+.bien-stack--justify-center {
+  justify-content: center;
+}
+
+.bien-stack--justify-end {
+  justify-content: flex-end;
+}
+
+.bien-stack--justify-space-between {
+  justify-content: space-between;
+}
+
+.bien-stack--justify-space-around {
+  justify-content: space-around;
+}
+
+.bien-stack--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+/* Wrap */
+.bien-stack--wrap {
+  flex-wrap: wrap;
+}

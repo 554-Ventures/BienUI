@@ -1,0 +1,101 @@
+.bien-checkbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.bien-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.bien-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bien-checkbox-box {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-base);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-base);
+  transition: all var(--duration-fast) var(--easing);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bien-checkbox-check,
+.bien-checkbox-indeterminate {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--duration-fast) var(--easing);
+  color: white;
+  display: block;
+}
+
+.bien-checkbox:checked + .bien-checkbox-box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.bien-checkbox:checked + .bien-checkbox-box .bien-checkbox-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bien-checkbox:indeterminate + .bien-checkbox-box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.bien-checkbox:indeterminate + .bien-checkbox-box .bien-checkbox-indeterminate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bien-checkbox:focus-visible + .bien-checkbox-box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.bien-checkbox:hover:not(:disabled) + .bien-checkbox-box {
+  border-color: var(--color-primary);
+}
+
+.bien-checkbox-wrapper--disabled .bien-checkbox-label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.bien-checkbox-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+}
+
+.bien-checkbox-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-left: 28px;
+}
+
+.bien-checkbox-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-status-error);
+  margin-left: 28px;
+}
+
+.bien-checkbox-wrapper--error .bien-checkbox-box {
+  border-color: var(--color-status-error);
+}

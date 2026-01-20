@@ -1,0 +1,73 @@
+.bien-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.bien-input-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.bien-input-required {
+  color: var(--color-status-error);
+}
+
+.bien-input {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-base);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  height: 40px;
+  transition: border-color var(--duration-fast) var(--easing);
+}
+
+.bien-input:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+}
+
+.bien-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-focus);
+}
+
+.bien-input:disabled {
+  background-color: var(--color-interactive-hover);
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+}
+
+.bien-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.bien-input--error {
+  border-color: var(--color-status-error);
+}
+
+.bien-input--error:focus {
+  border-color: var(--color-status-error);
+  box-shadow: 0 0 0 1px var(--color-status-error);
+}
+
+.bien-input-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.bien-input-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-status-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}

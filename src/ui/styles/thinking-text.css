@@ -1,0 +1,210 @@
+/* Thinking Text Container */
+.bien-thinking-text {
+  position: relative;
+  display: inline-block;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-surface-base);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Indicator (when no text) */
+.bien-thinking-text__indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.bien-thinking-text__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* Animated Dots */
+.bien-thinking-text__dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bien-thinking-text__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-brand-base);
+  border-radius: var(--radius-full);
+  animation: bien-thinking-dot 1.4s infinite ease-in-out;
+}
+
+.bien-thinking-text__dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.bien-thinking-text__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bien-thinking-text__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bien-thinking-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+/* Content (with text) */
+.bien-thinking-text__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.bien-thinking-text__icon {
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+  animation: bien-thinking-pulse 2s infinite ease-in-out;
+}
+
+@keyframes bien-thinking-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.bien-thinking-text__text-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.bien-thinking-text__text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  background: linear-gradient(
+    90deg,
+    var(--color-text-primary) 0%,
+    var(--color-brand-base) 50%,
+    var(--color-text-primary) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: bien-thinking-gradient 3s linear infinite;
+}
+
+@keyframes bien-thinking-gradient {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Cursor */
+.bien-thinking-text__cursor {
+  font-size: var(--font-size-base);
+  color: var(--color-brand-base);
+  animation: bien-thinking-blink 1s infinite;
+  font-weight: var(--font-weight-normal);
+}
+
+@keyframes bien-thinking-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Shimmer Effect */
+.bien-thinking-text__shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(29, 117, 188, 0.1) 50%,
+    transparent 100%
+  );
+  animation: bien-thinking-shimmer 2s infinite;
+}
+
+@keyframes bien-thinking-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Variants */
+.bien-thinking-text--thinking .bien-thinking-text__dot {
+  background: var(--color-blue);
+}
+
+.bien-thinking-text--reasoning .bien-thinking-text__dot {
+  background: var(--color-purple);
+}
+
+.bien-thinking-text--analyzing .bien-thinking-text__dot {
+  background: var(--color-teal);
+}
+
+.bien-thinking-text--processing .bien-thinking-text__dot {
+  background: var(--color-accent);
+}
+
+.bien-thinking-text--generating .bien-thinking-text__dot {
+  background: var(--color-purple);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-thinking-text {
+  background: var(--color-surface-raised);
+}
+
+[data-theme='dark'] .bien-thinking-text__shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(29, 117, 188, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .bien-thinking-text {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .bien-thinking-text__text {
+    font-size: var(--font-size-sm);
+  }
+}

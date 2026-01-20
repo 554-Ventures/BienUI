@@ -1,0 +1,293 @@
+/* List Container */
+.bien-list {
+  margin: 0;
+  padding: 0;
+  list-style-position: outside;
+}
+
+/* List Types */
+.bien-list--unordered {
+  list-style-type: disc;
+  padding-left: 24px;
+}
+
+.bien-list--ordered {
+  list-style-type: decimal;
+  padding-left: 24px;
+}
+
+.bien-list--unstyled {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Marker Styles */
+.bien-list--marker-default.bien-list--unordered {
+  list-style-type: disc;
+}
+
+.bien-list--marker-default.bien-list--ordered {
+  list-style-type: decimal;
+}
+
+.bien-list--marker-circle {
+  list-style-type: circle;
+}
+
+.bien-list--marker-square {
+  list-style-type: square;
+}
+
+.bien-list--marker-disc {
+  list-style-type: disc;
+}
+
+.bien-list--marker-decimal {
+  list-style-type: decimal;
+}
+
+.bien-list--marker-roman {
+  list-style-type: upper-roman;
+}
+
+.bien-list--marker-alpha {
+  list-style-type: upper-alpha;
+}
+
+.bien-list--marker-none {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Sizes */
+.bien-list--size-sm {
+  font-size: var(--font-size-sm);
+}
+
+.bien-list--size-md {
+  font-size: var(--font-size-md);
+}
+
+.bien-list--size-lg {
+  font-size: var(--font-size-lg);
+}
+
+/* Spacing */
+.bien-list--spacing-none > .bien-list-item {
+  margin-bottom: 0;
+}
+
+.bien-list--spacing-sm > .bien-list-item {
+  margin-bottom: var(--space-xs);
+}
+
+.bien-list--spacing-md > .bien-list-item {
+  margin-bottom: var(--space-sm);
+}
+
+.bien-list--spacing-lg > .bien-list-item {
+  margin-bottom: var(--space-md);
+}
+
+.bien-list--spacing-none > .bien-list-item:last-child,
+.bien-list--spacing-sm > .bien-list-item:last-child,
+.bien-list--spacing-md > .bien-list-item:last-child,
+.bien-list--spacing-lg > .bien-list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Dividers */
+.bien-list--dividers > .bien-list-item {
+  border-bottom: 1px solid var(--color-border-base);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.bien-list--dividers > .bien-list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* List Item */
+.bien-list-item {
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+  display: list-item;
+}
+
+.bien-list-item--with-prefix {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+/* Interactive Items */
+.bien-list-item--interactive {
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+  padding: var(--space-sm) var(--space-md);
+  margin-left: calc(-1 * var(--space-md));
+  margin-right: calc(-1 * var(--space-md));
+  border-radius: var(--radius-md);
+}
+
+.bien-list-item--interactive:hover {
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-list-item--interactive:active {
+  background-color: var(--color-interactive-active);
+}
+
+.bien-list-item--active {
+  background-color: var(--color-brand-subtle);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.bien-list-item--disabled {
+  color: var(--color-text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.bien-list-item--disabled:hover {
+  background-color: transparent;
+}
+
+/* List Item Icon */
+.bien-list-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.bien-list-item__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bien-list-item--active .bien-list-item__icon {
+  color: var(--color-primary);
+}
+
+/* List Item Avatar */
+.bien-list-item__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* List Item Content */
+.bien-list-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Description List */
+.bien-description-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bien-description-list--vertical {
+  gap: var(--space-md);
+}
+
+.bien-description-list--horizontal {
+  gap: var(--space-sm);
+}
+
+/* Sizes */
+.bien-description-list--size-sm {
+  font-size: var(--font-size-sm);
+}
+
+.bien-description-list--size-md {
+  font-size: var(--font-size-md);
+}
+
+.bien-description-list--size-lg {
+  font-size: var(--font-size-lg);
+}
+
+/* Spacing */
+.bien-description-list--spacing-none {
+  gap: 0;
+}
+
+.bien-description-list--spacing-sm {
+  gap: var(--space-sm);
+}
+
+.bien-description-list--spacing-md {
+  gap: var(--space-md);
+}
+
+.bien-description-list--spacing-lg {
+  gap: var(--space-lg);
+}
+
+/* Dividers */
+.bien-description-list--dividers .bien-description-term {
+  border-bottom: 1px solid var(--color-border-base);
+  padding-bottom: var(--space-xs);
+}
+
+.bien-description-list--dividers .bien-description-details {
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+/* Description Term */
+.bien-description-term {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.bien-description-list--horizontal .bien-description-term {
+  display: flex;
+  align-items: center;
+  min-width: 150px;
+}
+
+/* Description Details */
+.bien-description-details {
+  color: var(--color-text-secondary);
+  margin: 0;
+  margin-top: var(--space-xs);
+}
+
+.bien-description-list--horizontal .bien-description-details {
+  margin-top: 0;
+  margin-left: var(--space-md);
+}
+
+.bien-description-list--horizontal > div {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Nested Lists */
+.bien-list .bien-list {
+  margin-top: var(--space-xs);
+  margin-bottom: 0;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-list-item__icon {
+  color: var(--color-text-tertiary);
+}
+
+[data-theme='dark'] .bien-list-item--active .bien-list-item__icon {
+  color: var(--color-primary);
+}

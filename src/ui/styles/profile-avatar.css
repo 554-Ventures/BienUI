@@ -1,0 +1,298 @@
+.bien-profile-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px;
+}
+
+.bien-profile-avatar__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-bg-subtle);
+  transition: all var(--duration-fast) var(--easing);
+  position: relative;
+}
+
+/* Sizes - account for padding */
+.bien-profile-avatar--md {
+  width: 96px;
+  height: 96px;
+}
+
+.bien-profile-avatar--lg {
+  width: 136px;
+  height: 136px;
+}
+
+.bien-profile-avatar--xl {
+  width: 176px;
+  height: 176px;
+}
+
+.bien-profile-avatar--2xl {
+  width: 216px;
+  height: 216px;
+}
+
+/* Shapes */
+.bien-profile-avatar--circle .bien-profile-avatar__container {
+  border-radius: var(--radius-full);
+}
+
+.bien-profile-avatar--square .bien-profile-avatar__container {
+  border-radius: var(--radius-xl);
+}
+
+/* Ring Effect */
+.bien-profile-avatar--ring-brand .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-base),
+    0 0 0 6px var(--color-brand-base);
+}
+
+.bien-profile-avatar--ring-success .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-base),
+    0 0 0 6px #22c55e;
+}
+
+.bien-profile-avatar--ring-warning .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-base),
+    0 0 0 6px #f59e0b;
+}
+
+.bien-profile-avatar--ring-error .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-base),
+    0 0 0 6px #ef4444;
+}
+
+/* Image */
+.bien-profile-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Initials */
+.bien-profile-avatar__initials {
+  color: white;
+  font-weight: var(--font-weight-bold);
+  user-select: none;
+  text-transform: uppercase;
+}
+
+.bien-profile-avatar--md .bien-profile-avatar__initials {
+  font-size: 28px;
+}
+
+.bien-profile-avatar--lg .bien-profile-avatar__initials {
+  font-size: 40px;
+}
+
+.bien-profile-avatar--xl .bien-profile-avatar__initials {
+  font-size: 56px;
+}
+
+.bien-profile-avatar--2xl .bien-profile-avatar__initials {
+  font-size: 72px;
+}
+
+/* Edit Button */
+.bien-profile-avatar__edit {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    135deg,
+    var(--color-blue) 0%,
+    var(--color-teal) 100%
+  );
+  border: 3px solid var(--color-surface-base);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+  box-shadow: var(--shadow-md);
+  z-index: 5;
+}
+
+.bien-profile-avatar--md .bien-profile-avatar__edit {
+  width: 28px;
+  height: 28px;
+  bottom: 4px;
+  right: 4px;
+}
+
+.bien-profile-avatar--md .bien-profile-avatar__edit svg {
+  width: 14px;
+  height: 14px;
+}
+
+.bien-profile-avatar--lg .bien-profile-avatar__edit {
+  width: 36px;
+  height: 36px;
+  bottom: 4px;
+  right: 4px;
+}
+
+.bien-profile-avatar--xl .bien-profile-avatar__edit {
+  width: 44px;
+  height: 44px;
+  bottom: 6px;
+  right: 6px;
+}
+
+.bien-profile-avatar--xl .bien-profile-avatar__edit svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bien-profile-avatar--2xl .bien-profile-avatar__edit {
+  width: 52px;
+  height: 52px;
+  bottom: 8px;
+  right: 8px;
+}
+
+.bien-profile-avatar--2xl .bien-profile-avatar__edit svg {
+  width: 28px;
+  height: 28px;
+}
+
+.bien-profile-avatar__edit:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.bien-profile-avatar__edit:active {
+  transform: scale(1.05);
+}
+
+/* Status Indicator */
+.bien-profile-avatar__status {
+  position: absolute;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--color-surface-base);
+  box-shadow: var(--shadow-md);
+}
+
+.bien-profile-avatar--md .bien-profile-avatar__status {
+  width: 16px;
+  height: 16px;
+  bottom: 4px;
+  right: 4px;
+}
+
+.bien-profile-avatar--lg .bien-profile-avatar__status {
+  width: 20px;
+  height: 20px;
+  bottom: 6px;
+  right: 6px;
+}
+
+.bien-profile-avatar--xl .bien-profile-avatar__status {
+  width: 24px;
+  height: 24px;
+  bottom: 8px;
+  right: 8px;
+}
+
+.bien-profile-avatar--2xl .bien-profile-avatar__status {
+  width: 28px;
+  height: 28px;
+  bottom: 12px;
+  right: 12px;
+}
+
+.bien-profile-avatar__status--online {
+  background-color: #22c55e;
+}
+
+.bien-profile-avatar__status--offline {
+  background-color: var(--color-border-base);
+}
+
+.bien-profile-avatar__status--away {
+  background-color: #f59e0b;
+}
+
+.bien-profile-avatar__status--busy {
+  background-color: #ef4444;
+}
+
+/* Badge */
+.bien-profile-avatar__badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 10;
+}
+
+.bien-profile-avatar--md .bien-profile-avatar__badge {
+  top: -6px;
+  right: -6px;
+}
+
+.bien-profile-avatar--2xl .bien-profile-avatar__badge {
+  top: -12px;
+  right: -12px;
+}
+
+/* Hover effect */
+.bien-profile-avatar:hover .bien-profile-avatar__container {
+  transform: scale(1.02);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-profile-avatar__edit {
+  border-color: var(--color-surface-raised);
+}
+
+[data-theme='dark'] .bien-profile-avatar__status {
+  border-color: var(--color-surface-raised);
+}
+
+[data-theme='dark']
+  .bien-profile-avatar--ring-brand
+  .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-raised),
+    0 0 0 6px var(--color-brand-base);
+}
+
+[data-theme='dark']
+  .bien-profile-avatar--ring-success
+  .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-raised),
+    0 0 0 6px #22c55e;
+}
+
+[data-theme='dark']
+  .bien-profile-avatar--ring-warning
+  .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-raised),
+    0 0 0 6px #f59e0b;
+}
+
+[data-theme='dark']
+  .bien-profile-avatar--ring-error
+  .bien-profile-avatar__container {
+  box-shadow:
+    0 0 0 4px var(--color-surface-raised),
+    0 0 0 6px #ef4444;
+}

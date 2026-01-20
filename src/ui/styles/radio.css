@@ -1,0 +1,105 @@
+.bien-radio-wrapper {
+  display: inline-flex;
+}
+
+.bien-radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.bien-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bien-radio-box {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-base);
+  border-radius: 50%;
+  background: var(--color-surface-base);
+  transition: all var(--duration-fast) var(--easing);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bien-radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  transform: scale(0);
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-radio:checked + .bien-radio-box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.bien-radio:checked + .bien-radio-box .bien-radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bien-radio:focus-visible + .bien-radio-box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.bien-radio:hover:not(:disabled) + .bien-radio-box {
+  border-color: var(--color-primary);
+}
+
+.bien-radio:disabled + .bien-radio-box {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bien-radio-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+}
+
+/* Radio Group */
+.bien-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.bien-radio-group-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.bien-radio-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.bien-radio-group-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.bien-radio-group-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-status-error);
+}
+
+.bien-radio-group--error .bien-radio-box {
+  border-color: var(--color-status-error);
+}

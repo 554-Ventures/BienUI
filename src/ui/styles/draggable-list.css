@@ -1,0 +1,78 @@
+/* Draggable List Container */
+.bien-draggable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Draggable Item */
+.bien-draggable-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--color-surface-base);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: all var(--duration-fast) var(--easing);
+  cursor: move;
+  user-select: none;
+}
+
+.bien-draggable-item:hover {
+  border-color: var(--color-brand-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.bien-draggable-item:active {
+  cursor: grabbing;
+}
+
+/* Dragging State */
+.bien-draggable-item[style*='opacity: 0.5'] {
+  border-color: var(--color-brand-base);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(2deg);
+}
+
+/* Drag Handle */
+.bien-draggable-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-tertiary);
+  cursor: grab;
+  flex-shrink: 0;
+  transition: color var(--duration-fast) var(--easing);
+}
+
+.bien-draggable-handle:hover {
+  color: var(--color-brand-base);
+}
+
+.bien-draggable-handle:active {
+  cursor: grabbing;
+}
+
+/* Content */
+.bien-draggable-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-draggable-item {
+  background-color: var(--color-surface-raised);
+}
+
+[data-theme='dark'] .bien-draggable-item:hover {
+  border-color: var(--color-brand-base);
+}
+
+/* Accessibility */
+.bien-draggable-item:focus-visible {
+  outline: 2px solid var(--color-brand-base);
+  outline-offset: 2px;
+}

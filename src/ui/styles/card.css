@@ -1,0 +1,535 @@
+.bien-card {
+  background-color: var(--color-surface-base);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-fast) var(--easing);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Variants */
+.bien-card--elevated {
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bien-card--outlined {
+  background-color: transparent;
+  border: 2px solid var(--color-border-base);
+}
+
+.bien-card--filled {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bien-card--ghost {
+  background-color: transparent;
+  border: none;
+}
+
+.bien-card--glass-frost {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.bien-card--glass-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.1) 0%,
+    rgba(169, 79, 158, 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.bien-card--ai {
+  position: relative;
+  background-color: var(--color-surface-raised);
+  border: none;
+  overflow: visible;
+}
+
+.bien-card__ai-border {
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: linear-gradient(
+    135deg,
+    #1d75bc 0%,
+    #a94f9e 33%,
+    #e7c067 66%,
+    #016d77 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.bien-card--ai::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  filter: blur(12px);
+  opacity: 0.4;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    #1d75bc 0%,
+    #a94f9e 33%,
+    #e7c067 66%,
+    #016d77 100%
+  );
+}
+
+/* Color Variants */
+.bien-card--color-blue {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.1) 0%,
+    rgba(29, 117, 188, 0.05) 100%
+  );
+  border: 1px solid rgba(29, 117, 188, 0.3);
+}
+
+.bien-card--color-blue .bien-card__title,
+.bien-card--color-blue .bien-card__header {
+  color: var(--color-blue);
+}
+
+.bien-card--color-teal {
+  background: linear-gradient(
+    135deg,
+    rgba(2, 140, 134, 0.1) 0%,
+    rgba(2, 140, 134, 0.05) 100%
+  );
+  border: 1px solid rgba(2, 140, 134, 0.3);
+}
+
+.bien-card--color-teal .bien-card__title,
+.bien-card--color-teal .bien-card__header {
+  color: var(--color-teal);
+}
+
+.bien-card--color-purple {
+  background: linear-gradient(
+    135deg,
+    rgba(169, 79, 158, 0.1) 0%,
+    rgba(169, 79, 158, 0.05) 100%
+  );
+  border: 1px solid rgba(169, 79, 158, 0.3);
+}
+
+.bien-card--color-purple .bien-card__title,
+.bien-card--color-purple .bien-card__header {
+  color: var(--color-purple);
+}
+
+.bien-card--color-yellow {
+  background: linear-gradient(
+    135deg,
+    rgba(231, 192, 103, 0.15) 0%,
+    rgba(231, 192, 103, 0.08) 100%
+  );
+  border: 1px solid rgba(231, 192, 103, 0.4);
+}
+
+.bien-card--color-yellow .bien-card__title,
+.bien-card--color-yellow .bien-card__header {
+  color: var(--color-accent);
+}
+
+/* Dark mode adjustments for color variants */
+[data-theme='dark'] .bien-card--color-blue {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(29, 117, 188, 0.08) 100%
+  );
+  border-color: rgba(29, 117, 188, 0.4);
+}
+
+[data-theme='dark'] .bien-card--color-teal {
+  background: linear-gradient(
+    135deg,
+    rgba(2, 140, 134, 0.15) 0%,
+    rgba(2, 140, 134, 0.08) 100%
+  );
+  border-color: rgba(2, 140, 134, 0.4);
+}
+
+[data-theme='dark'] .bien-card--color-purple {
+  background: linear-gradient(
+    135deg,
+    rgba(169, 79, 158, 0.15) 0%,
+    rgba(169, 79, 158, 0.08) 100%
+  );
+  border-color: rgba(169, 79, 158, 0.4);
+}
+
+[data-theme='dark'] .bien-card--color-yellow {
+  background: linear-gradient(
+    135deg,
+    rgba(231, 192, 103, 0.2) 0%,
+    rgba(231, 192, 103, 0.1) 100%
+  );
+  border-color: rgba(231, 192, 103, 0.5);
+}
+
+/* Padding */
+.bien-card--padding-none {
+  padding: 0;
+}
+
+.bien-card--padding-sm {
+  padding: var(--space-sm);
+}
+
+.bien-card--padding-md {
+  padding: var(--card-padding);
+}
+
+.bien-card--padding-lg {
+  padding: var(--space-xl);
+}
+
+.bien-card--padding-xl {
+  padding: 2rem;
+}
+
+/* When card has header, remove top padding from content */
+.bien-card--has-header .bien-card__content {
+  padding-top: 0;
+}
+
+/* When card has footer, remove bottom padding from content */
+.bien-card--has-footer .bien-card__content {
+  padding-bottom: 0;
+}
+
+/* Radius */
+.bien-card--radius-none {
+  border-radius: 0;
+}
+
+.bien-card--radius-sm {
+  border-radius: var(--radius-sm);
+}
+
+.bien-card--radius-md {
+  border-radius: var(--radius-md);
+}
+
+.bien-card--radius-lg {
+  border-radius: var(--radius-lg);
+}
+
+.bien-card--radius-xl {
+  border-radius: 1rem;
+}
+
+.bien-card--radius-full {
+  border-radius: 9999px;
+}
+
+/* Shadows */
+.bien-card--shadow-none {
+  box-shadow: none;
+}
+
+.bien-card--shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.bien-card--shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.bien-card--shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.bien-card--shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Gradient Backgrounds */
+.bien-card--gradient-primary {
+  background: var(--gradient-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  box-shadow: 0 8px 24px rgba(1, 109, 119, 0.25);
+}
+
+.bien-card--gradient-purple {
+  background: var(--gradient-purple);
+  color: var(--color-text-inverse);
+  border: none;
+  box-shadow: 0 8px 24px rgba(169, 79, 158, 0.25);
+}
+
+.bien-card--gradient-accent {
+  background: var(--gradient-accent);
+  color: var(--color-accent-text);
+  border: none;
+  box-shadow: 0 8px 24px rgba(231, 192, 103, 0.25);
+}
+
+.bien-card--gradient-blue {
+  background: var(--gradient-blue);
+  color: var(--color-text-inverse);
+  border: none;
+  box-shadow: 0 8px 24px rgba(29, 117, 188, 0.25);
+}
+
+.bien-card--gradient-rainbow {
+  background: var(--gradient-rainbow);
+  color: var(--color-text-inverse);
+  border: none;
+  box-shadow: 0 8px 24px rgba(1, 109, 119, 0.3);
+}
+
+/* Bordered modifier */
+.bien-card--bordered {
+  border: 2px solid var(--color-border-strong) !important;
+}
+
+/* Hoverable state */
+.bien-card--hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.bien-card--gradient-primary.bien-card--hoverable:hover {
+  box-shadow: 0 12px 32px rgba(1, 109, 119, 0.35);
+}
+
+.bien-card--gradient-purple.bien-card--hoverable:hover {
+  box-shadow: 0 12px 32px rgba(169, 79, 158, 0.35);
+}
+
+.bien-card--gradient-accent.bien-card--hoverable:hover {
+  box-shadow: 0 12px 32px rgba(231, 192, 103, 0.35);
+}
+
+.bien-card--gradient-blue.bien-card--hoverable:hover {
+  box-shadow: 0 12px 32px rgba(29, 117, 188, 0.35);
+}
+
+.bien-card--gradient-rainbow.bien-card--hoverable:hover {
+  box-shadow: 0 12px 32px rgba(1, 109, 119, 0.4);
+}
+
+/* Clickable state */
+.bien-card--clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.bien-card--clickable:hover {
+  transform: translateY(-2px);
+}
+
+.bien-card--clickable:active {
+  transform: translateY(0);
+}
+
+/* Header */
+.bien-card__header {
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+}
+
+.bien-card--gradient-primary .bien-card__header,
+.bien-card--gradient-purple .bien-card__header,
+.bien-card--gradient-blue .bien-card__header,
+.bien-card--gradient-rainbow .bien-card__header {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.bien-card--gradient-accent .bien-card__header {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.bien-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.bien-card--gradient-primary .bien-card__title,
+.bien-card--gradient-purple .bien-card__title,
+.bien-card--gradient-blue .bien-card__title,
+.bien-card--gradient-rainbow .bien-card__title {
+  color: var(--color-text-inverse);
+}
+
+.bien-card--gradient-accent .bien-card__title {
+  color: var(--color-accent-text);
+}
+
+.bien-card__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+.bien-card--gradient-primary .bien-card__subtitle,
+.bien-card--gradient-purple .bien-card__subtitle,
+.bien-card--gradient-blue .bien-card__subtitle,
+.bien-card--gradient-rainbow .bien-card__subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bien-card--gradient-accent .bien-card__subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Content */
+.bien-card__content {
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+/* Footer */
+.bien-card__footer {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.bien-card--gradient-primary .bien-card__footer,
+.bien-card--gradient-purple .bien-card__footer,
+.bien-card--gradient-blue .bien-card__footer,
+.bien-card--gradient-rainbow .bien-card__footer {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.bien-card--gradient-accent .bien-card__footer {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Special card for zero padding with header/footer */
+.bien-card--padding-none .bien-card__header {
+  padding: var(--space-md);
+  margin: 0;
+}
+
+.bien-card--padding-none .bien-card__footer {
+  padding: var(--space-md);
+  margin: 0;
+}
+
+/* Collapsible Cards */
+.bien-card--collapsible .bien-card__header {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--duration-fast) var(--easing);
+  border-radius: var(--radius-sm);
+  margin-left: calc(var(--space-md) * -0.5);
+  margin-right: calc(var(--space-md) * -0.5);
+  padding-left: calc(var(--space-md) * 0.5);
+  padding-right: calc(var(--space-md) * 0.5);
+}
+
+.bien-card--collapsible .bien-card__header:hover {
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-card__expand-button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) var(--easing);
+  flex-shrink: 0;
+  margin-left: var(--space-sm);
+}
+
+.bien-card__expand-button:hover {
+  background-color: var(--color-interactive-hover);
+  color: var(--color-text-primary);
+}
+
+.bien-card__expand-icon {
+  transition: transform var(--duration-fast) var(--easing);
+}
+
+.bien-card__expand-icon--expanded {
+  transform: rotate(180deg);
+}
+
+.bien-card__content--collapsed {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height var(--duration-normal) var(--easing),
+    opacity var(--duration-fast) var(--easing);
+}
+
+.bien-card__content:not(.bien-card__content--collapsed) {
+  max-height: 5000px;
+  opacity: 1;
+  transition:
+    max-height var(--duration-normal) var(--easing),
+    opacity var(--duration-normal) var(--easing);
+}
+
+/* AI card gradient text colors */
+.bien-card--gradient-primary .bien-card__content,
+.bien-card--gradient-purple .bien-card__content,
+.bien-card--gradient-blue .bien-card__content,
+.bien-card--gradient-rainbow .bien-card__content {
+  color: var(--color-text-inverse);
+}
+
+.bien-card--gradient-accent .bien-card__content {
+  color: var(--color-accent-text);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .bien-card--glass-frost {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .bien-card--glass-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.15) 0%,
+    rgba(169, 79, 158, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .bien-card--elevated {
+  background-color: var(--color-surface-elevated);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .bien-card--outlined {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .bien-card--filled {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
