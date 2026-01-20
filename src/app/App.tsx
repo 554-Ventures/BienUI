@@ -1,14 +1,43 @@
 import { useState } from 'react'
 import {
+  // Providers
   BienProvider,
   TooltipProvider,
   ToastProvider,
+  useToast,
+  
+  // Interactive
   Button,
+  Tooltip,
+  Menu,
+  MenuItem,
+  MenuDivider,
+  MenuGroup,
+  Hotspot,
+  DraggableList,
+  FileDrop,
+  Panel,
+  
+  // Display
   Text,
   Card,
+  Badge,
+  Avatar,
+  AvatarGroup,
+  ProfileAvatar,
+  Timeline,
+  Meter,
+  CircularMeter,
+  Table,
+  List,
+  ListItem,
+  DescriptionList,
+  DescriptionTerm,
+  DescriptionDetails,
+  ColorSwatch,
+  
+  // Forms
   Input,
-  Tooltip,
-  useToast,
   Checkbox,
   Radio,
   RadioGroup,
@@ -18,42 +47,15 @@ import {
   Select,
   MultiSelect,
   Slider,
-  Modal,
-  Accordion,
-  Banner,
-  Callout,
-  EmptyState,
-  FileDrop,
-  ColorSwatch,
-  Header,
-  Hotspot,
-  Link,
-  List,
-  ListItem,
-  DescriptionList,
-  DescriptionTerm,
-  DescriptionDetails,
-  Menu,
-  MenuItem,
-  MenuDivider,
-  MenuGroup,
-  Meter,
-  CircularMeter,
-  Table,
-  Panel,
-  Loading,
-  Stepper,
-  Sidenav,
-  Badge,
-  Tabs,
-  Timeline,
   DatePicker,
-  Avatar,
-  AvatarGroup,
-  ProfileAvatar,
+  
+  // Navigation
+  Link,
   Breadcrumb,
-  DraggableList,
-  ThinkingText,
+  Header,
+  Sidenav,
+  
+  // Layout
   Container,
   Grid,
   VStack,
@@ -61,6 +63,21 @@ import {
   Divider,
   Spacer,
   Section,
+  
+  // Feedback
+  Modal,
+  Accordion,
+  Banner,
+  Callout,
+  EmptyState,
+  Loading,
+  Stepper,
+  Tabs,
+  
+  // Utils
+  ThinkingText,
+  
+  // Icons
   PlusIcon,
   DownloadIcon,
   SendIcon,
@@ -83,7 +100,7 @@ import {
   HelpCircleIcon,
   UserIcon,
   LayoutDashboardIcon,
-} from '@/ui'
+} from '../index'
 import './App.css'
 
 function DraggableListDemo() {

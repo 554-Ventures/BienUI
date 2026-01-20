@@ -1,15 +1,37 @@
 {
-  "name": "bien-ui-demo",
+  "name": "@bien/ui",
   "version": "0.1.0",
+  "description": "A comprehensive React component library with design tokens",
   "type": "module",
+  "main": "./dist/bien-ui.cjs.js",
+  "module": "./dist/bien-ui.esm.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/bien-ui.css",
+  "exports": {
+    ".": {
+      "import": "./dist/bien-ui.esm.js",
+      "require": "./dist/bien-ui.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/bien-ui.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 50",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepublishOnly": "npm run build:lib"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",
@@ -41,14 +63,18 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "clsx": "^2.1.0",
     "lucide-react": "^0.562.0",
-    "react": "^18.2.0",
     "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.2.0",
-    "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1"
+    "react-dnd-html5-backend": "^16.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "@eslint/js": "^9.39.2",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
@@ -63,6 +89,7 @@
     "prettier": "^3.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.11"
+    "vite": "^5.0.11",
+    "glob": "^10.3.10"
   }
 }
