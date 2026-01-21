@@ -1,7 +1,7 @@
 /* Table Container */
 .bien-table-container {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-base);
@@ -115,6 +115,15 @@
 
 .bien-table__header:last-child {
   border-top-right-radius: var(--radius-lg);
+}
+
+/* Bottom corner radius for last row */
+.bien-table__row:last-child .bien-table__cell:first-child {
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.bien-table__row:last-child .bien-table__cell:last-child {
+  border-bottom-right-radius: var(--radius-lg);
 }
 
 .bien-table__header--left {
@@ -251,12 +260,17 @@
 
 /* Variant: Bordered */
 .bien-table--bordered {
-  border-collapse: collapse;
+  border-collapse: separate;
+}
+
+.bien-table--bordered .bien-table-container {
+  border: 2px solid var(--color-border-base);
 }
 
 .bien-table--bordered .bien-table__header,
 .bien-table--bordered .bien-table__cell {
   border-right: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .bien-table--bordered .bien-table__header:last-child,
@@ -264,13 +278,13 @@
   border-right: none;
 }
 
-.bien-table--bordered .bien-table__row {
-  border-bottom: 1px solid var(--color-border-base);
+.bien-table--bordered .bien-table__row:last-child .bien-table__cell {
+  border-bottom: none;
 }
 
 /* Variant: Striped */
 .bien-table--striped .bien-table__row:nth-child(even) {
-  background-color: var(--color-background-subtle);
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .bien-table--striped.bien-table--hoverable
@@ -280,6 +294,10 @@
 
 .bien-table--striped .bien-table__row--selected {
   background-color: rgba(29, 117, 188, 0.08);
+}
+
+.bien-table--striped .bien-table__row--selected:nth-child(even) {
+  background-color: rgba(29, 117, 188, 0.12);
 }
 
 /* Variant: Minimal */
@@ -374,7 +392,13 @@
 }
 
 [data-theme='dark'] .bien-table--striped .bien-table__row:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark']
+  .bien-table--striped
+  .bien-table__row--selected:nth-child(even) {
+  background-color: rgba(29, 117, 188, 0.2);
 }
 
 [data-theme='dark'] .bien-table__row--selected {
