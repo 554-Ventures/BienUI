@@ -58,7 +58,29 @@ pnpm lint
 
 # Format code
 pnpm format
+
+# Format check (CI)
+pnpm format:check
 ```
+
+### Code Formatting (Auto-setup) 
+
+**✨ Prettier runs automatically on commit and save!**
+
+- **On Commit**: Husky + lint-staged auto-formats staged files
+- **On Save**: VS Code auto-formats when you save (if you have Prettier extension)
+- **Manual**: Run `pnpm format` to format all files
+
+**Setup for new developers:**
+1. Install recommended VS Code extensions (prompted automatically)
+2. Prettier will format on save automatically  
+3. Git commits will auto-format staged files
+
+**Configuration files:**
+- `.prettierrc` - Prettier formatting rules
+- `.husky/pre-commit` - Git hook for auto-formatting  
+- `.vscode/extensions.json` - Recommended extensions
+- `package.json` - lint-staged configuration
 
 ### Versioning & Publishing
 

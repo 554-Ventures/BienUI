@@ -1,4 +1,3 @@
-
 export interface GridProps {
   children: React.ReactNode
   columns?: 1 | 2 | 3 | 4 | 6 | 12 | 'auto'

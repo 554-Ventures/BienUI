@@ -46,11 +46,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
             {required && <span className="bien-radio-required">*</span>}
           </div>
         )}
-        {hint && (
-          <div className="bien-radio-group-hint">
-            {hint}
-          </div>
-        )}
+        {hint && <div className="bien-radio-group-hint">{hint}</div>}
         <RadioGroupPrimitive.Root
           ref={ref}
           className={`bien-radio-group bien-radio-group--${orientation}`}
@@ -61,24 +57,26 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
           required={required}
           name={name}
         >
-          {options ? options.map((option) => (
-            <div key={option.value} className="bien-radio-item-wrapper">
-              <RadioGroupPrimitive.Item
-                className="bien-radio-item"
-                value={option.value}
-                disabled={option.disabled || disabled}
-                id={`${name}-${option.value}`}
-              >
-                <RadioGroupPrimitive.Indicator className="bien-radio-indicator" />
-              </RadioGroupPrimitive.Item>
-              <label
-                htmlFor={`${name}-${option.value}`}
-                className="bien-radio-label"
-              >
-                {option.label}
-              </label>
-            </div>
-          )) : children}
+          {options
+            ? options.map((option) => (
+                <div key={option.value} className="bien-radio-item-wrapper">
+                  <RadioGroupPrimitive.Item
+                    className="bien-radio-item"
+                    value={option.value}
+                    disabled={option.disabled || disabled}
+                    id={`${name}-${option.value}`}
+                  >
+                    <RadioGroupPrimitive.Indicator className="bien-radio-indicator" />
+                  </RadioGroupPrimitive.Item>
+                  <label
+                    htmlFor={`${name}-${option.value}`}
+                    className="bien-radio-label"
+                  >
+                    {option.label}
+                  </label>
+                </div>
+              ))
+            : children}
         </RadioGroupPrimitive.Root>
       </div>
     )

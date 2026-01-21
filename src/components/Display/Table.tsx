@@ -261,7 +261,11 @@ export function Table<T = Record<string, unknown>>({
                       className={`bien-table__cell bien-table__cell--${column.align || 'left'}`}
                     >
                       {column.render
-                        ? column.render((row as Record<string, unknown>)[column.key], row, rowIndex)
+                        ? column.render(
+                            (row as Record<string, unknown>)[column.key],
+                            row,
+                            rowIndex
+                          )
                         : (row as Record<string, unknown>)[column.key]}
                     </td>
                   ))}

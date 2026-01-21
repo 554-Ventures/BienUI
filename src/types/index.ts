@@ -1,9 +1,9 @@
 export type Theme = 'light' | 'dark'
 export type Density = 'comfortable' | 'compact'
 
-export type ComponentVariant = 
+export type ComponentVariant =
   | 'default'
-  | 'primary' 
+  | 'primary'
   | 'secondary'
   | 'success'
   | 'warning'

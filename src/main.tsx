@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './styles/tokens.css';
-import './styles/theme.css';
-import './styles/fonts.css';
+import './styles/tokens.css'
+import './styles/theme.css'
+import './styles/fonts.css'
 import App from './app/App'
 
 createRoot(document.getElementById('root')!).render(

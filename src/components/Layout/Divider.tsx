@@ -1,4 +1,3 @@
-
 export interface DividerProps {
   orientation?: 'horizontal' | 'vertical'
   spacing?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'

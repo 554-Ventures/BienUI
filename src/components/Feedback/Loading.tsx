@@ -1,4 +1,3 @@
-
 export interface LoadingProps {
   size?: 'sm' | 'md' | 'lg' | 'xl'
   variant?: 'spinner' | 'dots' | 'pulse' | 'ring'

@@ -9,7 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'BienUI',
       formats: ['es', 'cjs'],
-      fileName: (format) => `bien-ui.${format === 'es' ? 'esm' : format}.js`
+      fileName: (format) => `bien-ui.${format === 'es' ? 'esm' : format}.js`,
     },
     rollupOptions: {
       external: [
@@ -45,28 +45,28 @@ export default defineConfig({
         '@radix-ui/react-tooltip',
         'class-variance-authority',
         'clsx',
-        'lucide-react'
+        'lucide-react',
       ],
       output: {
         globals: {
-          'react': 'React',
+          react: 'React',
           'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'jsxRuntime'
+          'react/jsx-runtime': 'jsxRuntime',
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'bien-ui.css'
           return assetInfo.name || 'asset'
-        }
-      }
+        },
+      },
     },
     cssCodeSplit: false,
     sourcemap: true,
     emptyOutDir: true,
-    outDir: 'dist'
+    outDir: 'dist',
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
-    }
-  }
+      '@': resolve(__dirname, 'src'),
+    },
+  },
 })

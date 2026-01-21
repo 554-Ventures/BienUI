@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   ToastProvider,
   useToast,
-  
+
   // Interactive
   Button,
   Tooltip,
@@ -17,7 +17,7 @@ import {
   DraggableList,
   FileDrop,
   Panel,
-  
+
   // Display
   Text,
   Card,
@@ -35,7 +35,7 @@ import {
   DescriptionTerm,
   DescriptionDetails,
   ColorSwatch,
-  
+
   // Forms
   Input,
   Checkbox,
@@ -48,13 +48,13 @@ import {
   MultiSelect,
   Slider,
   DatePicker,
-  
+
   // Navigation
   Link,
   Breadcrumb,
   Header,
   Sidenav,
-  
+
   // Layout
   Container,
   Grid,
@@ -63,7 +63,7 @@ import {
   Divider,
   Spacer,
   Section,
-  
+
   // Feedback
   Modal,
   Accordion,
@@ -73,10 +73,10 @@ import {
   Loading,
   Stepper,
   Tabs,
-  
+
   // Utils
   ThinkingText,
-  
+
   // Icons
   PlusIcon,
   DownloadIcon,
@@ -1218,8 +1218,8 @@ function DemoContent() {
                     </Text>
                     <Text truncate>
                       This is a very long text that will be truncated with an
-                      ellipsis when it exceeds the container width. You won&apos;t
-                      see the rest of this sentence.
+                      ellipsis when it exceeds the container width. You
+                      won&apos;t see the rest of this sentence.
                     </Text>
                   </div>
                   <div>
@@ -8285,7 +8285,7 @@ function DemoContent() {
                   data={Array.from({ length: 15 }, (_, i) => ({
                     id: String(i + 1).padStart(3, '0'),
                     transaction: `Transaction ${i + 1}`,
-                    amount: `$${((i + 1) * 127.43 % 1000).toFixed(2)}`,
+                    amount: `$${(((i + 1) * 127.43) % 1000).toFixed(2)}`,
                     date: `2026-01-${String(i + 1).padStart(2, '0')}`,
                     status:
                       i % 3 === 0
@@ -8437,7 +8437,7 @@ function DemoContent() {
                     customer: `Customer ${i + 1}`,
                     email: `customer${i + 1}@example.com`,
                     status: i % 3 === 0 ? 'Active' : 'Pending',
-                    amount: `$${((i + 1) * 73.21 % 500 + 50).toFixed(2)}`,
+                    amount: `$${((((i + 1) * 73.21) % 500) + 50).toFixed(2)}`,
                   }))}
                 />
               </Card>
@@ -10339,8 +10339,8 @@ function DemoContent() {
                     ]}
                   >
                     <Text size="sm">
-                      Limited time: Get 50% off your first month. Don&apos;t miss out
-                      on this exclusive deal!
+                      Limited time: Get 50% off your first month. Don&apos;t
+                      miss out on this exclusive deal!
                     </Text>
                   </Callout>
                 </VStack>

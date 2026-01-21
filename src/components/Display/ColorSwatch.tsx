@@ -1,4 +1,3 @@
-
 export interface ColorSwatchProps {
   name: string
   hex: string

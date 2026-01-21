@@ -1,4 +1,3 @@
-
 export interface StackProps {
   children: React.ReactNode
   direction?: 'vertical' | 'horizontal'

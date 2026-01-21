@@ -1,4 +1,3 @@
-
 export interface SectionProps {
   children: React.ReactNode
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'

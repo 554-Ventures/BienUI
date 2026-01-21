@@ -85,7 +85,7 @@ export function ThinkingText({
       const timer = setTimeout(() => {
         setIsComplete(true)
         onComplete?.()
-        
+
         if (loop) {
           setTimeout(() => {
             setDisplayedText('')

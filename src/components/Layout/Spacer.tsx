@@ -1,4 +1,3 @@
-
 export interface SpacerProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
   axis?: 'vertical' | 'horizontal' | 'both'
