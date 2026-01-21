@@ -286,12 +286,38 @@ const illustrations = {
 
 export type EmptyStateIllustration = keyof typeof illustrations
 
+/**
+ * Props for the EmptyState component
+ */
 export interface EmptyStateProps {
+  /**
+   * The illustration to display in the empty state. Can be a predefined illustration type or a custom React node.
+   */
   illustration?: EmptyStateIllustration | ReactNode
+
+  /**
+   * The main title text to display in the empty state.
+   */
   title: string
+
+  /**
+   * Optional description text to provide additional context about the empty state.
+   */
   description?: string
+
+  /**
+   * Optional action element (like a button) to help users resolve the empty state.
+   */
   action?: ReactNode
+
+  /**
+   * Optional CSS class name for custom styling.
+   */
   className?: string
+
+  /**
+   * Optional inline styles to apply to the component.
+   */
   style?: React.CSSProperties
 }
 
@@ -307,7 +333,7 @@ export function EmptyState({
 
   const illustrationElement =
     typeof illustration === 'string'
-      ? illustrations[illustration]
+      ? illustrations[illustration as EmptyStateIllustration]
       : illustration
 
   return (

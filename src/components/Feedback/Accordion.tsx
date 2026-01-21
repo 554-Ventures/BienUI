@@ -21,17 +21,33 @@ export const useAccordionContext = () => {
   return context
 }
 
+/**
+ * Props for the Accordion component
+ */
 export interface AccordionProps {
+  /** The accordion items to render */
   children: ReactNode
+  /** Visual style variant of the accordion */
   variant?: 'default' | 'bordered' | 'filled' | 'ai'
+  /** Allow multiple items to be expanded simultaneously */
   allowMultiple?: boolean
+  /** Default expanded item(s) */
   defaultValue?: string | string[]
+  /** Controlled expanded item(s) */
   value?: string | string[]
+  /** Callback when expanded items change */
   onValueChange?: (value: string | string[]) => void
+  /** Additional CSS class name */
   className?: string
+  /** Inline styles */
   style?: React.CSSProperties
 }
 
+/**
+ * Accordion component for creating collapsible content sections.
+ * Allows users to expand and collapse information panels. Perfect for FAQs,
+ * settings panels, and organizing content in a compact space.
+ */
 export function AccordionRoot({
   children,
   variant = 'default',

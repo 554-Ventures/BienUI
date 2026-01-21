@@ -1,8 +1,16 @@
+/**
+ * Props for the Loading component
+ */
 export interface LoadingProps {
+  /** Size of the loading indicator. Defaults to 'md' if not specified */
   size?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Visual style variant of the loading indicator. Defaults to 'spinner' if not specified */
   variant?: 'spinner' | 'dots' | 'pulse' | 'ring'
+  /** Optional message to display alongside the loading indicator */
   message?: string
+  /** Additional CSS class names to apply to the loading component */
   className?: string
+  /** Inline styles to apply to the loading component */
   style?: React.CSSProperties
 }
 

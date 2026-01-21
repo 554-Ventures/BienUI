@@ -4,7 +4,7 @@ import { Text } from '../components/Display/Text'
 import { Grid } from '../components/Layout/Grid'
 
 const meta = {
-  title: 'Display/ColorSwatch',
+  title: 'Design System/ColorSwatch',
   component: ColorSwatch,
   parameters: {
     layout: 'fullscreen',

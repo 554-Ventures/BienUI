@@ -266,7 +266,9 @@ export function Table<T = Record<string, unknown>>({
                             row,
                             rowIndex
                           )
-                        : (row as Record<string, unknown>)[column.key]}
+                        : ((row as Record<string, unknown>)[
+                            column.key
+                          ] as ReactNode)}
                     </td>
                   ))}
                 </tr>
