@@ -84,14 +84,10 @@ jobs:
 
       - name: Create GitHub Release
         if: steps.bump_version.outputs.new_version != steps.current_version.outputs.version
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.bump_version.outputs.new_version }}
-          release_name: Release v${{ steps.bump_version.outputs.new_version }}
-          body: |
-            🚀 **Storybook Deployment v${{ steps.bump_version.outputs.new_version }}**
+        run: |
+          gh release create v${{ steps.bump_version.outputs.new_version }} \
+            --title "Release v${{ steps.bump_version.outputs.new_version }}" \
+            --notes "🚀 **Storybook Deployment v${{ steps.bump_version.outputs.new_version }}**
             
             ## What's included:
             - 📚 Updated component documentation
@@ -102,6 +98,7 @@ jobs:
             - 📖 [Storybook Documentation](${{ steps.deployment.outputs.page_url }})
             - 🔧 [Component Library](https://github.com/${{ github.repository }})
             
-            Auto-generated from commit: ${{ github.sha }}
-          draft: false
-          prerelease: false
+            Auto-generated from commit: ${{ github.sha }}" \
+            --latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
