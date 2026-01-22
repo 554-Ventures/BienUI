@@ -78,7 +78,8 @@ export function Table<T = Record<string, unknown>>({
   selectable = false,
   selectedRows = [],
   onSelectionChange,
-  rowKey = (row: T) => (row as Record<string, unknown>).id || String(row),
+  rowKey = (row: T) =>
+    String((row as Record<string, unknown>).id) || String(row),
   onRowClick,
   emptyState,
   caption,
@@ -135,7 +136,19 @@ export function Table<T = Record<string, unknown>>({
 
       if (aValue === bValue) return 0
 
-      const comparison = aValue > bValue ? 1 : -1
+      // Handle different types for comparison
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        const comparison = aValue.localeCompare(bValue)
+        return sortDirection === 'asc' ? comparison : -comparison
+      }
+
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        const comparison = aValue - bValue
+        return sortDirection === 'asc' ? comparison : -comparison
+      }
+
+      // Fallback to string comparison
+      const comparison = String(aValue).localeCompare(String(bValue))
       return sortDirection === 'asc' ? comparison : -comparison
     })
   }

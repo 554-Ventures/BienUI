@@ -11,6 +11,8 @@
     "src/**/*.stories.tsx",
     "src/**/*.test.tsx",
     "src/**/*.spec.tsx",
+    "src/app/**/*",
+    "src/main.tsx",
     "**/*.d.ts"
   ]
 }

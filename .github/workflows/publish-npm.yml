@@ -1,0 +1,129 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      tag:
+        description: 'NPM tag'
+        required: true
+        default: 'latest'
+        type: choice
+        options:
+          - latest
+          - beta
+          - alpha
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests and linting
+        run: |
+          yarn lint
+          yarn format:check
+
+      - name: Build library
+        run: yarn build:lib
+
+      - name: Version bump (if manual trigger)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          yarn version --${{ github.event.inputs.version-type }} --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          git add package.json
+          git commit -m "🔖 Bump version to v$NEW_VERSION"
+          git tag "v$NEW_VERSION"
+          git push origin HEAD --follow-tags
+
+      - name: Get version (if tag trigger)
+        if: github.event_name == 'push'
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Dry run publish
+        run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to NPM
+        run: |
+          if [ "${{ github.event.inputs.tag }}" = "" ]; then
+            npm publish --tag latest
+          else
+            npm publish --tag ${{ github.event.inputs.tag }}
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          gh release create v${{ env.NEW_VERSION }} \
+            --title "Release v${{ env.NEW_VERSION }}" \
+            --notes "🚀 **@bien/ui v${{ env.NEW_VERSION }}**
+            
+            ## 📦 Installation
+            \`\`\`bash
+            npm install @bien/ui
+            # or
+            yarn add @bien/ui
+            \`\`\`
+            
+            ## 📚 Documentation
+            - [Storybook Documentation](https://anhbien.github.io/BienUI/)
+            - [GitHub Repository](https://github.com/${{ github.repository }})
+            
+            ## What's New
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for detailed changes.
+            
+            Auto-published from commit: ${{ github.sha }}" \
+            --latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Storybook deployment
+        run: |
+          echo "📚 Triggering Storybook deployment with new version..."
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/dispatches" \
+            -d '{"event_type":"storybook_deploy"}'
