@@ -1,6 +1,6 @@
 {
   "name": "@bien/ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A comprehensive React component library with design tokens",
   "type": "module",
   "main": "./dist/bien-ui.cjs.js",
