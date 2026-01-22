@@ -7,7 +7,7 @@ const bienDarkTheme = create({
   base: 'dark',
 
   // Brand
-  brandTitle: `@bien/ui v${version}`,
+  brandTitle: `@bienui/core v${version}`,
   brandUrl: '/',
   brandTarget: '_self',
 
