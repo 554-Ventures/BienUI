@@ -36,9 +36,9 @@
   "style": "./dist/bien-ui.css",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/bien-ui.esm.js",
-      "require": "./dist/bien-ui.cjs.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/bien-ui.cjs.js"
     },
     "./styles": "./dist/bien-ui.css"
   },
