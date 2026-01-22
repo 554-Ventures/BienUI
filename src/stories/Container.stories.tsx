@@ -156,7 +156,7 @@ export const AllSizes: Story = {
                   as="p"
                   style={{ color: 'var(--color-text-secondary)', margin: 0 }}
                 >
-                  This container uses the "{size}" size constraint
+                  This container uses the &quot;{size}&quot; size constraint
                 </Text>
               </Card>
             </Container>
@@ -205,7 +205,7 @@ export const PaddingVariants: Story = {
                   as="p"
                   style={{ color: 'var(--color-text-secondary)', margin: 0 }}
                 >
-                  Container internal padding is set to "{padding}"
+                  Container internal padding is set to &quot;{padding}&quot;
                 </Text>
               </Card>
             </Container>

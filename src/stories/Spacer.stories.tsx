@@ -159,8 +159,8 @@ export const BothAxes: Story = {
         <Text
           style={{ margin: '0 0 2rem 0', color: 'var(--color-text-secondary)' }}
         >
-          Spacers with axis="both" add spacing in all directions, useful for
-          creating breathing room around elements.
+          Spacers with axis=&quot;both&quot; add spacing in all directions,
+          useful for creating breathing room around elements.
         </Text>
 
         {sizes.map((size) => (

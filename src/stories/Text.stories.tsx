@@ -598,7 +598,8 @@ export const TypographyShowcase: Story = {
         >
           <VStack gap="xs">
             <Text size="sm">
-              • Use size="4xl" for hero headlines and major page titles
+              • Use size=&quot;4xl&quot; for hero headlines and major page
+              titles
             </Text>
             <Text size="sm">
               • Gradient text works best on large sizes (xl and above)

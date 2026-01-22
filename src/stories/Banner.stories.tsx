@@ -200,16 +200,16 @@ export const AllVariants: Story = {
 
         <Banner variant="error">
           <Text size="sm">
-            <strong>Payment Failed:</strong> We couldn't process your payment.
-            Please update your billing information to continue using premium
-            features.
+            <strong>Payment Failed:</strong> We couldn&apos;t process your
+            payment. Please update your billing information to continue using
+            premium features.
           </Text>
         </Banner>
 
         <Banner variant="neutral">
           <Text size="sm">
             <strong>Pro Tip:</strong> Use keyboard shortcuts to navigate faster.
-            Press '?' to view all available shortcuts.
+            Press &apos;?&apos; to view all available shortcuts.
           </Text>
         </Banner>
       </VStack>
@@ -352,8 +352,9 @@ export const CustomIcons: Story = {
               New Features Available
             </Text>
             <Text size="sm">
-              We've released advanced analytics, team collaboration tools, and
-              improved performance. Check out what's new in your dashboard.
+              We&apos;ve released advanced analytics, team collaboration tools,
+              and improved performance. Check out what&apos;s new in your
+              dashboard.
             </Text>
           </VStack>
         </Banner>
@@ -482,7 +483,7 @@ export const UserOnboarding: Story = {
               Step 3: Connect Integrations ✓
             </Text>
             <Text size="sm">
-              Great! You've connected GitHub and Slack to streamline your
+              Great! You&apos;ve connected GitHub and Slack to streamline your
               workflow.
             </Text>
           </VStack>
@@ -553,7 +554,7 @@ export const PaymentAndBilling: Story = {
                 Payment Failed
               </Text>
               <Text size="sm">
-                We couldn't charge your card. Your subscription will be
+                We couldn&apos;t charge your card. Your subscription will be
                 suspended in 3 days if not resolved.
               </Text>
             </VStack>
@@ -722,8 +723,8 @@ export const AllVariationsShowcase: Story = {
                 }}
               >
                 <Text size="sm">
-                  🎉 <strong>New features available!</strong> Discover what's
-                  new in this release.
+                  🎉 <strong>New features available!</strong> Discover
+                  what&apos;s new in this release.
                 </Text>
                 <Button size="sm" variant="primary">
                   Explore
