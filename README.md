@@ -93,7 +93,46 @@ pnpm version-packages
 
 # Build and publish packages to npm
 pnpm release
+
+# Manual version bumping
+npm run version:patch  # 0.1.0 -> 0.1.1
+npm run version:minor  # 0.1.0 -> 0.2.0  
+npm run version:major  # 0.1.0 -> 1.0.0
 ```
+
+## 🚀 Deployment & GitHub Pages
+
+### Automatic Deployment
+- **🔄 Auto-deploy**: Every push to `main`/`master` triggers automatic deployment
+- **📈 Auto-versioning**: Version number automatically bumps on each deploy
+- **🏷️ Auto-releases**: GitHub releases created automatically with changelog
+- **📚 Live Storybook**: Available at your GitHub Pages URL
+
+### Deployment Process
+1. **Push to main/master branch**
+2. **GitHub Actions automatically**:
+   - Bumps patch version (0.1.0 → 0.1.1)
+   - Commits version change
+   - Builds Storybook with accessibility testing
+   - Deploys to GitHub Pages
+   - Creates GitHub release with changelog
+
+### Manual Deployment
+
+```bash
+# Test build locally
+npm run build-storybook
+
+# Test deploy command (builds only)
+npm run deploy:storybook
+```
+
+### Setup GitHub Pages (One-time)
+1. Go to repository **Settings** → **Pages**
+2. Set **Source** to "GitHub Actions"
+3. The workflow will handle the rest automatically
+
+**Live Storybook URL**: `https://<username>.github.io/<repository-name>/`
 
 ## 📚 Using Bien UI in Your App
 
