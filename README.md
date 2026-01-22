@@ -1,66 +1,72 @@
-# Bien UI
+# BienUI Core
 
-A production-ready, token-first React component library built with:
+A production-ready, accessibility-first React component library built with:
 
-- **pnpm workspaces** for monorepo management
-- **TypeScript** for type safety
-- **Radix UI** primitives for accessibility
-- **vanilla-extract** for type-safe styling
+- **TypeScript** for type safety and excellent DX
+- **Radix UI** primitives for robust accessibility
+- **Comprehensive Storybook** documentation with a11y testing
 - **Token-first theming** with light/dark modes + comfortable/compact density
-- **Storybook** for documentation
-- **tsup** for fast builds
-- **changesets** for versioning and publishing
+- **Modern build system** with ESM/CJS dual output
+- **CI/CD automation** for seamless publishing
 
-## 📦 Packages
+## 📦 Installation
 
-- **`@bien/tokens`** - Design tokens (colors, spacing, typography, etc.)
-- **`@bien/ui`** - React component library
+```bash
+npm install @bienui/core
+# or
+yarn add @bienui/core
+# or
+pnpm add @bienui/core
+```
 
-## 🚀 Quick Start
+## 🚀 Development
 
-### Installation
+### Quick Start
 
 ```bash
 # Install dependencies
-pnpm install
-
-# Build all packages
-pnpm build
+yarn install
 
 # Start Storybook (development)
-pnpm storybook
+yarn storybook
+
+# Build library
+yarn build:lib
 ```
 
 ### Build Commands
 
 ```bash
-# Build all packages in the workspace
-pnpm build
-
-# Build and watch for changes
-pnpm --filter @bien/tokens dev
-pnpm --filter @bien/ui dev
+# Build the component library
+yarn build:lib
 
 # Build Storybook for production
-pnpm build:storybook
+yarn build-storybook
+
+# Preview Vite build
+yarn preview
 ```
 
 ### Development Commands
 
 ```bash
 # Run Storybook (development mode)
-pnpm dev
-# or
-pnpm storybook
+yarn storybook
 
 # Lint code
-pnpm lint
+yarn lint
+
+# Fix linting issues
+yarn lint:fix
 
 # Format code
-pnpm format
+yarn format
 
 # Format check (CI)
-pnpm format:check
+yarn format:check
+
+# Dry run publish
+yarn publish:dry
 ```
 
 ### Code Formatting (Auto-setup) 
@@ -69,7 +75,7 @@ pnpm format:check
 
 - **On Commit**: Husky + lint-staged auto-formats staged files
 - **On Save**: VS Code auto-formats when you save (if you have Prettier extension)
-- **Manual**: Run `pnpm format` to format all files
+- **Manual**: Run `yarn format` to format all files
 
 **Setup for new developers:**
 1. Install recommended VS Code extensions (prompted automatically)
@@ -85,19 +91,19 @@ pnpm format:check
 ### Versioning & Publishing
 
 ```bash
-# Create a changeset (describe your changes)
-pnpm changeset
-
-# Version packages based on changesets
-pnpm version-packages
-
-# Build and publish packages to npm
-pnpm release
-
 # Manual version bumping
-npm run version:patch  # 0.1.0 -> 0.1.1
-npm run version:minor  # 0.1.0 -> 0.2.0  
-npm run version:major  # 0.1.0 -> 1.0.0
+yarn version:patch  # 1.0.0 -> 1.0.1
+yarn version:minor  # 1.0.0 -> 1.1.0  
+yarn version:major  # 1.0.0 -> 2.0.0
+
+# Build library
+yarn build:lib
+
+# Test publish (dry run)
+yarn publish:dry
+
+# Publish to npm (via GitHub Actions)
+# Go to Actions -> Publish to NPM -> Run workflow
 ```
 
 ## 🚀 Deployment & GitHub Pages
@@ -132,14 +138,18 @@ npm run deploy:storybook
 2. Set **Source** to "GitHub Actions"
 3. The workflow will handle the rest automatically
 
-**Live Storybook URL**: `https://<username>.github.io/<repository-name>/`
+**Live Storybook URL**: `https://554-ventures.github.io/BienUI/`
 
-## 📚 Using Bien UI in Your App
+## 📚 Using BienUI Core in Your App
 
-### 1. Install packages
+### 1. Install package
 
 ```bash
-pnpm add @bien/tokens @bien/ui
+npm install @bienui/core
+# or
+yarn add @bienui/core
+# or 
+pnpm add @bienui/core
 ```
 
 ### 2. Setup providers and styles
@@ -147,8 +157,8 @@ pnpm add @bien/tokens @bien/ui
 In your app entry point (`main.tsx` or `App.tsx`):
 
 ```tsx
-import { BienProvider, TooltipProvider, ToastProvider } from '@bien/ui';
-import '@bien/tokens/styles.css';
+import { BienProvider, TooltipProvider, ToastProvider } from '@bienui/core';
+import '@bienui/core/styles';
 
 function App() {
   return (
@@ -166,7 +176,7 @@ function App() {
 ### 3. Use components
 
 ```tsx
-import { Button, Input, Card, Modal, Text } from '@bien/ui';
+import { Button, Input, Card, Modal, Text } from '@bienui/core';
 
 function MyComponent() {
   return (
@@ -185,7 +195,7 @@ function MyComponent() {
 
 ```tsx
 import { useState } from 'react';
-import { BienProvider } from '@bien/ui';
+import { BienProvider } from '@bienui/core';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -205,10 +215,10 @@ function App() {
 }
 ```
 
-### Using tokens in custom components
+### Using design tokens in custom components
 
 ```tsx
-import { tokens } from '@bien/tokens';
+import { tokens } from '@bienui/core';
 import { style } from '@vanilla-extract/css';
 
 export const myCustomStyle = style({
@@ -284,42 +294,30 @@ export const myCustomStyle = style({
 ## 📂 Project Structure
 
 ```
-bien-ui-monorepo/
-├── .changeset/             # Changesets configuration
-├── packages/
-│   ├── tokens/            # Design tokens package
-│   │   ├── src/
-│   │   │   ├── primitives.ts    # Raw token values
-│   │   │   ├── contract.ts      # Token contract
-│   │   │   ├── themes.ts        # Light/dark themes
-│   │   │   ├── density.ts       # Density variants
-│   │   │   ├── global.css.ts    # Global styles
-│   │   │   └── index.ts
-│   │   ├── package.json
-│   │   └── tsup.config.ts
-│   └── ui/                # Component library
-│       ├── src/
-│       │   ├── components/
-│       │   │   ├── Button/
-│       │   │   ├── Text/
-│       │   │   ├── Card/
-│       │   │   ├── Input/
-│       │   │   ├── Modal/
-│       │   │   ├── Tooltip/
-│       │   │   ├── Tabs/
-│       │   │   └── Toast/
-│       │   ├── provider.tsx
-│       │   └── index.ts
-│       ├── package.json
-│       └── tsup.config.ts
-├── apps/
-│   └── storybook/         # Storybook documentation
-│       ├── .storybook/
-│       ├── stories/
-│       └── package.json
-├── package.json           # Root package.json
-├── pnpm-workspace.yaml    # Workspace configuration
-├── tsconfig.json          # Shared TypeScript config
+bienui-core/
+├── .github/
+│   └── workflows/          # GitHub Actions
+│       ├── deploy-storybook.yml
+│       └── publish-npm.yml
+├── .storybook/            # Storybook configuration
+├── src/
+│   ├── components/        # React components
+│   │   ├── Display/       # Avatar, Badge, Card, Text, etc.
+│   │   ├── Forms/         # Input, Checkbox, Select, etc.
+│   │   ├── Interactive/   # Button, Menu, Panel, etc.
+│   │   ├── Layout/        # Container, Grid, Stack, etc.
+│   │   ├── Navigation/    # Breadcrumb, Header, Link, etc.
+│   │   └── Feedback/      # Banner, Modal, Toast, etc.
+│   ├── tokens/            # Design tokens
+│   │   ├── primitives.ts  # Raw token values
+│   │   ├── themes.css.ts  # Light/dark themes
+│   │   └── index.ts
+│   ├── provider.tsx       # Main provider
+│   └── index.ts
+├── stories/               # Storybook stories
+├── dist/                  # Built output
+├── package.json
+├── vite.config.lib.ts     # Library build config
 └── README.md
 ```
 
@@ -327,43 +325,53 @@ bien-ui-monorepo/
 
 ### Package Exports
 
-Both packages are configured with proper exports for ESM, CJS, and TypeScript:
+The package is configured with proper exports for ESM, CJS, and TypeScript:
 
 ```json
 {
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/bien-ui.esm.js",
+      "require": "./dist/bien-ui.cjs.js"
     },
-    "./styles.css": "./dist/index.css"
+    "./styles": "./dist/bien-ui.css"
   }
 }
 ```
 
 ### Peer Dependencies
 
-`@bien/ui` marks React as a peer dependency:
+`@bienui/core` marks React as a peer dependency:
 
 ```json
 {
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   }
 }
 ```
 
 ## 🧪 Testing in Consuming Apps
 
-Before publishing, you can test the packages locally using pnpm link or by referencing the workspace:
+Before publishing, you can test the package locally using npm/yarn link:
+
+```bash
+# In BienUI Core project
+yarn build:lib
+yarn link
+
+# In your test project
+yarn link @bienui/core
+```
+
+Or install directly from file:
 
 ```json
 {
   "dependencies": {
-    "@bien/tokens": "workspace:*",
-    "@bien/ui": "workspace:*"
+    "@bienui/core": "file:../path/to/BienUI"
   }
 }
 ```
@@ -373,40 +381,41 @@ Before publishing, you can test the packages locally using pnpm link or by refer
 Run Storybook to explore all components, variants, and usage examples:
 
 ```bash
-pnpm storybook
+yarn storybook
 ```
 
 Storybook includes:
 - Interactive component playground
 - Auto-generated prop documentation
+- Accessibility testing with @storybook/addon-a11y
 - Theme switcher (light/dark)
 - Density switcher (comfortable/compact)
 - Live code examples
 
 ## 🚢 Publishing Workflow
 
-1. Make changes to packages
-2. Create a changeset:
+1. Make changes to components
+2. Update version in package.json:
    ```bash
-   pnpm changeset
+   yarn version:patch  # or minor/major
    ```
-3. Commit the changeset
-4. When ready to release:
-   ```bash
-   pnpm version-packages  # Updates versions
-   pnpm release           # Builds and publishes
-   ```
+3. Commit and push changes
+4. Use GitHub Actions to publish:
+   - Go to **Actions** → **Publish to NPM**
+   - Click **Run workflow**
+   - Select version type and npm tag
+   - The workflow will build and publish automatically
 
 ## 🛠️ Tech Stack
 
 - **React 18** - UI library
 - **TypeScript 5** - Type safety
-- **vanilla-extract** - Zero-runtime CSS-in-JS
-- **Radix UI** - Accessible component primitives
-- **tsup** - Fast TypeScript bundler
-- **Storybook 7** - Component documentation
-- **changesets** - Version management
-- **pnpm** - Fast, efficient package manager
+- **Radix UI** - Accessible component primitives  
+- **Lucide React** - Icon library
+- **Vite** - Fast build tool and dev server
+- **Storybook 8** - Component documentation with a11y testing
+- **GitHub Actions** - CI/CD automation
+- **yarn** - Package manager
 
 ## 📝 License
 

@@ -62,22 +62,10 @@ jobs:
       - name: Build library
         run: yarn build:lib
 
-      - name: Version bump (if manual trigger)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Get current version
         run: |
-          yarn version --${{ github.event.inputs.version-type }} --no-git-tag-version
-          NEW_VERSION=$(node -p "require('./package.json').version")
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-          git add package.json
-          git commit -m "🔖 Bump version to v$NEW_VERSION"
-          git tag "v$NEW_VERSION"
-          git push origin HEAD --follow-tags
-
-      - name: Get version (if tag trigger)
-        if: github.event_name == 'push'
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
-          echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
       - name: Dry run publish
         run: npm publish --dry-run
@@ -94,36 +82,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Create GitHub Release
+      - name: Success notification
         run: |
-          gh release create v${{ env.NEW_VERSION }} \
-            --title "Release v${{ env.NEW_VERSION }}" \
-            --notes "🚀 **@bien/ui v${{ env.NEW_VERSION }}**
-            
-            ## 📦 Installation
-            \`\`\`bash
-            npm install @bien/ui
-            # or
-            yarn add @bien/ui
-            \`\`\`
-            
-            ## 📚 Documentation
-            - [Storybook Documentation](https://anhbien.github.io/BienUI/)
-            - [GitHub Repository](https://github.com/${{ github.repository }})
-            
-            ## What's New
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for detailed changes.
-            
-            Auto-published from commit: ${{ github.sha }}" \
-            --latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update Storybook deployment
-        run: |
-          echo "📚 Triggering Storybook deployment with new version..."
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/dispatches" \
-            -d '{"event_type":"storybook_deploy"}'
+          echo "🎉 Successfully published @bienui/ui@${{ env.CURRENT_VERSION }} to npm!"
+          echo "📦 Package URL: https://www.npmjs.com/package/@bienui/ui"
