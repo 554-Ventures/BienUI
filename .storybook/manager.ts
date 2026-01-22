@@ -1,12 +1,13 @@
 import { addons } from '@storybook/manager-api'
 import { create } from '@storybook/theming'
+import { version } from '../package.json'
 
 // Create a custom dark theme that matches your brand
 const bienDarkTheme = create({
   base: 'dark',
 
   // Brand
-  brandTitle: '@bien/ui',
+  brandTitle: `@bien/ui v${version}`,
   brandUrl: '/',
   brandTarget: '_self',
 
