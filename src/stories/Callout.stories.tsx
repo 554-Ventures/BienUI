@@ -21,7 +21,7 @@ const meta: Meta<typeof Callout> = {
     docs: {
       description: {
         component: `
-The Callout component creates expandable popover content that displays additional information, confirmations, or interactive elements. It's perfect for contextual help, confirmations, and progressive disclosure.
+The Callout component creates expandable popover content that displays additional information, confirmations, or interactive elements. It&apos;s perfect for contextual help, confirmations, and progressive disclosure.
 
 **Key Features:**
 - **Multiple variants**: Default, glass-frost, and glass-tint styles

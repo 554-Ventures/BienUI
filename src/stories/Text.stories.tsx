@@ -396,8 +396,8 @@ export const TextTruncation: Story = {
             </Text>
             <Text truncate>
               This is a very long text that will be truncated with an ellipsis
-              when it exceeds the container width. You won't see the rest of
-              this sentence.
+              when it exceeds the container width. You won&apos;t see the rest
+              of this sentence.
             </Text>
           </div>
 

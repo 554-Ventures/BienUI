@@ -15,7 +15,7 @@ const meta: Meta<typeof EmptyState> = {
     docs: {
       description: {
         component: `
-The EmptyState component displays helpful messages and actions when there's no content to show. It guides users on what to do next and maintains engagement during empty or loading states.
+The EmptyState component displays helpful messages and actions when there&apos;s no content to show. It guides users on what to do next and maintains engagement during empty or loading states.
 
 **Key Features:**
 - **Clear messaging**: Descriptive titles and explanations for empty states

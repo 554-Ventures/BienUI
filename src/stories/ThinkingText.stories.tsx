@@ -349,7 +349,7 @@ export const ChatInterface: Story = {
       },
       {
         variant: 'generating' as const,
-        text: "Here's a comprehensive solution with code examples and best practices...",
+        text: 'Here&apos;s a comprehensive solution with code examples and best practices...',
       },
     ]
 

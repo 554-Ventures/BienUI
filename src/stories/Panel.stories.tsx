@@ -5,18 +5,12 @@ import { Panel } from '../components/Interactive/Panel'
 import { Card } from '../components/Display/Card'
 import { Text } from '../components/Display/Text'
 import { Button } from '../components/Interactive/Button'
-import { Input } from '../components/Forms/Input'
 import { Avatar } from '../components/Display/Avatar'
-import { Badge } from '../components/Display/Badge'
 import {
   HomeIcon,
   UsersIcon,
   SettingsIcon,
   FileTextIcon,
-  SearchIcon,
-  PlusIcon,
-  MessageCircleIcon,
-  CalendarIcon,
   BarChart3Icon,
   FolderIcon,
   StarIcon,

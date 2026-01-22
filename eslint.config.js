@@ -7,7 +7,16 @@ import tsparser from '@typescript-eslint/parser'
 import react from 'eslint-plugin-react'
 
 export default [
-  { ignores: ['dist', 'node_modules', '**/*.d.ts', 'tmp/**'] },
+  {
+    ignores: [
+      'dist',
+      'node_modules',
+      '**/*.d.ts',
+      'tmp/**',
+      'storybook-static/**',
+      '.storybook/manager-head.html',
+    ],
+  },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {

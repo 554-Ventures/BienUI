@@ -349,7 +349,10 @@ export const StepByStepTour: Story = {
         position: 'center' as const,
       },
       { label: 'This is the header section', position: 'top-left' as const },
-      { label: "Here's the main content area", position: 'center' as const },
+      {
+        label: 'Here&apos;s the main content area',
+        position: 'center' as const,
+      },
       {
         label: 'And this is the action panel',
         position: 'bottom-right' as const,

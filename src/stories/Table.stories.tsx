@@ -11,12 +11,7 @@ import {
   Callout,
   HStack,
 } from '..'
-import {
-  SearchIcon,
-  SparklesIcon,
-  SettingsIcon,
-  TrashIcon,
-} from '../components/Icons'
+import { SparklesIcon, SettingsIcon, TrashIcon } from '../components/Icons'
 import { Eye, Edit, MoreHorizontal } from 'lucide-react'
 
 const meta = {
@@ -816,7 +811,7 @@ export const TransactionHistory: Story = {
               status: 'Failed',
             },
           ]}
-          renderCell={(value, column, row) => {
+          renderCell={(value, column, _row) => {
             if (column.key === 'amount') {
               const isCredit = value.startsWith('+')
               return (
