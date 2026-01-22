@@ -152,17 +152,18 @@ yarn add @bienui/core
 pnpm add @bienui/core
 ```
 
-### 2. Setup providers and styles
+### 2. Setup providers
 
 In your app entry point (`main.tsx` or `App.tsx`):
 
 ```tsx
 import { BienProvider, TooltipProvider, ToastProvider } from '@bienui/core';
-import '@bienui/core/styles';
+// Import styles if needed
+import '@bienui/core/dist/bien-ui.css';
 
 function App() {
   return (
-    <BienProvider theme="light" density="comfortable">
+    <BienProvider>
       <TooltipProvider>
         <ToastProvider>
           {/* Your app content */}
@@ -176,14 +177,18 @@ function App() {
 ### 3. Use components
 
 ```tsx
-import { Button, Input, Card, Modal, Text } from '@bienui/core';
+import { Button, Input, Card, Text, VStack } from '@bienui/core';
 
 function MyComponent() {
   return (
     <Card>
-      <Text weight="semibold" size="lg">Welcome</Text>
-      <Input label="Email" placeholder="you@example.com" />
-      <Button variant="primary">Submit</Button>
+      <VStack gap="md">
+        <Text as="h2" size="lg" weight="semibold">
+          Welcome
+        </Text>
+        <Input placeholder="Enter your email" />
+        <Button variant="primary">Get Started</Button>
+      </VStack>
     </Card>
   );
 }
@@ -191,24 +196,23 @@ function MyComponent() {
 
 ## 🎨 Theming
 
-### Switch theme dynamically
+### Theme switching
 
 ```tsx
 import { useState } from 'react';
-import { BienProvider } from '@bienui/core';
+import { BienProvider, Button } from '@bienui/core';
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [density, setDensity] = useState<'comfortable' | 'compact'>('comfortable');
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <BienProvider theme={theme} density={density}>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-        Toggle Theme
-      </button>
-      <button onClick={() => setDensity(density === 'comfortable' ? 'compact' : 'comfortable')}>
-        Toggle Density
-      </button>
+    <BienProvider className={isDark ? 'dark' : 'light'}>
+      <Button 
+        onClick={() => setIsDark(!isDark)}
+        variant="secondary"
+      >
+        Switch to {isDark ? 'Light' : 'Dark'} Mode
+      </Button>
       {/* Your app */}
     </BienProvider>
   );
@@ -218,30 +222,168 @@ function App() {
 ### Using design tokens in custom components
 
 ```tsx
-import { tokens } from '@bienui/core';
-import { style } from '@vanilla-extract/css';
+// Access design tokens via CSS custom properties
+export const CustomCard = () => (
+  <div 
+    style={{
+      backgroundColor: 'var(--surface-base)',
+      padding: 'var(--space-md)',
+      borderRadius: 'var(--radius-lg)',
+      border: '1px solid var(--border-base)',
+    }}
+  >
+    Custom styled component
+  </div>
+);
 
-export const myCustomStyle = style({
-  backgroundColor: tokens.color.surface.base,
-  padding: tokens.space.md,
-  borderRadius: tokens.radius.lg,
-  border: `1px solid ${tokens.color.border.base}`,
-});
+// Or use className with CSS
+// .custom-card {
+//   background-color: var(--surface-base);
+//   padding: var(--space-md);
+//   border-radius: var(--radius-lg);
+// }
 ```
 
 ## 🧩 Available Components
 
-### Core Components
+### Layout
+- **Container** - Max-width content wrapper
+- **Grid** - CSS Grid layout component
+- **VStack** / **HStack** - Vertical and horizontal stack layouts
+- **Section** - Semantic content sections
+- **Spacer** - Flexible spacing component
+- **Divider** - Visual content separators
 
-- **Button** - Multiple variants (primary, secondary, ghost, danger), sizes, loading states
-- **Text** - Typography with size, weight, tone options
-- **Card** - Content containers with elevation
-- **Input** + **FormField** - Text inputs with label, hint, error, proper ARIA
-- **Modal** - Dialog with focus trap, keyboard support (Escape to close)
-- **Drawer** - Side-positioned modal (left/right)
-- **Tooltip** - Accessible tooltips with positioning
-- **Tabs** - Tab navigation with keyboard support
-- **Toast** - Notification system with variants (success, error, warning, info)
+### Forms
+- **Input** - Text input with validation states
+- **Textarea** - Multi-line text input
+- **MarkdownTextarea** - Markdown-enabled textarea
+- **Select** / **MultiSelect** - Dropdown selections
+- **Checkbox** / **Radio** / **RadioGroup** - Selection controls
+- **Switch** - Toggle switch
+- **Slider** - Range input slider
+- **DatePicker** - Date selection input
+
+### Display
+- **Text** - Typography component with `as`, `size`, `weight` props
+- **Card** - Content container
+- **Badge** - Status indicators
+- **Avatar** / **AvatarGroup** / **ProfileAvatar** - User avatars
+- **Timeline** - Sequential event display
+- **Meter** / **CircularMeter** - Progress indicators
+- **Table** - Data tables
+- **List** / **ListItem** - List components
+- **DescriptionList** - Definition lists
+- **ColorSwatch** - Color display component
+
+### Interactive
+- **Button** - Primary interaction element
+- **Tooltip** - Contextual help
+- **Menu** / **MenuItem** / **MenuGroup** - Dropdown menus
+- **Hotspot** - Interactive markers
+- **DraggableList** - Drag and drop lists
+- **FileDrop** - File upload area
+- **Panel** - Collapsible content panels
+
+### Feedback
+- **Loading** - Loading states
+- **EmptyState** - No content messaging
+- **Banner** - Important announcements
+- **Callout** - Highlighted information
+- **Modal** - Dialog overlays
+- **Accordion** - Collapsible content
+- **Tabs** - Tabbed navigation
+- **Stepper** - Step-by-step processes
+
+### Navigation
+- **Link** - Navigation links
+- **Breadcrumb** - Hierarchical navigation
+- **Header** - Page headers
+- **Sidenav** - Sidebar navigation
+
+### Utilities
+- **ThinkingText** - Animated typing effect
+- **useToast** - Toast notification hook
+
+### Example Usage
+
+```tsx
+import { 
+  Button, 
+  Text, 
+  Card, 
+  Input, 
+  Avatar, 
+  Badge,
+  Tooltip,
+  VStack,
+  HStack,
+  useToast
+} from '@bienui/core';
+
+function Dashboard() {
+  const { toast } = useToast();
+
+  const handleSend = () => {
+    toast({
+      title: "Message sent!",
+      description: "Your message has been delivered.",
+      variant: "success"
+    });
+  };
+
+  return (
+    <Card>
+      <VStack gap="md">
+        <HStack gap="sm" align="center">
+          <Avatar src="/user.jpg" alt="User" fallback="U" />
+          <VStack gap="xs">
+            <Text as="h3" size="md" weight="semibold">
+              John Doe
+            </Text>
+            <Badge variant="success">Active</Badge>
+          </VStack>
+        </HStack>
+        
+        <Input placeholder="Enter message..." />
+        
+        <HStack gap="sm">
+          <Button variant="primary" onClick={handleSend}>
+            Send
+          </Button>
+          <Tooltip content="Save as draft">
+            <Button variant="secondary">Save</Button>
+          </Tooltip>
+        </HStack>
+      </VStack>
+    </Card>
+  );
+}
+```
+
+### Toast Notifications
+
+```tsx
+import { useToast, Button } from '@bienui/core';
+
+function NotificationExample() {
+  const { toast } = useToast();
+
+  return (
+    <Button 
+      onClick={() => {
+        toast({
+          title: "Success!",
+          description: "Operation completed successfully.",
+          variant: "success"
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+}
+```
 
 ### Component Features
 
@@ -355,8 +497,9 @@ The package is configured with proper exports for ESM, CJS, and TypeScript:
 
 ## 🧪 Testing in Consuming Apps
 
-Before publishing, you can test the package locally using npm/yarn link:
+Before publishing, you can test the package locally:
 
+### Method 1: Build and Link
 ```bash
 # In BienUI Core project
 yarn build:lib
@@ -366,12 +509,21 @@ yarn link
 yarn link @bienui/core
 ```
 
-Or install directly from file:
+### Method 2: Pack and Install
+```bash
+# In BienUI Core project
+yarn build:lib
+npm pack
 
+# This creates a .tgz file, then in your test project:
+npm install /path/to/bienui-core-1.0.0.tgz
+```
+
+### Method 3: File Reference
 ```json
 {
   "dependencies": {
-    "@bienui/core": "file:../path/to/BienUI"
+    "@bienui/core": "file:../BienUI"
   }
 }
 ```

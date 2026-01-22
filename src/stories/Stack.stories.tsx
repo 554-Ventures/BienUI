@@ -1,30 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Stack, VStack, HStack } from '../components/Layout/Stack'
+import { VStack, HStack } from '../components/Layout/Stack'
 import { Card } from '../components/Display/Card'
 import { Text } from '../components/Display/Text'
 import { Button } from '../components/Interactive/Button'
 import { Badge } from '../components/Display/Badge'
 import { Avatar } from '../components/Display/Avatar'
 
-const meta: Meta<typeof Stack> = {
+const meta: Meta<typeof VStack> = {
   title: 'Layout/Stack',
-  component: Stack,
+  component: VStack,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'A flexible layout component for arranging elements in vertical or horizontal stacks with consistent spacing and alignment. Includes VStack and HStack convenience components.',
+          'Flexible layout components for arranging elements in vertical (VStack) or horizontal (HStack) stacks with consistent spacing and alignment.',
       },
     },
   },
   tags: ['autodocs'],
   argTypes: {
-    direction: {
-      control: 'select',
-      options: ['vertical', 'horizontal'],
-      description: 'Stack direction',
-    },
     gap: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -69,18 +64,17 @@ const StackItem = ({ children, ...props }: { children: React.ReactNode }) => (
 
 export const Default: Story = {
   args: {
-    direction: 'vertical',
     gap: 'md',
     align: 'stretch',
   },
   render: (args) => (
     <div style={{ width: '300px' }}>
-      <Stack {...args}>
+      <VStack {...args}>
         <StackItem>First Item</StackItem>
         <StackItem>Second Item</StackItem>
         <StackItem>Third Item</StackItem>
         <StackItem>Fourth Item</StackItem>
-      </Stack>
+      </VStack>
     </div>
   ),
 }
