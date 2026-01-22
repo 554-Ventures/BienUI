@@ -71,3 +71,107 @@
   align-items: center;
   gap: var(--space-xs);
 }
+
+/* Input wrapper for adornments */
+.bien-input-wrapper {
+  position: relative;
+}
+
+.bien-input-wrapper--with-adornments {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-surface-base);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  padding: 0 var(--input-padding-x);
+  height: 40px;
+  transition: border-color var(--duration-fast) var(--easing);
+}
+
+.bien-input-wrapper--with-adornments:hover:not(:has(.bien-input:disabled)) {
+  border-color: var(--color-border-strong);
+}
+
+.bien-input-wrapper--with-adornments:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-focus);
+}
+
+.bien-input-wrapper--error {
+  border-color: var(--color-status-error);
+}
+
+.bien-input-wrapper--error:focus-within {
+  border-color: var(--color-status-error);
+  box-shadow: 0 0 0 1px var(--color-status-error);
+}
+
+/* Input field with adornments */
+.bien-input--with-adornments {
+  border: none;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  flex: 1;
+  min-width: 0;
+}
+
+.bien-input--with-adornments:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.bien-input--with-adornments:hover {
+  border: none;
+}
+
+.bien-input--with-start {
+  padding-left: var(--space-xs);
+}
+
+.bien-input--with-end {
+  padding-right: var(--space-xs);
+}
+
+/* Adornment elements */
+.bien-input-start-element,
+.bien-input-end-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.bien-input-start-element {
+  margin-right: var(--space-xs);
+}
+
+.bien-input-end-element {
+  margin-left: var(--space-xs);
+}
+
+/* Ensure buttons and interactive elements in adornments have proper styling */
+.bien-input-start-element button,
+.bien-input-end-element button {
+  border: none;
+  background: none;
+  padding: 2px;
+  margin: 0;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  transition: background-color var(--duration-fast) var(--easing);
+}
+
+.bien-input-start-element button:hover,
+.bien-input-end-element button:hover {
+  background-color: var(--color-interactive-hover);
+}
+
+.bien-input-start-element button:focus,
+.bien-input-end-element button:focus {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 1px;
+}

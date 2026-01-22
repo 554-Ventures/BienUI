@@ -12,8 +12,9 @@
 
 .bien-divider--vertical {
   width: 1px;
-  height: 100%;
-  display: inline-block;
+  min-height: 40px;
+  align-self: stretch;
+  flex-shrink: 0;
 }
 
 /* Spacing */
@@ -80,6 +81,7 @@
 .bien-divider--vertical.bien-divider--dashed {
   border-top: none;
   border-left: 1px dashed var(--color-border-base);
+  background: none;
 }
 
 .bien-divider--dotted {
@@ -90,6 +92,7 @@
 .bien-divider--vertical.bien-divider--dotted {
   border-top: none;
   border-left: 1px dotted var(--color-border-base);
+  background: none;
 }
 
 /* Thickness */
@@ -105,8 +108,24 @@
   width: 2px;
 }
 
+.bien-divider--vertical.bien-divider--medium.bien-divider--dashed {
+  border-left-width: 2px;
+}
+
+.bien-divider--vertical.bien-divider--medium.bien-divider--dotted {
+  border-left-width: 2px;
+}
+
 .bien-divider--vertical.bien-divider--thick {
   width: 4px;
+}
+
+.bien-divider--vertical.bien-divider--thick.bien-divider--dashed {
+  border-left-width: 4px;
+}
+
+.bien-divider--vertical.bien-divider--thick.bien-divider--dotted {
+  border-left-width: 4px;
 }
 
 /* Gradient */

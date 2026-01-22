@@ -42,5 +42,16 @@ export function Divider({
     )
   }
 
+  if (orientation === 'vertical') {
+    return (
+      <div
+        className={classes}
+        style={style}
+        role="separator"
+        aria-orientation="vertical"
+      />
+    )
+  }
+
   return <hr className={classes} style={style} />
 }

@@ -32,6 +32,16 @@ const meta = {
       control: 'text',
       description: 'Error message to display',
     },
+    startElement: {
+      control: false,
+      description:
+        'Element to display at the start of the input (e.g., search icon)',
+    },
+    endElement: {
+      control: false,
+      description:
+        'Element to display at the end of the input (e.g., clear button)',
+    },
     placeholder: {
       control: 'text',
       description: 'Placeholder text for the input',
@@ -170,6 +180,150 @@ export const NoLabel: Story = {
   },
 }
 
+export const WithStartElement: Story = {
+  render: InputWithState,
+  args: {
+    label: 'Search',
+    placeholder: 'Search products...',
+    type: 'search',
+    startElement: (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+    ),
+  },
+}
+
+export const WithEndElement: Story = {
+  render: () => {
+    const [value, setValue] = useState('Some text to clear')
+
+    return (
+      <div style={{ minWidth: '300px' }}>
+        <Input
+          label="Message"
+          placeholder="Enter your message..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          endElement={
+            value && (
+              <button
+                type="button"
+                onClick={() => setValue('')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'var(--color-text-secondary)',
+                }}
+                aria-label="Clear input"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            )
+          }
+        />
+      </div>
+    )
+  },
+}
+
+export const WithBothElements: Story = {
+  render: () => {
+    const [value, setValue] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+
+    return (
+      <div style={{ minWidth: '300px' }}>
+        <Input
+          label="Password"
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Enter your password..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          startElement={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <circle cx="12" cy="16" r="1" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          }
+          endElement={
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                color: 'var(--color-text-secondary)',
+              }}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              ) : (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              )}
+            </button>
+          }
+        />
+      </div>
+    )
+  },
+}
+
 export const DifferentTypes: Story = {
   render: () => (
     <div
@@ -210,6 +364,130 @@ export const DifferentTypes: Story = {
       />
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
+}
+
+export const AdornmentExamples: Story = {
+  render: () => {
+    const [searchValue, setSearchValue] = useState('')
+    const [currencyValue, setCurrencyValue] = useState('')
+    const [percentValue, setPercentValue] = useState('')
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          minWidth: '300px',
+        }}
+      >
+        {/* Search with icon */}
+        <Input
+          label="Search Products"
+          placeholder="Search..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          startElement={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+          }
+          endElement={
+            searchValue && (
+              <button
+                type="button"
+                onClick={() => setSearchValue('')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '2px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            )
+          }
+        />
+
+        {/* Currency input */}
+        <Input
+          label="Price"
+          type="number"
+          placeholder="0.00"
+          value={currencyValue}
+          onChange={(e) => setCurrencyValue(e.target.value)}
+          startElement={
+            <span
+              style={{ color: 'var(--color-text-secondary)', fontSize: '14px' }}
+            >
+              $
+            </span>
+          }
+        />
+
+        {/* Percentage input */}
+        <Input
+          label="Discount"
+          type="number"
+          placeholder="10"
+          value={percentValue}
+          onChange={(e) => setPercentValue(e.target.value)}
+          endElement={
+            <span
+              style={{ color: 'var(--color-text-secondary)', fontSize: '14px' }}
+            >
+              %
+            </span>
+          }
+        />
+
+        {/* Email with icon */}
+        <Input
+          label="Email Address"
+          type="email"
+          placeholder="you@example.com"
+          startElement={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          }
+        />
+      </div>
+    )
+  },
   parameters: {
     controls: { disable: true },
   },
