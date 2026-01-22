@@ -158,8 +158,8 @@ In your app entry point (`main.tsx` or `App.tsx`):
 
 ```tsx
 import { BienProvider, TooltipProvider, ToastProvider } from '@bienui/core';
-// Import styles if needed
-import '@bienui/core/dist/bien-ui.css';
+// Import styles
+import '@bienui/core/styles';
 
 function App() {
   return (

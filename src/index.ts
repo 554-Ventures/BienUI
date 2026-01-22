@@ -1,3 +1,6 @@
+// === STYLES ===
+import './styles/index.css'
+
 // === PROVIDERS ===
 export { BienProvider } from './components/Providers'
 export { TooltipProvider } from './components/Providers'
