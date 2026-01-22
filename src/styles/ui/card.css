@@ -90,6 +90,44 @@
   );
 }
 
+/* Top Gradient Border Feature */
+.bien-card--has-top-gradient {
+  position: relative;
+  border-top: none;
+  overflow: hidden;
+}
+
+.bien-card--has-top-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  z-index: 1;
+}
+
+.bien-card--top-gradient-primary::before {
+  background: var(--gradient-primary);
+}
+
+.bien-card--top-gradient-blue::before {
+  background: var(--gradient-blue);
+}
+
+.bien-card--top-gradient-purple::before {
+  background: var(--gradient-purple);
+}
+
+.bien-card--top-gradient-accent::before {
+  background: var(--gradient-accent);
+}
+
+.bien-card--top-gradient-rainbow::before {
+  background: var(--gradient-rainbow);
+}
+
 /* Color Variants */
 .bien-card--color-blue {
   background: linear-gradient(

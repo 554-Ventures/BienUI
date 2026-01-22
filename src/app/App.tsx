@@ -15,6 +15,7 @@ import {
   MenuGroup,
   Hotspot,
   DraggableList,
+  DraggableListProvider,
   FileDrop,
   Panel,
 
@@ -150,157 +151,163 @@ function DraggableListDemo() {
   ])
 
   return (
-    <section id="draggable" className="demo-section">
-      <Text size="lg" weight="semibold">
-        🎯 Draggable List
-      </Text>
-      <VStack gap="lg">
-        {/* Basic Drag and Drop */}
-        <div>
-          <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
-            Basic Drag and Drop
-          </Text>
-          <Card>
-            <Text size="sm" weight="semibold" style={{ marginBottom: '12px' }}>
-              Reorder Items
+    <DraggableListProvider>
+      <section id="draggable" className="demo-section">
+        <Text size="lg" weight="semibold">
+          🎯 Draggable List
+        </Text>
+        <VStack gap="lg">
+          {/* Basic Drag and Drop */}
+          <div>
+            <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
+              Basic Drag and Drop
             </Text>
-            <DraggableList
-              items={people}
-              onReorder={(newItems) => {
-                setPeople(newItems)
-                toast({ title: 'List reordered!', variant: 'success' })
-              }}
-            />
-          </Card>
-        </div>
+            <Card>
+              <Text
+                size="sm"
+                weight="semibold"
+                style={{ marginBottom: '12px' }}
+              >
+                Reorder Items
+              </Text>
+              <DraggableList
+                items={people}
+                onReorder={(newItems) => {
+                  setPeople(newItems)
+                  toast({ title: 'List reordered!', variant: 'success' })
+                }}
+              />
+            </Card>
+          </div>
 
-        {/* Task List with Custom Rendering */}
-        <div>
-          <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
-            Task List (Custom Rendering)
-          </Text>
-          <Card>
-            <DraggableList
-              items={tasks}
-              onReorder={(newItems) => {
-                setTasks(newItems)
-                toast({ title: 'Tasks reordered!', variant: 'info' })
-              }}
-              renderItem={(item) => (
-                <VStack gap="xs" style={{ width: '100%' }}>
-                  <HStack
-                    gap="sm"
-                    style={{
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Text weight="semibold">{item.content}</Text>
-                    <HStack gap="xs">
-                      <Badge
-                        variant={
-                          item.priority === 'Critical'
-                            ? 'error'
-                            : item.priority === 'High'
-                              ? 'warning'
-                              : item.priority === 'Medium'
+          {/* Task List with Custom Rendering */}
+          <div>
+            <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
+              Task List (Custom Rendering)
+            </Text>
+            <Card>
+              <DraggableList
+                items={tasks}
+                onReorder={(newItems) => {
+                  setTasks(newItems)
+                  toast({ title: 'Tasks reordered!', variant: 'info' })
+                }}
+                renderItem={(item) => (
+                  <VStack gap="xs" style={{ width: '100%' }}>
+                    <HStack
+                      gap="sm"
+                      style={{
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Text weight="semibold">{item.content}</Text>
+                      <HStack gap="xs">
+                        <Badge
+                          variant={
+                            item.priority === 'Critical'
+                              ? 'error'
+                              : item.priority === 'High'
+                                ? 'warning'
+                                : item.priority === 'Medium'
+                                  ? 'primary'
+                                  : 'secondary'
+                          }
+                          size="sm"
+                        >
+                          {item.priority}
+                        </Badge>
+                        <Badge
+                          variant={
+                            item.status === 'Done'
+                              ? 'success'
+                              : item.status === 'In Progress'
                                 ? 'primary'
                                 : 'secondary'
-                        }
-                        size="sm"
-                      >
-                        {item.priority}
-                      </Badge>
-                      <Badge
-                        variant={
-                          item.status === 'Done'
-                            ? 'success'
-                            : item.status === 'In Progress'
-                              ? 'primary'
-                              : 'secondary'
-                        }
-                        size="sm"
-                      >
-                        {item.status}
-                      </Badge>
+                          }
+                          size="sm"
+                        >
+                          {item.status}
+                        </Badge>
+                      </HStack>
                     </HStack>
+                  </VStack>
+                )}
+              />
+            </Card>
+          </div>
+
+          {/* Features List with Emoji */}
+          <div>
+            <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
+              Feature Priority
+            </Text>
+            <Card>
+              <Text size="xs" tone="secondary" style={{ marginBottom: '12px' }}>
+                Drag to reorder features by priority
+              </Text>
+              <DraggableList
+                items={features}
+                onReorder={(newItems) => {
+                  setFeatures(newItems)
+                }}
+                renderItem={(item, isDragging) => (
+                  <HStack gap="sm" style={{ alignItems: 'center' }}>
+                    <Text size="lg">{item.content}</Text>
+                    {isDragging && (
+                      <Badge variant="primary" size="sm">
+                        Moving...
+                      </Badge>
+                    )}
                   </HStack>
-                </VStack>
-              )}
-            />
-          </Card>
-        </div>
+                )}
+              />
+            </Card>
+          </div>
 
-        {/* Features List with Emoji */}
-        <div>
-          <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
-            Feature Priority
-          </Text>
-          <Card>
-            <Text size="xs" tone="secondary" style={{ marginBottom: '12px' }}>
-              Drag to reorder features by priority
+          {/* Without Handle */}
+          <div>
+            <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
+              Without Drag Handle
             </Text>
-            <DraggableList
-              items={features}
-              onReorder={(newItems) => {
-                setFeatures(newItems)
-              }}
-              renderItem={(item, isDragging) => (
-                <HStack gap="sm" style={{ alignItems: 'center' }}>
-                  <Text size="lg">{item.content}</Text>
-                  {isDragging && (
-                    <Badge variant="primary" size="sm">
-                      Moving...
-                    </Badge>
-                  )}
-                </HStack>
-              )}
-            />
-          </Card>
-        </div>
+            <Card>
+              <Text size="xs" tone="secondary" style={{ marginBottom: '12px' }}>
+                Drag anywhere on the item
+              </Text>
+              <DraggableList
+                items={[
+                  { id: 1, content: '🥇 First Place' },
+                  { id: 2, content: '🥈 Second Place' },
+                  { id: 3, content: '🥉 Third Place' },
+                ]}
+                onReorder={() => {}}
+                showHandle={false}
+              />
+            </Card>
+          </div>
+        </VStack>
 
-        {/* Without Handle */}
-        <div>
-          <Text size="md" weight="semibold" style={{ marginBottom: '12px' }}>
-            Without Drag Handle
+        <Banner variant="info" style={{ marginTop: '24px' }}>
+          <Text size="sm">
+            <strong>Drag and Drop:</strong> Use DraggableList to create
+            reorderable lists. Items can be reordered by dragging with the
+            handle or the entire item.
           </Text>
-          <Card>
-            <Text size="xs" tone="secondary" style={{ marginBottom: '12px' }}>
-              Drag anywhere on the item
-            </Text>
-            <DraggableList
-              items={[
-                { id: 1, content: '🥇 First Place' },
-                { id: 2, content: '🥈 Second Place' },
-                { id: 3, content: '🥉 Third Place' },
-              ]}
-              onReorder={() => {}}
-              showHandle={false}
-            />
-          </Card>
-        </div>
-      </VStack>
+        </Banner>
 
-      <Banner variant="info" style={{ marginTop: '24px' }}>
-        <Text size="sm">
-          <strong>Drag and Drop:</strong> Use DraggableList to create
-          reorderable lists. Items can be reordered by dragging with the handle
-          or the entire item.
-        </Text>
-      </Banner>
-
-      <Callout
-        variant="tint"
-        icon={<SparklesIcon />}
-        style={{ marginTop: '16px' }}
-      >
-        <Text size="sm">
-          <strong>Custom Rendering:</strong> Use renderItem prop to customize
-          how each item looks. The isDragging parameter lets you show visual
-          feedback during drag operations.
-        </Text>
-      </Callout>
-    </section>
+        <Callout
+          variant="tint"
+          icon={<SparklesIcon />}
+          style={{ marginTop: '16px' }}
+        >
+          <Text size="sm">
+            <strong>Custom Rendering:</strong> Use renderItem prop to customize
+            how each item looks. The isDragging parameter lets you show visual
+            feedback during drag operations.
+          </Text>
+        </Callout>
+      </section>
+    </DraggableListProvider>
   )
 }
 

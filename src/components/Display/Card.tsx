@@ -15,6 +15,7 @@ export interface CardProps {
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   gradient?: 'primary' | 'purple' | 'accent' | 'blue' | 'rainbow'
+  topGradient?: 'primary' | 'purple' | 'accent' | 'blue' | 'rainbow' | false
   hoverable?: boolean
   clickable?: boolean
   bordered?: boolean
@@ -39,6 +40,7 @@ export function Card({
   radius = 'lg',
   shadow = 'sm',
   gradient,
+  topGradient,
   hoverable = false,
   clickable = false,
   bordered = false,
@@ -76,6 +78,8 @@ export function Card({
     `bien-card--radius-${radius}`,
     !gradient && `bien-card--shadow-${shadow}`,
     gradient && `bien-card--gradient-${gradient}`,
+    topGradient && 'bien-card--has-top-gradient',
+    topGradient && `bien-card--top-gradient-${topGradient}`,
     hoverable && 'bien-card--hoverable',
     clickable && 'bien-card--clickable',
     bordered && 'bien-card--bordered',

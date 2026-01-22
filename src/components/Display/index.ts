@@ -1,6 +1,7 @@
 export { Text } from './Text'
 export { Card } from './Card'
 export { Badge } from './Badge'
+export { Tags } from './Tags'
 export { Avatar, AvatarGroup } from './Avatar'
 export { ProfileAvatar } from './ProfileAvatar'
 export { Timeline } from './Timeline'

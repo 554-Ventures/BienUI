@@ -147,6 +147,7 @@
   background: var(--color-surface-raised);
   padding: 8px;
   border-bottom: 1px solid var(--color-border-base);
+  z-index: 10;
 }
 
 .bien-multi-select-search input {
@@ -164,35 +165,19 @@
   border-color: var(--color-primary);
 }
 
-.bien-multi-select-option {
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color var(--duration-fast) var(--easing);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-text-primary);
-  user-select: none;
+/* Ensure proper spacing for checkboxes in dropdown */
+.bien-multi-select-dropdown .bien-checkbox-wrapper {
+  margin: 0;
+  padding: 4px 12px;
 }
 
-.bien-multi-select-option:hover {
-  background: var(--color-interactive-hover);
+.bien-multi-select-dropdown .bien-checkbox-label {
+  width: 100%;
+  padding: 4px 0;
+  gap: 12px;
 }
 
-.bien-multi-select-option[data-selected='true'] {
-  background: var(--color-brand-subtle);
-  color: var(--color-brand-base);
-  font-weight: 500;
-}
-
-.bien-multi-select-option[data-disabled='true'] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.bien-multi-select-option[data-disabled='true']:hover {
-  background: transparent;
-}
+/* Checkbox component handles its own hover and selected states */
 
 .bien-multi-select-checkbox {
   width: 16px;

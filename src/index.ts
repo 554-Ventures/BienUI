@@ -74,6 +74,7 @@ export {
   MenuGroup,
   Hotspot,
   DraggableList,
+  DraggableListProvider,
   FileDrop,
   Panel,
 } from './components/Interactive'

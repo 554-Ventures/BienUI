@@ -23,6 +23,17 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       .filter(Boolean)
       .join(' ')
 
+    // Handle controlled vs uncontrolled pattern
+    const inputProps = { ...props }
+
+    // If both checked and defaultChecked are provided, prioritize checked (controlled)
+    if (
+      inputProps.checked !== undefined &&
+      inputProps.defaultChecked !== undefined
+    ) {
+      delete inputProps.defaultChecked
+    }
+
     return (
       <div className={classes}>
         <label className="bien-switch-label">
@@ -30,7 +41,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             ref={ref}
             type="checkbox"
             className="bien-switch-input"
-            {...props}
+            {...inputProps}
           />
           <span className={trackClasses}>
             <span className="bien-switch-thumb" />

@@ -19,6 +19,11 @@
   user-select: none;
 }
 
+/* When item has handle, default cursor for content area */
+.bien-draggable-item--with-handle {
+  cursor: default;
+}
+
 .bien-draggable-item:hover {
   border-color: var(--color-brand-base);
   box-shadow: var(--shadow-sm);

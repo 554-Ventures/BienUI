@@ -104,7 +104,7 @@
 /* Glass Frost variant */
 .bien-file-drop--glass-frost {
   background: rgba(255, 255, 255, 0.7);
-  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border: 2px dashed rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
 }

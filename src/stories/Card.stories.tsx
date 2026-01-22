@@ -38,6 +38,11 @@ const meta = {
       options: [undefined, 'primary', 'blue', 'purple', 'accent', 'rainbow'],
       description: 'Gradient background',
     },
+    topGradient: {
+      control: 'select',
+      options: [false, 'primary', 'blue', 'purple', 'accent', 'rainbow'],
+      description: 'Gradient for top border (works with any variant)',
+    },
     padding: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl'],
@@ -419,6 +424,86 @@ export const AICards: Story = {
   ),
 }
 
+export const TopGradientFeature: Story = {
+  name: 'Top Gradient Feature',
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '16px',
+        width: '900px',
+      }}
+    >
+      <Card
+        variant="elevated"
+        topGradient="primary"
+        title="Elevated + Primary"
+        subtitle="Clean with gradient accent"
+      >
+        <Text size="sm" tone="secondary">
+          The topGradient feature works with any variant for flexible design
+          combinations.
+        </Text>
+      </Card>
+      <Card
+        variant="outlined"
+        topGradient="purple"
+        title="Outlined + Purple"
+        subtitle="Strong border with gradient"
+      >
+        <Text size="sm" tone="secondary">
+          Add gradient top borders to outlined cards for enhanced visual
+          hierarchy.
+        </Text>
+      </Card>
+      <Card
+        variant="glass-frost"
+        topGradient="rainbow"
+        title="Glass Frost + Rainbow"
+        subtitle="Modern glass with color"
+      >
+        <Text size="sm">
+          Combine glassmorphism with vibrant gradient accents for stunning
+          modern interfaces.
+        </Text>
+      </Card>
+      <Card
+        variant="glass-tint"
+        topGradient="blue"
+        title="Glass Tint + Blue"
+        subtitle="Professional glass design"
+      >
+        <Text size="sm">
+          Perfect for business applications with professional blue accents on
+          glass surfaces.
+        </Text>
+      </Card>
+      <Card
+        variant="filled"
+        topGradient="accent"
+        title="Filled + Accent"
+        subtitle="Subtle with golden accent"
+      >
+        <Text size="sm" tone="secondary">
+          Highlight premium features with elegant golden gradients on any card
+          variant.
+        </Text>
+      </Card>
+      <Card
+        variant="ghost"
+        topGradient="primary"
+        title="Ghost + Primary"
+        subtitle="Minimal with brand accent"
+      >
+        <Text size="sm" tone="secondary">
+          Even transparent cards can have gradient accents for subtle branding.
+        </Text>
+      </Card>
+    </div>
+  ),
+}
+
 export const CollapsibleCards: Story = {
   name: 'Collapsible Cards',
   render: () => (
@@ -459,18 +544,19 @@ export const CollapsibleCards: Story = {
       </Card>
       <Card
         collapsible
-        variant="ai"
-        title="AI + Collapsible"
-        subtitle="Best of both worlds"
+        variant="glass-frost"
+        topGradient="rainbow"
+        title="Glass + Gradient + Collapsible"
+        subtitle="Triple combination"
       >
         <VStack gap="sm">
           <Text size="sm">
-            Combine the AI variant with collapsible functionality for stunning,
-            space-efficient cards.
+            Combine any variant with topGradient and collapsible functionality
+            for maximum flexibility.
           </Text>
           <Divider spacing="sm" />
           <Text size="sm" tone="secondary">
-            The animated gradient border remains visible even when collapsed!
+            The gradient top border works seamlessly with all card features!
           </Text>
         </VStack>
       </Card>

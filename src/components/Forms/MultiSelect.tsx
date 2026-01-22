@@ -1,4 +1,7 @@
 import { forwardRef, useState, useRef, useEffect } from 'react'
+import { Input } from './Input'
+import { Checkbox } from './Checkbox'
+import { Tags } from '../Display/Tags'
 
 export interface MultiSelectOption {
   value: string
@@ -19,7 +22,16 @@ export interface MultiSelectProps {
   required?: boolean
   searchable?: boolean
   maxTags?: number
-  variant?: 'primary' | 'accent' | 'purple'
+  variant?:
+    | 'primary'
+    | 'accent'
+    | 'purple'
+    | 'neutral'
+    | 'error'
+    | 'warning'
+    | 'info'
+    | 'gradient-primary'
+    | 'gradient-purple'
 }
 
 export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
@@ -82,8 +94,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       onChange?.(newValue)
     }
 
-    const handleRemoveTag = (optionValue: string, e: React.MouseEvent) => {
-      e.stopPropagation()
+    const handleRemoveTag = (optionValue: string) => {
       if (!disabled) {
         onChange?.(value.filter((v) => v !== optionValue))
       }
@@ -163,40 +174,21 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                   const option = options.find((opt) => opt.value === v)
                   if (!option) return null
                   return (
-                    <span
+                    <Tags
                       key={v}
-                      className={`bien-multi-select-tag bien-multi-select-tag--${variant}`}
+                      variant={variant}
+                      size="sm"
+                      onRemove={() => handleRemoveTag(v)}
+                      disabled={disabled}
                     >
                       {option.label}
-                      <button
-                        type="button"
-                        className="bien-multi-select-tag-remove"
-                        onClick={(e) => handleRemoveTag(v, e)}
-                        aria-label={`Remove ${option.label}`}
-                      >
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 2L8 8M2 8L8 2"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </button>
-                    </span>
+                    </Tags>
                   )
                 })}
                 {remainingCount > 0 && (
-                  <span
-                    className={`bien-multi-select-tag bien-multi-select-tag--${variant}`}
-                  >
+                  <Tags variant={variant} size="sm" disabled>
                     +{remainingCount} more
-                  </span>
+                  </Tags>
                 )}
               </>
             ) : (
@@ -225,7 +217,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             <div className="bien-multi-select-dropdown" role="listbox">
               {searchable && (
                 <div className="bien-multi-select-search">
-                  <input
+                  <Input
                     ref={searchInputRef}
                     type="text"
                     placeholder="Search..."
@@ -240,37 +232,16 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                 filteredOptions.map((option) => {
                   const isSelected = value.includes(option.value)
                   return (
-                    <div
+                    <Checkbox
                       key={option.value}
                       className="bien-multi-select-option"
-                      onClick={() =>
+                      checked={isSelected}
+                      disabled={option.disabled}
+                      onChange={() =>
                         handleOptionClick(option.value, option.disabled)
                       }
-                      data-selected={isSelected}
-                      data-disabled={option.disabled}
-                      role="option"
-                      aria-selected={isSelected}
-                      aria-disabled={option.disabled}
-                    >
-                      <div className="bien-multi-select-checkbox">
-                        <svg
-                          className="bien-multi-select-check-icon"
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 6L5 9L10 3"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span>{option.label}</span>
-                    </div>
+                      label={option.label}
+                    />
                   )
                 })
               ) : (

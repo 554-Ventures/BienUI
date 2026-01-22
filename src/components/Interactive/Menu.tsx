@@ -11,6 +11,8 @@ export interface MenuProps {
     | 'top-end'
     | 'left'
     | 'right'
+  /** Automatically choose best placement based on available space */
+  autoPlacement?: boolean
   /** Visual variant */
   variant?: 'default' | 'glass-frost' | 'glass-tint'
   /** Width of the menu */
@@ -28,6 +30,7 @@ export interface MenuProps {
 export function Menu({
   trigger,
   placement = 'bottom-start',
+  autoPlacement = false,
   variant = 'default',
   width = '220px',
   open: controlledOpen,
@@ -37,6 +40,7 @@ export function Menu({
 }: MenuProps) {
   const [internalOpen, setInternalOpen] = useState(false)
   const [position, setPosition] = useState({ top: 0, left: 0 })
+  const [actualPlacement, setActualPlacement] = useState(placement)
   const isControlled = controlledOpen !== undefined
   const isOpen = isControlled ? controlledOpen : internalOpen
 
@@ -60,34 +64,103 @@ export function Menu({
 
     const updatePosition = () => {
       const rect = triggerRef.current!.getBoundingClientRect()
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }
+
+      // Get menu dimensions for proper offset calculations
+      const menuElement = menuRef.current
+      const menuWidth = typeof width === 'number' ? width : 220
+      const menuHeight = menuElement ? menuElement.offsetHeight : 200 // fallback height
+
+      let bestPlacement = placement
+
+      if (autoPlacement) {
+        // Calculate available space in each direction
+        const spaceBelow = viewport.height - rect.bottom
+        const spaceAbove = rect.top
+        const spaceRight = viewport.width - rect.right
+        const spaceLeft = rect.left
+
+        // Determine best vertical placement
+        const needsVerticalSpace = menuHeight + 8 // 4px gap + some buffer
+        const preferBottom = spaceBelow >= needsVerticalSpace
+        const preferTop = spaceAbove >= needsVerticalSpace
+
+        // Determine best horizontal placement
+        const needsHorizontalSpace = menuWidth + 8 // 4px gap + some buffer
+        const preferRight = spaceRight >= needsHorizontalSpace
+        const preferLeft = spaceLeft >= needsHorizontalSpace
+
+        // Choose best placement based on available space
+        if (preferBottom && spaceBelow >= spaceAbove) {
+          bestPlacement =
+            rect.left + menuWidth <= viewport.width
+              ? 'bottom-start'
+              : 'bottom-end'
+        } else if (preferTop) {
+          bestPlacement =
+            rect.left + menuWidth <= viewport.width ? 'top-start' : 'top-end'
+        } else if (preferRight) {
+          bestPlacement = 'right'
+        } else if (preferLeft) {
+          bestPlacement = 'left'
+        } else {
+          // Fallback to bottom if no ideal space
+          bestPlacement = 'bottom-start'
+        }
+      }
+
+      setActualPlacement(bestPlacement)
+
       let top = 0
       let left = 0
 
-      switch (placement) {
+      switch (bestPlacement) {
         case 'bottom-start':
           top = rect.bottom + 4
           left = rect.left
           break
         case 'bottom-end':
           top = rect.bottom + 4
-          left = rect.right - (typeof width === 'number' ? width : 220)
+          left = rect.right - menuWidth
           break
         case 'top-start':
-          top = rect.top - 4
+          top = rect.top - menuHeight - 4
           left = rect.left
           break
         case 'top-end':
-          top = rect.top - 4
-          left = rect.right - (typeof width === 'number' ? width : 220)
+          top = rect.top - menuHeight - 4
+          left = rect.right - menuWidth
           break
         case 'left':
           top = rect.top
-          left = rect.left - 4
+          left = rect.left - menuWidth - 4
           break
         case 'right':
           top = rect.top
           left = rect.right + 4
           break
+      }
+
+      // Ensure menu stays within viewport bounds
+      if (autoPlacement) {
+        // Adjust horizontal position if menu would overflow
+        if (left + menuWidth > viewport.width) {
+          left = viewport.width - menuWidth - 8
+        }
+        if (left < 8) {
+          left = 8
+        }
+
+        // Adjust vertical position if menu would overflow
+        if (top + menuHeight > viewport.height) {
+          top = viewport.height - menuHeight - 8
+        }
+        if (top < 8) {
+          top = 8
+        }
       }
 
       setPosition({ top, left })
@@ -101,7 +174,7 @@ export function Menu({
       window.removeEventListener('scroll', updatePosition, true)
       window.removeEventListener('resize', updatePosition)
     }
-  }, [isOpen, placement, width])
+  }, [isOpen, placement, width, autoPlacement])
 
   // Close on click outside
   useEffect(() => {
@@ -140,7 +213,7 @@ export function Menu({
 
   const classes = [
     'bien-menu',
-    `bien-menu--${placement}`,
+    `bien-menu--${actualPlacement}`,
     `bien-menu--${variant}`,
     isOpen && 'bien-menu--open',
     className,
