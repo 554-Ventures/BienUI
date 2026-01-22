@@ -149,7 +149,6 @@ temp/
 
 # Package manager lock files (keep pnpm-lock.yaml since this is a pnpm workspace)
 package-lock.json
-yarn.lock
 
 # Build tools
 .turbo

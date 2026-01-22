@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Configure Git
         run: |
@@ -43,7 +43,7 @@ jobs:
           git config --local user.name "GitHub Action"
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: yarn install --frozen-lockfile
 
       - name: Get current version
         id: current_version
@@ -52,7 +52,7 @@ jobs:
       - name: Bump patch version
         id: bump_version
         run: |
-          npm version patch --no-git-tag-version
+          yarn version --patch --no-git-tag-version
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
@@ -66,7 +66,7 @@ jobs:
           git push origin HEAD:${{ github.ref_name }} || echo "No changes to push"
 
       - name: Build Storybook
-        run: npm run build-storybook
+        run: yarn build-storybook
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
 

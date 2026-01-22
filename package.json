@@ -32,13 +32,13 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "prepublishOnly": "npm run build:lib",
+    "prepublishOnly": "yarn build:lib",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --output-dir storybook-static",
-    "version:patch": "npm version patch",
-    "version:minor": "npm version minor",
-    "version:major": "npm version major",
-    "deploy:storybook": "npm run build-storybook && echo 'Storybook built successfully. Push to main/master to deploy to GitHub Pages.'"
+    "version:patch": "yarn version --patch",
+    "version:minor": "yarn version --minor",
+    "version:major": "yarn version --major",
+    "deploy:storybook": "yarn build-storybook && echo 'Storybook built successfully. Push to main/master to deploy to GitHub Pages.'"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": [
