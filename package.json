@@ -1,6 +1,6 @@
 {
   "name": "@bienui/core",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Production-ready React component library with accessibility-first design, Radix UI primitives, and comprehensive Storybook documentation",
   "keywords": [
     "react",
