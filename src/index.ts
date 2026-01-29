@@ -80,6 +80,7 @@ export {
   DraggableListProvider,
   FileDrop,
   Panel,
+  Drawer,
 } from './components/Interactive'
 
 // === UTILS ===
