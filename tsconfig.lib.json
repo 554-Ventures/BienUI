@@ -6,13 +6,12 @@
     "noEmit": false,
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/types/**/*.d.ts"],
   "exclude": [
     "src/**/*.stories.tsx",
     "src/**/*.test.tsx",
     "src/**/*.spec.tsx",
     "src/app/**/*",
-    "src/main.tsx",
-    "**/*.d.ts"
+    "src/main.tsx"
   ]
 }

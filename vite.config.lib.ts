@@ -4,6 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.webp'],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
@@ -55,6 +56,10 @@ export default defineConfig({
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'bien-ui.css'
+          // Keep PNG files with original names for proper importing
+          if (assetInfo.name?.endsWith('.png')) {
+            return `assets/${assetInfo.name}`
+          }
           return assetInfo.name || 'asset'
         },
       },

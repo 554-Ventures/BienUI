@@ -1,9 +1,9 @@
 import { forwardRef } from 'react'
 
-// Import logo assets
-import logoIcon from '../../assets/logos/Workarc_icon.png'
-import logoLight from '../../assets/logos/WorkarcLogo.png'
-import logoDark from '../../assets/logos/WorkarcLogoInverse.png'
+// Import logo assets using explicit declarations to help TypeScript
+import logoIcon from '../../assets/logos/Workarc_icon.png?url'
+import logoLight from '../../assets/logos/WorkarcLogo.png?url'
+import logoDark from '../../assets/logos/WorkarcLogoInverse.png?url'
 
 export interface LogoProps {
   /** Logo variant - 'icon' uses small icon file, 'horizontal'/'stacked' use full logo with theme support */
