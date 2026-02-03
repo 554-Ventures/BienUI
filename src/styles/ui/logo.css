@@ -1,0 +1,115 @@
+/* Logo Component */
+
+.bien-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Sizes */
+.bien-logo--xs {
+  width: 1rem;
+  height: 1rem;
+}
+
+.bien-logo--sm {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.bien-logo--md {
+  width: 2rem;
+  height: 2rem;
+}
+
+.bien-logo--lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.bien-logo--xl {
+  width: 4rem;
+  height: 4rem;
+}
+
+/* Variant-specific sizing adjustments */
+.bien-logo--horizontal.bien-logo--xs {
+  width: auto;
+  height: 1rem;
+}
+
+.bien-logo--horizontal.bien-logo--sm {
+  width: auto;
+  height: 1.5rem;
+}
+
+.bien-logo--horizontal.bien-logo--md {
+  width: auto;
+  height: 2rem;
+}
+
+.bien-logo--horizontal.bien-logo--lg {
+  width: auto;
+  height: 3rem;
+}
+
+.bien-logo--horizontal.bien-logo--xl {
+  width: auto;
+  height: 4rem;
+}
+
+.bien-logo--stacked.bien-logo--xs {
+  width: auto;
+  height: 1.5rem;
+}
+
+.bien-logo--stacked.bien-logo--sm {
+  width: auto;
+  height: 2rem;
+}
+
+.bien-logo--stacked.bien-logo--md {
+  width: auto;
+  height: 2.5rem;
+}
+
+.bien-logo--stacked.bien-logo--lg {
+  width: auto;
+  height: 4rem;
+}
+
+.bien-logo--stacked.bien-logo--xl {
+  width: auto;
+  height: 5rem;
+}
+
+/* Theme variants - if needed for filtering effects */
+.bien-logo--dark {
+  /* Add any dark theme specific styles if needed */
+}
+
+.bien-logo--light {
+  /* Add any light theme specific styles if needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .bien-logo--lg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .bien-logo--horizontal.bien-logo--lg {
+    height: 2.5rem;
+  }
+
+  .bien-logo--xl {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .bien-logo--horizontal.bien-logo--xl {
+    height: 3rem;
+  }
+}

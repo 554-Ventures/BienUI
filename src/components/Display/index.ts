@@ -15,3 +15,4 @@ export {
   DescriptionDetails,
 } from './List'
 export { ColorSwatch } from './ColorSwatch'
+export { Logo } from './Logo'
