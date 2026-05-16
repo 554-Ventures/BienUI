@@ -1,0 +1,495 @@
+.bien-chatbox {
+  width: min(100%, 760px);
+  height: var(--bien-chatbox-max-height, 580px);
+  max-height: var(--bien-chatbox-max-height, 580px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(29, 117, 188, 0.14),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(169, 79, 158, 0.1),
+      transparent 46%
+    ),
+    var(--color-surface-raised);
+}
+
+.bien-chatbox__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.bien-chatbox__header-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.bien-chatbox__header-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.bien-chatbox__title-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bien-chatbox__header-tools {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.bien-chatbox__capabilities {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.bien-chatbox__capability {
+  font-size: var(--font-size-xs);
+  line-height: 1;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-base);
+  padding: 0.35rem 0.6rem;
+  background-color: var(--color-surface-base);
+}
+
+.bien-chatbox__transcript {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  scroll-behavior: smooth;
+}
+
+.bien-chatbox__empty {
+  display: grid;
+  gap: var(--space-sm);
+  border: 1px dashed var(--color-border-base);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(1, 109, 119, 0.08) 0%,
+    rgba(29, 117, 188, 0.06) 50%,
+    rgba(169, 79, 158, 0.08) 100%
+  );
+}
+
+.bien-chatbox__suggestions {
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.bien-chatbox__suggestion {
+  border: 1px solid var(--color-border-base);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.7rem;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-chatbox__suggestion:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.bien-chatbox__suggestion:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.bien-chatbox__message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  animation: bien-chatbox-message-in var(--duration-normal) var(--easing);
+}
+
+.bien-chatbox__message--user {
+  flex-direction: row-reverse;
+}
+
+.bien-chatbox__bubble {
+  max-width: min(82%, 620px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-sm) var(--space-md);
+  display: grid;
+  gap: 0.35rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.bien-chatbox__bubble--assistant {
+  background-color: var(--color-surface-base);
+}
+
+.bien-chatbox__bubble--user {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.92) 0%,
+    rgba(1, 109, 119, 0.9) 100%
+  );
+  color: var(--color-text-inverse);
+  border-color: transparent;
+}
+
+.bien-chatbox__bubble--user .bien-text {
+  color: var(--color-text-inverse);
+}
+
+.bien-chatbox__bubble--system {
+  background-color: var(--color-bg-subtle);
+  border-style: dashed;
+}
+
+.bien-chatbox__bubble--error {
+  border-color: var(--color-status-error);
+  background-color: var(--color-status-error-subtle);
+}
+
+.bien-chatbox__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.bien-chatbox__content {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  word-break: break-word;
+}
+
+.bien-chatbox__tool-calls {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__tool-call {
+  border: 1px solid var(--color-border-subtle);
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.06) 0%,
+    rgba(169, 79, 158, 0.05) 100%
+  );
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__tool-call-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__tool-call-block {
+  border-left: 2px solid var(--color-border-base);
+  padding-left: var(--space-xs);
+  display: grid;
+  gap: 2px;
+}
+
+.bien-chatbox__artifacts {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__artifact {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  background-color: var(--color-surface-base);
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__artifact-fields {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.bien-chatbox__artifact-field {
+  display: grid;
+  grid-template-columns: minmax(86px, auto) 1fr;
+  gap: var(--space-xs);
+  align-items: baseline;
+}
+
+.bien-chatbox__artifact-field dt {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.bien-chatbox__artifact-field dd {
+  margin: 0;
+  font-size: var(--font-size-xs);
+}
+
+.bien-chatbox__artifact-footer {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.bien-chatbox__citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__citation {
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  color: var(--color-primary);
+  border: 1px solid rgba(29, 117, 188, 0.28);
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-subtle);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing);
+}
+
+.bien-chatbox__citation:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-primary);
+}
+
+.bien-chatbox__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.bien-chatbox__retry {
+  justify-self: start;
+  border: 0;
+  background: transparent;
+  color: var(--color-status-error);
+  padding: 0;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}
+
+.bien-chatbox__assistant-state {
+  padding-top: var(--space-xs);
+}
+
+.bien-chatbox--streaming .bien-chatbox__assistant-state {
+  position: relative;
+  overflow: hidden;
+}
+
+.bien-chatbox--streaming .bien-chatbox__assistant-state::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(29, 117, 188, 0.12),
+    transparent
+  );
+  animation: bien-chatbox-stream-shimmer 1.8s linear infinite;
+  pointer-events: none;
+}
+
+.bien-chatbox__global-error {
+  margin: 0 var(--space-lg);
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-status-error);
+  background-color: var(--color-status-error-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.bien-chatbox__composer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+}
+
+.bien-chatbox__composer-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.bien-chatbox__composer-input textarea {
+  width: 100%;
+  resize: none;
+  min-height: 2.75rem;
+  max-height: 8rem;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-base);
+  transition: border-color var(--duration-fast) var(--easing);
+}
+
+.bien-chatbox__composer-input textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.bien-chatbox__composer-input textarea:disabled {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+.bien-chatbox__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bien-chatbox--disabled {
+  opacity: 0.8;
+}
+
+.bien-chatbox--disabled .bien-chatbox__transcript,
+.bien-chatbox--disabled .bien-chatbox__composer {
+  filter: grayscale(0.1);
+}
+
+@keyframes bien-chatbox-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bien-chatbox-stream-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 640px) {
+  .bien-chatbox {
+    max-height: min(78vh, var(--bien-chatbox-max-height, 580px));
+  }
+
+  .bien-chatbox__header,
+  .bien-chatbox__transcript,
+  .bien-chatbox__composer {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .bien-chatbox__bubble {
+    max-width: 88%;
+  }
+
+  .bien-chatbox__header-main {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bien-chatbox__header-badges {
+    width: 100%;
+  }
+
+  .bien-chatbox__header-tools {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+[data-theme='dark'] .bien-chatbox {
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(29, 117, 188, 0.2),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(169, 79, 158, 0.2),
+      transparent 46%
+    ),
+    var(--color-surface-raised);
+}
+
+[data-theme='dark'] .bien-chatbox__composer {
+  background-color: rgba(32, 40, 43, 0.45);
+}
+
+[data-theme='dark'] .bien-chatbox__bubble--assistant {
+  background-color: var(--color-bg-subtle);
+}
+
+[data-theme='dark'] .bien-chatbox__tool-call {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 117, 188, 0.12) 0%,
+    rgba(169, 79, 158, 0.12) 100%
+  );
+}

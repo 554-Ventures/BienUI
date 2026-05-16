@@ -61,6 +61,7 @@ export {
   EmptyState,
   Banner,
   Callout,
+  AIChatbox,
   Modal,
   Accordion,
   Tabs,
