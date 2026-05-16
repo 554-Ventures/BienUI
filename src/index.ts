@@ -15,6 +15,7 @@ export {
   Section,
   Spacer,
   Divider,
+  SplitPanel,
 } from './components/Layout'
 
 // === FORMS ===
@@ -40,6 +41,7 @@ export {
   Text,
   Card,
   Badge,
+  Tags,
   Avatar,
   AvatarGroup,
   ProfileAvatar,
@@ -53,6 +55,7 @@ export {
   DescriptionTerm,
   DescriptionDetails,
   ColorSwatch,
+  Logo,
 } from './components/Display'
 
 // === FEEDBACK ===
