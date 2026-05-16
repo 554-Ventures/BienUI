@@ -4,7 +4,9 @@ import { Avatar } from '../Display/Avatar'
 import { Badge } from '../Display/Badge'
 import { Text } from '../Display/Text'
 import { Button } from '../Interactive/Button'
-import { SendIcon, SparklesIcon, SettingsIcon } from '../Icons'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { SendIcon, TrashIcon } from '../Icons'
 import { ThinkingText } from '../Utils/ThinkingText'
 
 export type AIChatRole = 'assistant' | 'user' | 'system'
@@ -164,6 +166,18 @@ function getToolBadgeVariant(
   }
 }
 
+function renderMessageContent(content: React.ReactNode) {
+  if (typeof content === 'string') {
+    return (
+      <div className="bien-chatbox__markdown">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+      </div>
+    )
+  }
+
+  return content
+}
+
 export function AIChatbox({
   messages,
   inputValue,
@@ -262,13 +276,7 @@ export function AIChatbox({
         <header className="bien-chatbox__header">
           <div className="bien-chatbox__header-main">
             <div className="bien-chatbox__title-group">
-              {assistantAvatar || (
-                <Avatar
-                  size="sm"
-                  name={assistantName}
-                  icon={<SparklesIcon size={14} />}
-                />
-              )}
+              {assistantAvatar || <Avatar size="sm" name="AI" />}
               <div className="bien-chatbox__title-copy">
                 <Text as="h3" size="sm" weight="semibold" style={{ margin: 0 }}>
                   {title}
@@ -310,7 +318,7 @@ export function AIChatbox({
                 <Button
                   variant="ghost"
                   size="sm"
-                  icon={<SettingsIcon size={14} />}
+                  icon={<TrashIcon size={14} />}
                   onClick={onClearConversation}
                 >
                   Clear
@@ -373,13 +381,7 @@ export function AIChatbox({
           const avatarNode =
             message.avatarSlot ||
             (message.role === 'assistant'
-              ? assistantAvatar || (
-                  <Avatar
-                    size="xs"
-                    name={sender}
-                    icon={<SparklesIcon size={12} />}
-                  />
-                )
+              ? assistantAvatar || <Avatar size="xs" name="AI" />
               : userAvatar || <Avatar size="xs" name={sender} />)
 
           return (
@@ -399,7 +401,9 @@ export function AIChatbox({
                     </Text>
                   )}
                 </div>
-                <div className="bien-chatbox__content">{message.content}</div>
+                <div className="bien-chatbox__content">
+                  {renderMessageContent(message.content)}
+                </div>
 
                 {message.toolCalls && message.toolCalls.length > 0 && (
                   <div className="bien-chatbox__tool-calls">

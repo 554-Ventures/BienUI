@@ -82,6 +82,16 @@
 
 .bien-panel-sidebar--collapsed .bien-panel-sidebar__content {
   padding: var(--space-sm) var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bien-panel-sidebar--collapsed .bien-panel-sidebar__content > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Hide text elements when collapsed, keep icons visible */
@@ -90,7 +100,7 @@
   justify-content: center !important;
   align-items: center !important;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   min-width: 44px;
   width: 44px !important;
   height: 44px !important;
