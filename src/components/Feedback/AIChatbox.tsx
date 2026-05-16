@@ -113,7 +113,13 @@ export interface AIChatboxProps {
   autoScroll?: boolean
   showHeader?: boolean
   showComposer?: boolean
+  showEmptyState?: boolean
+  showSuggestions?: boolean
   maxHeight?: string | number
+  thinkingText?: string
+  thinkingSpeed?: 'slow' | 'normal' | 'fast'
+  streamingText?: string
+  streamingSpeed?: 'slow' | 'normal' | 'fast'
   className?: string
   style?: React.CSSProperties
 }
@@ -207,7 +213,13 @@ export function AIChatbox({
   autoScroll = true,
   showHeader = true,
   showComposer = true,
+  showEmptyState = true,
+  showSuggestions = true,
   maxHeight,
+  thinkingText = 'Thinking through your request...',
+  thinkingSpeed = 'fast',
+  streamingText = 'Generating response and streaming tokens...',
+  streamingSpeed = 'fast',
   className = '',
   style,
 }: AIChatboxProps) {
@@ -336,7 +348,7 @@ export function AIChatbox({
         aria-live="polite"
         aria-atomic="false"
       >
-        {!hasMessages && (
+        {!hasMessages && showEmptyState && (
           <div className="bien-chatbox__empty">
             {emptyState || (
               <>
@@ -350,7 +362,7 @@ export function AIChatbox({
               </>
             )}
 
-            {suggestions && suggestions.length > 0 && (
+            {showSuggestions && suggestions && suggestions.length > 0 && (
               <div className="bien-chatbox__suggestions">
                 {suggestions.map((suggestion) => (
                   <button
@@ -587,15 +599,15 @@ export function AIChatbox({
             {status === 'thinking' && (
               <ThinkingText
                 variant="thinking"
-                text="Thinking through your request..."
-                speed="fast"
+                text={thinkingText}
+                speed={thinkingSpeed}
               />
             )}
             {status === 'streaming' && (
               <ThinkingText
                 variant="generating"
-                text="Generating response and streaming tokens..."
-                speed="fast"
+                text={streamingText}
+                speed={streamingSpeed}
               />
             )}
           </div>
