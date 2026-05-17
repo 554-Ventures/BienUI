@@ -116,10 +116,9 @@ export interface AIChatboxProps {
   showEmptyState?: boolean
   showSuggestions?: boolean
   maxHeight?: string | number
-  thinkingText?: string
-  thinkingSpeed?: 'slow' | 'normal' | 'fast'
-  streamingText?: string
-  streamingSpeed?: 'slow' | 'normal' | 'fast'
+  assistantState?:
+    | React.ReactNode
+    | ((status: 'thinking' | 'streaming') => React.ReactNode)
   className?: string
   style?: React.CSSProperties
 }
@@ -216,10 +215,7 @@ export function AIChatbox({
   showEmptyState = true,
   showSuggestions = true,
   maxHeight,
-  thinkingText = 'Thinking through your request...',
-  thinkingSpeed = 'fast',
-  streamingText = 'Generating response and streaming tokens...',
-  streamingSpeed = 'fast',
+  assistantState,
   className = '',
   style,
 }: AIChatboxProps) {
@@ -596,18 +592,23 @@ export function AIChatbox({
 
         {(status === 'thinking' || status === 'streaming') && (
           <div className="bien-chatbox__assistant-state">
-            {status === 'thinking' && (
+            {assistantState ? (
+              typeof assistantState === 'function' ? (
+                assistantState(status)
+              ) : (
+                assistantState
+              )
+            ) : status === 'thinking' ? (
               <ThinkingText
                 variant="thinking"
-                text={thinkingText}
-                speed={thinkingSpeed}
+                text="Thinking through your request..."
+                speed="fast"
               />
-            )}
-            {status === 'streaming' && (
+            ) : (
               <ThinkingText
                 variant="generating"
-                text={streamingText}
-                speed={streamingSpeed}
+                text="Generating response and streaming tokens..."
+                speed="fast"
               />
             )}
           </div>
