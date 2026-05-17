@@ -361,6 +361,26 @@ export function FileIcon({ size = 24, className, style }: IconProps) {
   )
 }
 
+export function PaperclipIcon({ size = 24, className, style }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      style={style}
+    >
+      <path d="M21.44 11.05 12.25 20.25a5.5 5.5 0 0 1-7.78-7.78l9.2-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.49" />
+    </svg>
+  )
+}
+
 export function FolderIcon({ size = 24, className, style }: IconProps) {
   return (
     <svg

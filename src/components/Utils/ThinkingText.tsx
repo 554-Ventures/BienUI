@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 export interface ThinkingTextProps {
   text?: string
@@ -41,62 +41,23 @@ const variantConfig = {
   },
 }
 
-const speedConfig = {
-  slow: 80,
-  normal: 50,
-  fast: 30,
-}
-
 export function ThinkingText({
   text,
   variant = 'thinking',
-  speed = 'normal',
   showCursor = true,
-  loop = false,
   onComplete,
   className = '',
 }: ThinkingTextProps) {
-  const [displayedText, setDisplayedText] = useState('')
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isComplete, setIsComplete] = useState(false)
-
   const config = variantConfig[variant]
-  const typingSpeed = speedConfig[speed]
 
   useEffect(() => {
-    if (!text) {
-      // Use setTimeout to avoid setState in effect
-      const timer = setTimeout(() => {
-        setDisplayedText('')
-        setCurrentIndex(0)
-        setIsComplete(false)
-      }, 0)
-      return () => clearTimeout(timer)
+    if (!text || !onComplete) {
+      return
     }
 
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(text.slice(0, currentIndex + 1))
-        setCurrentIndex(currentIndex + 1)
-      }, typingSpeed)
-
-      return () => clearTimeout(timeout)
-    } else if (!isComplete) {
-      const timer = setTimeout(() => {
-        setIsComplete(true)
-        onComplete?.()
-
-        if (loop) {
-          setTimeout(() => {
-            setDisplayedText('')
-            setCurrentIndex(0)
-            setIsComplete(false)
-          }, 2000)
-        }
-      }, 0)
-      return () => clearTimeout(timer)
-    }
-  }, [currentIndex, text, typingSpeed, isComplete, loop, onComplete])
+    // Text now renders immediately without typing animation.
+    onComplete()
+  }, [text, onComplete])
 
   const classes = [
     'bien-thinking-text',
@@ -127,10 +88,8 @@ export function ThinkingText({
       <div className="bien-thinking-text__content">
         <span className="bien-thinking-text__icon">{config.icon}</span>
         <div className="bien-thinking-text__text-wrapper">
-          <span className="bien-thinking-text__text">{displayedText}</span>
-          {showCursor && !isComplete && (
-            <span className="bien-thinking-text__cursor">|</span>
-          )}
+          <span className="bien-thinking-text__text">{text}</span>
+          {showCursor && <span className="bien-thinking-text__cursor">|</span>}
         </div>
       </div>
       <div className="bien-thinking-text__shimmer"></div>

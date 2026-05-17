@@ -3,17 +3,54 @@
   position: relative;
   display: inline-block;
   padding: var(--space-md) var(--space-lg);
-  background: var(--color-surface-base);
-  border: 1px solid var(--color-border-base);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: var(--radius-lg);
   overflow: hidden;
+}
+
+.bien-thinking-text::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(0, 196, 255, 0.95) 0%,
+    rgba(123, 92, 255, 0.95) 50%,
+    rgba(48, 140, 255, 0.95) 100%
+  );
+  background-size: 260% 260%;
+  animation: bien-thinking-border-gradient 4.2s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes bien-thinking-border-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Indicator (when no text) */
 .bien-thinking-text__indicator {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 0;
 }
 
 .bien-thinking-text__label {
@@ -24,17 +61,11 @@
 
 /* Animated Dots */
 .bien-thinking-text__dots {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  display: none;
 }
 
 .bien-thinking-text__dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-brand-base);
-  border-radius: var(--radius-full);
-  animation: bien-thinking-dot 1.4s infinite ease-in-out;
+  display: none;
 }
 
 .bien-thinking-text__dot:nth-child(1) {
@@ -54,27 +85,25 @@
   60%,
   100% {
     transform: translateY(0);
-    opacity: 0.7;
+    opacity: 0.65;
   }
   30% {
-    transform: translateY(-8px);
-    opacity: 1;
+    transform: translateY(-3px);
+    opacity: 0.9;
   }
 }
 
 /* Content (with text) */
 .bien-thinking-text__content {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: 0;
   position: relative;
   z-index: 1;
 }
 
 .bien-thinking-text__icon {
-  font-size: var(--font-size-lg);
-  flex-shrink: 0;
-  animation: bien-thinking-pulse 2s infinite ease-in-out;
+  display: none;
 }
 
 @keyframes bien-thinking-pulse {
@@ -83,48 +112,26 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.04);
   }
 }
 
 .bien-thinking-text__text-wrapper {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 0;
 }
 
 .bien-thinking-text__text {
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
   line-height: 1.5;
-  background: linear-gradient(
-    90deg,
-    var(--color-text-primary) 0%,
-    var(--color-brand-base) 50%,
-    var(--color-text-primary) 100%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: bien-thinking-gradient 3s linear infinite;
-}
-
-@keyframes bien-thinking-gradient {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  font-weight: var(--font-weight-medium);
 }
 
 /* Cursor */
 .bien-thinking-text__cursor {
-  font-size: var(--font-size-base);
-  color: var(--color-brand-base);
-  animation: bien-thinking-blink 1s infinite;
-  font-weight: var(--font-weight-normal);
+  display: none;
 }
 
 @keyframes bien-thinking-blink {
@@ -140,18 +147,7 @@
 
 /* Shimmer Effect */
 .bien-thinking-text__shimmer {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(29, 117, 188, 0.1) 50%,
-    transparent 100%
-  );
-  animation: bien-thinking-shimmer 2s infinite;
+  display: none;
 }
 
 @keyframes bien-thinking-shimmer {
@@ -186,16 +182,17 @@
 
 /* Dark mode adjustments */
 [data-theme='dark'] .bien-thinking-text {
-  background: var(--color-surface-raised);
+  background: transparent;
 }
 
-[data-theme='dark'] .bien-thinking-text__shimmer {
+[data-theme='dark'] .bien-thinking-text::before {
   background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(29, 117, 188, 0.2) 50%,
-    transparent 100%
+    120deg,
+    rgba(90, 220, 255, 1) 0%,
+    rgba(173, 146, 255, 1) 50%,
+    rgba(118, 184, 255, 1) 100%
   );
+  background-size: 260% 260%;
 }
 
 /* Responsive */

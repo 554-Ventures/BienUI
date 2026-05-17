@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Card } from '../Display/Card'
 import { Avatar } from '../Display/Avatar'
 import { Badge } from '../Display/Badge'
@@ -6,7 +6,7 @@ import { Text } from '../Display/Text'
 import { Button } from '../Interactive/Button'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { SendIcon, TrashIcon } from '../Icons'
+import { PaperclipIcon, SendIcon, TrashIcon } from '../Icons'
 import { ThinkingText } from '../Utils/ThinkingText'
 
 export type AIChatRole = 'assistant' | 'user' | 'system'
@@ -115,6 +115,9 @@ export interface AIChatboxProps {
   showComposer?: boolean
   showEmptyState?: boolean
   showSuggestions?: boolean
+  onFilesSelected?: (files: File[]) => void
+  fileAccept?: string
+  fileMultiple?: boolean
   maxHeight?: string | number
   assistantState?:
     | React.ReactNode
@@ -214,6 +217,9 @@ export function AIChatbox({
   showComposer = true,
   showEmptyState = true,
   showSuggestions = true,
+  onFilesSelected,
+  fileAccept,
+  fileMultiple = true,
   maxHeight,
   assistantState,
   className = '',
@@ -228,6 +234,9 @@ export function AIChatbox({
   const hasMessages = messages.length > 0
   const statusLabel = getStatusLabel(status)
   const transcriptRef = useRef<HTMLDivElement | null>(null)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [isDragActive, setIsDragActive] = useState(false)
+  const canUploadFiles = Boolean(onFilesSelected) && !isDisabled
 
   useEffect(() => {
     if (!autoScroll || !transcriptRef.current) {
@@ -268,6 +277,63 @@ export function AIChatbox({
     }
 
     onSuggestionClick?.(suggestion)
+  }
+
+  const handleSelectedFiles = (fileList: FileList | null) => {
+    if (!fileList || !onFilesSelected || isDisabled) {
+      return
+    }
+
+    const files = Array.from(fileList)
+    if (files.length === 0) {
+      return
+    }
+
+    onFilesSelected(files)
+  }
+
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    handleSelectedFiles(event.target.files)
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
+  const handleComposerDrop = (event: React.DragEvent<HTMLElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (!canUploadFiles) {
+      setIsDragActive(false)
+      return
+    }
+
+    setIsDragActive(false)
+    handleSelectedFiles(event.dataTransfer.files)
+  }
+
+  const handleComposerDragOver = (event: React.DragEvent<HTMLElement>) => {
+    if (!canUploadFiles) {
+      return
+    }
+
+    event.preventDefault()
+    event.stopPropagation()
+    event.dataTransfer.dropEffect = 'copy'
+    setIsDragActive(true)
+  }
+
+  const handleComposerDragLeave = (event: React.DragEvent<HTMLElement>) => {
+    if (!canUploadFiles) {
+      return
+    }
+
+    event.preventDefault()
+    event.stopPropagation()
+    setIsDragActive(false)
   }
 
   return (
@@ -602,13 +668,13 @@ export function AIChatbox({
               <ThinkingText
                 variant="thinking"
                 text="Thinking through your request..."
-                speed="fast"
+                speed="normal"
               />
             ) : (
               <ThinkingText
                 variant="generating"
                 text="Generating response and streaming tokens..."
-                speed="fast"
+                speed="normal"
               />
             )}
           </div>
@@ -630,9 +696,40 @@ export function AIChatbox({
 
       {showComposer && (
         <footer
-          className="bien-chatbox__composer"
+          className={[
+            'bien-chatbox__composer',
+            isDragActive && 'bien-chatbox__composer--drag-active',
+          ]
+            .filter(Boolean)
+            .join(' ')}
           aria-label="Message composer"
+          onDragOver={handleComposerDragOver}
+          onDragEnter={handleComposerDragOver}
+          onDragLeave={handleComposerDragLeave}
+          onDrop={handleComposerDrop}
         >
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="bien-chatbox__file-input"
+            accept={fileAccept}
+            multiple={fileMultiple}
+            disabled={!canUploadFiles}
+            onChange={handleFileInputChange}
+          />
+
+          {canUploadFiles && (
+            <Button
+              size="md"
+              variant="ghost"
+              icon={<PaperclipIcon size={14} />}
+              iconOnly
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Attach file
+            </Button>
+          )}
+
           <label className="bien-chatbox__composer-input">
             <span className="bien-chatbox__sr-only">Message</span>
             <textarea
@@ -645,6 +742,13 @@ export function AIChatbox({
               readOnly={readOnly}
             />
           </label>
+
+          {isDragActive && canUploadFiles && (
+            <span className="bien-chatbox__drop-hint">
+              Drop files to upload
+            </span>
+          )}
+
           <Button
             size="md"
             variant="gradient-primary"

@@ -83,6 +83,18 @@ const meta: Meta<typeof AIChatbox> = {
     showComposer: {
       control: 'boolean',
     },
+    showEmptyState: {
+      control: 'boolean',
+    },
+    showSuggestions: {
+      control: 'boolean',
+    },
+    fileAccept: {
+      control: 'text',
+    },
+    fileMultiple: {
+      control: 'boolean',
+    },
     disabled: {
       control: 'boolean',
     },
@@ -343,6 +355,60 @@ export const ResponsivePreview: Story = {
       </VStack>
     ),
   ],
+}
+
+function FileUploadAndDropDemo() {
+  const [draft, setDraft] = useState('')
+  const [messages, setMessages] = useState<AIChatMessage[]>(baseMessages)
+
+  return (
+    <VStack gap="sm" style={{ width: 'min(100vw - 32px, 760px)' }}>
+      <Text as="p" size="sm" tone="secondary" style={{ margin: 0 }}>
+        Use the Upload button or drag files onto the composer area.
+      </Text>
+
+      <AIChatbox
+        messages={messages}
+        inputValue={draft}
+        onInputChange={setDraft}
+        onSend={(value) => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `upload-user-${Date.now()}`,
+              role: 'user',
+              content: value,
+              timestamp: 'now',
+              status: 'complete',
+            },
+          ])
+          setDraft('')
+        }}
+        onFilesSelected={(files) => {
+          const names = files.map((file) => file.name).join(', ')
+
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `upload-system-${Date.now()}`,
+              role: 'system',
+              content: `Uploaded ${files.length} file${files.length > 1 ? 's' : ''}: ${names}`,
+              timestamp: 'now',
+              status: 'complete',
+            },
+          ])
+        }}
+        fileAccept=".pdf,.png,.jpg,.jpeg,.txt,.md"
+        fileMultiple
+        status="idle"
+        maxHeight={520}
+      />
+    </VStack>
+  )
+}
+
+export const FileUploadAndDrop: Story = {
+  render: () => <FileUploadAndDropDemo />,
 }
 
 function AgenticWorkflowDemo() {

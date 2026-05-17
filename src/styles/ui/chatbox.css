@@ -410,11 +410,26 @@
   backdrop-filter: blur(8px);
 }
 
+.bien-chatbox__composer--drag-active {
+  border-top-color: var(--color-primary);
+  background-color: rgba(29, 117, 188, 0.12);
+}
+
+.bien-chatbox__file-input {
+  display: none;
+}
+
 .bien-chatbox__composer-input {
   flex: 1;
   display: flex;
   align-items: center;
   min-width: 0;
+}
+
+.bien-chatbox__drop-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  white-space: nowrap;
 }
 
 .bien-chatbox__composer-input textarea {
@@ -531,6 +546,10 @@
 
 [data-theme='dark'] .bien-chatbox__composer {
   background-color: rgba(32, 40, 43, 0.45);
+}
+
+[data-theme='dark'] .bien-chatbox__composer--drag-active {
+  background-color: rgba(29, 117, 188, 0.2);
 }
 
 [data-theme='dark'] .bien-chatbox__bubble--assistant {
