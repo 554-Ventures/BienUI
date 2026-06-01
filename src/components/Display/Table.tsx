@@ -1,6 +1,5 @@
 import { ReactNode, useState, CSSProperties } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Select } from '../Forms/Select'
+import { Pagination } from '../Navigation/Pagination'
 
 export interface TableColumn<T = Record<string, unknown>> {
   /** Unique key for the column */
@@ -290,108 +289,16 @@ export function Table<T = Record<string, unknown>>({
           </tbody>
         </table>
       </div>
-      {pagination && (
-        <div className="bien-table-pagination">
-          {onPageSizeChange && (
-            <div className="bien-table-pagination__page-size">
-              <span className="bien-table-pagination__page-size-label">
-                Rows per page:
-              </span>
-              <Select
-                value={String(pageSize)}
-                onChange={(e) => onPageSizeChange(Number(e.target.value))}
-                options={pageSizeOptions.map((size) => ({
-                  value: String(size),
-                  label: String(size),
-                }))}
-              />
-            </div>
-          )}
-          <div className="bien-table-pagination__right">
-            <div className="bien-table-pagination__info">
-              Showing {totalItems === 0 ? 0 : (page - 1) * pageSize + 1}-
-              {Math.min(page * pageSize, totalItems)} of {totalItems}
-            </div>
-            <div className="bien-table-pagination__controls">
-              <button
-                className="bien-table-pagination__button bien-table-pagination__button--icon"
-                onClick={() => onPageChange?.(page - 1)}
-                disabled={page === 1}
-                aria-label="Previous page"
-              >
-                <ChevronLeft />
-              </button>
-              {(() => {
-                const pages = []
-                const maxVisible = 5
-
-                if (totalPages <= maxVisible + 2) {
-                  // Show all pages
-                  for (let i = 1; i <= totalPages; i++) {
-                    pages.push(i)
-                  }
-                } else {
-                  // Always show first page
-                  pages.push(1)
-
-                  if (page > 3) {
-                    pages.push('...')
-                  }
-
-                  // Show pages around current page
-                  const start = Math.max(2, page - 1)
-                  const end = Math.min(totalPages - 1, page + 1)
-
-                  for (let i = start; i <= end; i++) {
-                    if (!pages.includes(i)) {
-                      pages.push(i)
-                    }
-                  }
-
-                  if (page < totalPages - 2) {
-                    pages.push('...')
-                  }
-
-                  // Always show last page
-                  if (totalPages > 1) {
-                    pages.push(totalPages)
-                  }
-                }
-
-                return pages.map((pageNum, idx) => {
-                  if (pageNum === '...') {
-                    return (
-                      <span
-                        key={`ellipsis-${idx}`}
-                        className="bien-table-pagination__ellipsis"
-                      >
-                        ...
-                      </span>
-                    )
-                  }
-
-                  return (
-                    <button
-                      key={pageNum}
-                      className={`bien-table-pagination__button ${page === pageNum ? 'bien-table-pagination__button--active' : ''}`}
-                      onClick={() => onPageChange?.(pageNum as number)}
-                    >
-                      {pageNum}
-                    </button>
-                  )
-                })
-              })()}
-              <button
-                className="bien-table-pagination__button bien-table-pagination__button--icon"
-                onClick={() => onPageChange?.(page + 1)}
-                disabled={page === totalPages}
-                aria-label="Next page"
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          </div>
-        </div>
+      {pagination && onPageChange && (
+        <Pagination
+          page={page}
+          pageSize={pageSize}
+          total={totalItems}
+          onPageChange={onPageChange}
+          onPageSizeChange={onPageSizeChange}
+          pageSizeOptions={pageSizeOptions}
+          pageSizeLabel="Rows per page:"
+        />
       )}
     </>
   )

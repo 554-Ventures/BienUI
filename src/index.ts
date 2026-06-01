@@ -34,7 +34,7 @@ export {
 } from './components/Forms'
 
 // === NAVIGATION ===
-export { Link, Breadcrumb, Header, Sidenav } from './components/Navigation'
+export { Link, Breadcrumb, Header, Sidenav, Pagination } from './components/Navigation'
 
 // === DISPLAY ===
 export {
