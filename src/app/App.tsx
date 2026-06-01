@@ -102,11 +102,20 @@ import {
   UserIcon,
   LayoutDashboardIcon,
 } from '../index'
+import type { DraggableListItem } from '../components/Interactive/DraggableList'
 import './App.css'
+
+type TaskItem = DraggableListItem & {
+  priority: 'Low' | 'Medium' | 'High' | 'Critical'
+  status: 'To Do' | 'In Progress' | 'Done'
+}
+
+type PersonItem = DraggableListItem
+type FeatureItem = DraggableListItem
 
 function DraggableListDemo() {
   const { toast } = useToast()
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<TaskItem[]>([
     {
       id: 1,
       content: 'Design homepage mockups',
@@ -134,7 +143,7 @@ function DraggableListDemo() {
     { id: 5, content: 'Review pull requests', priority: 'Low', status: 'Done' },
   ])
 
-  const [people, setPeople] = useState([
+  const [people, setPeople] = useState<PersonItem[]>([
     { id: 1, content: 'Alice Johnson' },
     { id: 2, content: 'Bob Smith' },
     { id: 3, content: 'Charlie Davis' },
@@ -142,7 +151,7 @@ function DraggableListDemo() {
     { id: 5, content: 'Eve Martinez' },
   ])
 
-  const [features, setFeatures] = useState([
+  const [features, setFeatures] = useState<FeatureItem[]>([
     { id: 1, content: '🎨 Custom theming support' },
     { id: 2, content: '🌙 Dark mode toggle' },
     { id: 3, content: '📱 Responsive design' },
@@ -173,7 +182,7 @@ function DraggableListDemo() {
               <DraggableList
                 items={people}
                 onReorder={(newItems) => {
-                  setPeople(newItems)
+                  setPeople(newItems as PersonItem[])
                   toast({ title: 'List reordered!', variant: 'success' })
                 }}
               />
@@ -189,7 +198,7 @@ function DraggableListDemo() {
               <DraggableList
                 items={tasks}
                 onReorder={(newItems) => {
-                  setTasks(newItems)
+                  setTasks(newItems as TaskItem[])
                   toast({ title: 'Tasks reordered!', variant: 'info' })
                 }}
                 renderItem={(item) => (
@@ -211,7 +220,7 @@ function DraggableListDemo() {
                                 ? 'warning'
                                 : item.priority === 'Medium'
                                   ? 'primary'
-                                  : 'secondary'
+                                  : 'neutral'
                           }
                           size="sm"
                         >
@@ -223,7 +232,7 @@ function DraggableListDemo() {
                               ? 'success'
                               : item.status === 'In Progress'
                                 ? 'primary'
-                                : 'secondary'
+                                : 'neutral'
                           }
                           size="sm"
                         >
@@ -249,7 +258,7 @@ function DraggableListDemo() {
               <DraggableList
                 items={features}
                 onReorder={(newItems) => {
-                  setFeatures(newItems)
+                  setFeatures(newItems as FeatureItem[])
                 }}
                 renderItem={(item, isDragging) => (
                   <HStack gap="sm" style={{ alignItems: 'center' }}>

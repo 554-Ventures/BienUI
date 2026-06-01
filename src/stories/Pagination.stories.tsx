@@ -95,9 +95,7 @@ export const Default: Story = {
   },
   render: (args) => {
     const [page, setPage] = useState(args.page)
-    return (
-      <Pagination {...args} page={page} onPageChange={setPage} />
-    )
+    return <Pagination {...args} page={page} onPageChange={setPage} />
   },
 }
 
@@ -244,7 +242,12 @@ export const WithList: Story = {
     return (
       <Card>
         <VStack gap="none">
-          <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border-subtle)' }}>
+          <div
+            style={{
+              padding: '16px 20px',
+              borderBottom: '1px solid var(--color-border-subtle)',
+            }}
+          >
             <Text weight="semibold">Paginated List</Text>
           </div>
           <List>
