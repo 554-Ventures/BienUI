@@ -1,6 +1,8 @@
 import { ReactNode, useState, CSSProperties } from 'react'
 import { Pagination } from '../Navigation/Pagination'
 
+const NOOP_PAGE_CHANGE = () => {}
+
 export interface TableColumn<T = Record<string, unknown>> {
   /** Unique key for the column */
   key: string
@@ -176,7 +178,6 @@ export function Table<T = Record<string, unknown>>({
 
   // Pagination calculations
   const totalItems = total || data.length
-  const totalPages = Math.ceil(totalItems / pageSize)
   const paginatedData = pagination
     ? sortedData.slice((page - 1) * pageSize, page * pageSize)
     : sortedData
@@ -289,12 +290,12 @@ export function Table<T = Record<string, unknown>>({
           </tbody>
         </table>
       </div>
-      {pagination && onPageChange && (
+      {pagination && (
         <Pagination
           page={page}
           pageSize={pageSize}
           total={totalItems}
-          onPageChange={onPageChange}
+          onPageChange={onPageChange ?? NOOP_PAGE_CHANGE}
           onPageSizeChange={onPageSizeChange}
           pageSizeOptions={pageSizeOptions}
           pageSizeLabel="Rows per page:"
