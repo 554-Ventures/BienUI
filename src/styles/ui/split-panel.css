@@ -109,6 +109,51 @@
   display: none;
 }
 
+.bien-split-panel__toggle {
+  position: absolute;
+  z-index: 20;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border-base, rgba(32, 40, 43, 0.18));
+  border-radius: 9999px;
+  background-color: var(--color-surface-raised, #fff);
+  color: var(--color-text-secondary, #4b5563);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.06));
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.bien-split-panel__toggle:hover {
+  color: var(--color-primary-500, #1d75bc);
+  border-color: var(--color-primary-500, #1d75bc);
+}
+
+.bien-split-panel__toggle:focus-visible {
+  outline: 2px solid var(--color-primary-500, #1d75bc);
+  outline-offset: 2px;
+}
+
+.bien-split-panel__toggle[data-direction='vertical'][data-collapsed='false']
+  svg {
+  transform: rotate(90deg);
+}
+
+.bien-split-panel__toggle[data-direction='vertical'][data-collapsed='true']
+  svg {
+  transform: rotate(-90deg);
+}
+
+.bien-split-panel--second-collapsed .bien-split-panel__first {
+  flex: 1 1 auto;
+}
+
 /* Nested split panels */
 .bien-split-panel .bien-split-panel {
   height: 100%;

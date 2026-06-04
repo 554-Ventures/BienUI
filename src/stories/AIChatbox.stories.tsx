@@ -77,6 +77,10 @@ const meta: Meta<typeof AIChatbox> = {
     subtitle: {
       control: 'text',
     },
+    variant: {
+      control: 'select',
+      options: ['default', 'streamlined'],
+    },
     showHeader: {
       control: 'boolean',
     },
@@ -188,6 +192,105 @@ export const EmptyState: Story = {
     ],
     maxHeight: 540,
   },
+}
+
+function StreamlinedAgenticStreamingDemo() {
+  const [draft, setDraft] = useState('')
+  const [stepIndex, setStepIndex] = useState(1)
+
+  const streamingStatus: AIChatboxStatus = stepIndex < 3 ? 'streaming' : 'idle'
+
+  const stepDefinitions = [
+    {
+      id: 'profile',
+      toolName: 'Reading your profile',
+      summary: 'Collecting profile context and recent entries.',
+    },
+    {
+      id: 'standardize',
+      toolName: 'Standardizing your achievement',
+      summary: 'Converting raw notes into normalized achievement format.',
+    },
+    {
+      id: 'log',
+      toolName: 'Logging your achievement',
+      summary: 'Writing standardized output into the activity ledger.',
+    },
+  ]
+
+  const workflowMessages: AIChatMessage[] = [
+    {
+      id: 'stream-user-1',
+      role: 'user',
+      content: 'Please process my latest achievement and log it.',
+      timestamp: '11:04',
+      status: 'complete',
+    },
+    {
+      id: 'stream-assistant-1',
+      role: 'assistant',
+      content:
+        'Running your achievement workflow as a streaming sequence. I will keep each step visible while it executes.',
+      timestamp: '11:05',
+      status: 'complete',
+      toolCalls: stepDefinitions.map((step, index) => ({
+        id: step.id,
+        toolName: step.toolName,
+        summary: step.summary,
+        status:
+          index < stepIndex
+            ? 'success'
+            : index === stepIndex
+              ? 'running'
+              : 'queued',
+      })),
+    },
+  ]
+
+  return (
+    <VStack gap="sm" style={{ width: 'min(100vw - 32px, 760px)' }}>
+      <HStack wrap gap="sm" align="center">
+        <Button
+          size="sm"
+          variant="primary"
+          onClick={() => setStepIndex((prev) => Math.min(prev + 1, 3))}
+        >
+          Advance Step
+        </Button>
+        <Button size="sm" variant="ghost" onClick={() => setStepIndex(1)}>
+          Reset Streaming
+        </Button>
+      </HStack>
+
+      <AIChatbox
+        messages={workflowMessages}
+        inputValue={draft}
+        onInputChange={setDraft}
+        onSend={(_value) => {
+          setDraft('')
+          setStepIndex(1)
+        }}
+        status={streamingStatus}
+        variant="streamlined"
+        suggestions={[
+          'Reading your profile',
+          'Standardizing your achievement',
+          'Logging your achievement',
+        ]}
+        assistantState={() => (
+          <Text as="span" size="xs" tone="secondary">
+            Reading your profile -&gt; Standardizing your achievement -&gt;
+            Logging your achievement
+          </Text>
+        )}
+        maxHeight={560}
+      />
+    </VStack>
+  )
+}
+
+export const StreamlinedModern: Story = {
+  render: () => <StreamlinedAgenticStreamingDemo />,
 }
 
 export const SendingState: Story = {

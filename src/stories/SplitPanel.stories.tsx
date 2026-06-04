@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import { SplitPanel } from '../components/Layout/SplitPanel'
 import { Text } from '../components/Display/Text'
+import { AIChatbox, type AIChatMessage } from '../components/Feedback/AIChatbox'
 
 const meta = {
   title: 'Layout/SplitPanel',
   component: SplitPanel,
+  args: {
+    children: [<div key="split-left" />, <div key="split-right" />],
+  },
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -37,6 +42,10 @@ const meta = {
       control: 'boolean',
       description: 'Whether the split is resizable',
     },
+    collapsibleSecondPanel: {
+      control: 'boolean',
+      description: 'Whether the second panel can be collapsed and toggled',
+    },
   },
 } satisfies Meta<typeof SplitPanel>
 
@@ -66,14 +75,16 @@ export const HorizontalSplit: Story = {
     initialSize: 50,
     resizable: true,
   },
-  render: (args) => (
-    <div style={{ height: '500px' }}>
-      <SplitPanel {...args}>
-        <DemoPanel title="Left Panel" bgColor="#f0f9ff" />
-        <DemoPanel title="Right Panel" bgColor="#fef3c7" />
-      </SplitPanel>
-    </div>
-  ),
+  render: (args) => {
+    return (
+      <div style={{ height: '500px' }}>
+        <SplitPanel {...args}>
+          <DemoPanel title="Left Panel" bgColor="#f0f9ff" />
+          <DemoPanel title="Right Panel" bgColor="#fef3c7" />
+        </SplitPanel>
+      </div>
+    )
+  },
 }
 
 export const VerticalSplit: Story = {
@@ -82,14 +93,16 @@ export const VerticalSplit: Story = {
     initialSize: 50,
     resizable: true,
   },
-  render: (args) => (
-    <div style={{ height: '500px' }}>
-      <SplitPanel {...args}>
-        <DemoPanel title="Top Panel" bgColor="#f0f9ff" />
-        <DemoPanel title="Bottom Panel" bgColor="#fef3c7" />
-      </SplitPanel>
-    </div>
-  ),
+  render: (args) => {
+    return (
+      <div style={{ height: '500px' }}>
+        <SplitPanel {...args}>
+          <DemoPanel title="Top Panel" bgColor="#f0f9ff" />
+          <DemoPanel title="Bottom Panel" bgColor="#fef3c7" />
+        </SplitPanel>
+      </div>
+    )
+  },
 }
 
 export const WithMinMax: Story = {
@@ -100,14 +113,19 @@ export const WithMinMax: Story = {
     maxSize: 600,
     resizable: true,
   },
-  render: (args) => (
-    <div style={{ height: '500px' }}>
-      <SplitPanel {...args}>
-        <DemoPanel title="Sidebar (min: 200px, max: 600px)" bgColor="#f0f9ff" />
-        <DemoPanel title="Main Content" bgColor="#fef3c7" />
-      </SplitPanel>
-    </div>
-  ),
+  render: (args) => {
+    return (
+      <div style={{ height: '500px' }}>
+        <SplitPanel {...args}>
+          <DemoPanel
+            title="Sidebar (min: 200px, max: 600px)"
+            bgColor="#f0f9ff"
+          />
+          <DemoPanel title="Main Content" bgColor="#fef3c7" />
+        </SplitPanel>
+      </div>
+    )
+  },
 }
 
 export const AIAssistantDashboard: Story = {
@@ -518,4 +536,161 @@ export const AIAssistantDashboard: Story = {
       </SplitPanel>
     </div>
   ),
+}
+
+function MainWithToggleableRightChatDemo() {
+  const [chatCollapsed, setChatCollapsed] = useState(false)
+  const [chatInput, setChatInput] = useState('')
+  const [chatMessages, setChatMessages] = useState<AIChatMessage[]>([
+    {
+      id: 'split-chat-assistant-1',
+      role: 'assistant',
+      content:
+        'I can turn your notes into polished release highlights. Share the sprint summary and I will draft it.',
+      timestamp: '11:15',
+      status: 'complete',
+    },
+    {
+      id: 'split-chat-user-1',
+      role: 'user',
+      content: 'Start with this sprint and keep it concise.',
+      timestamp: '11:16',
+      status: 'complete',
+    },
+  ])
+
+  return (
+    <div style={{ height: '700px' }}>
+      <SplitPanel
+        direction="horizontal"
+        initialSize={68}
+        minSize={360}
+        collapsibleSecondPanel
+        secondPanelCollapsed={chatCollapsed}
+        onSecondPanelCollapsedChange={setChatCollapsed}
+        collapseSecondPanelLabel="Hide AI chat"
+        expandSecondPanelLabel="Show AI chat"
+      >
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            height: '100%',
+            padding: '28px',
+            overflow: 'auto',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '18px',
+            }}
+          >
+            <Text as="h2" style={{ margin: 0 }}>
+              Main Content
+            </Text>
+            <button
+              type="button"
+              onClick={() => setChatCollapsed((prev) => !prev)}
+              style={{
+                border: '1px solid #d9dde2',
+                backgroundColor: '#f8fafc',
+                borderRadius: '9999px',
+                padding: '8px 14px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              {chatCollapsed ? 'Open Chat' : 'Hide Chat'}
+            </button>
+          </div>
+
+          <Text as="p" tone="secondary" style={{ marginBottom: '20px' }}>
+            Use the pill button or the floating edge toggle to show/hide the
+            right AI chat panel.
+          </Text>
+
+          <div
+            style={{
+              display: 'grid',
+              gap: '14px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            }}
+          >
+            {['Tasks', 'Draft', 'Results', 'Timeline'].map((item) => (
+              <div
+                key={item}
+                style={{
+                  border: '1px solid #e8ecf1',
+                  borderRadius: '12px',
+                  padding: '16px',
+                  backgroundColor: '#f8fafc',
+                }}
+              >
+                <Text as="h4" style={{ margin: '0 0 6px 0' }}>
+                  {item}
+                </Text>
+                <Text as="p" tone="secondary" style={{ margin: 0 }}>
+                  Workspace details stay readable when chat is hidden.
+                </Text>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            height: '100%',
+            padding: '12px',
+            backgroundColor: '#fbfcfd',
+            borderLeft: '1px solid #e8ecf1',
+          }}
+        >
+          <AIChatbox
+            variant="streamlined"
+            title="AI Chat"
+            subtitle="Ask for summaries, rewrites, and implementation help"
+            messages={chatMessages}
+            inputValue={chatInput}
+            onInputChange={setChatInput}
+            onSend={(value) => {
+              setChatMessages((prev) => [
+                ...prev,
+                {
+                  id: `split-chat-user-${Date.now()}`,
+                  role: 'user',
+                  content: value,
+                  timestamp: 'now',
+                  status: 'complete',
+                },
+                {
+                  id: `split-chat-assistant-${Date.now()}`,
+                  role: 'assistant',
+                  content:
+                    'Received. I will condense this into a crisp release-ready summary.',
+                  timestamp: 'now',
+                  status: 'complete',
+                },
+              ])
+              setChatInput('')
+            }}
+            suggestions={[
+              'Summarize this sprint in 3 bullets',
+              'Convert notes into release highlights',
+              'Extract user impact and outcomes',
+            ]}
+            onSuggestionClick={(suggestion) => setChatInput(suggestion)}
+            maxHeight="100%"
+            capabilities={['Summarize', 'Rewrite', 'Structure']}
+          />
+        </div>
+      </SplitPanel>
+    </div>
+  )
+}
+
+export const MainWithToggleableRightChat: Story = {
+  render: () => <MainWithToggleableRightChatDemo />,
 }

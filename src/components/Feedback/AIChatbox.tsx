@@ -34,6 +34,8 @@ export type AIChatActionVariant =
   | 'blue'
   | 'teal'
 
+export type AIChatboxVariant = 'default' | 'streamlined'
+
 export interface AIChatCitation {
   id: string
   label: string
@@ -122,6 +124,7 @@ export interface AIChatboxProps {
   assistantState?:
     | React.ReactNode
     | ((status: 'thinking' | 'streaming') => React.ReactNode)
+  variant?: AIChatboxVariant
   className?: string
   style?: React.CSSProperties
 }
@@ -222,10 +225,16 @@ export function AIChatbox({
   fileMultiple = true,
   maxHeight,
   assistantState,
+  variant = 'default',
   className = '',
   style,
 }: AIChatboxProps) {
-  const classes = ['bien-chatbox', `bien-chatbox--${status}`, className]
+  const classes = [
+    'bien-chatbox',
+    `bien-chatbox--${status}`,
+    `bien-chatbox--variant-${variant}`,
+    className,
+  ]
     .filter(Boolean)
     .join(' ')
 
@@ -360,18 +369,20 @@ export function AIChatbox({
                 </Text>
               </div>
             </div>
-            <div className="bien-chatbox__header-badges">
-              <Badge variant="ai" size="sm">
-                {agentModeLabel}
-              </Badge>
-              <Badge
-                variant={status === 'error' ? 'error' : 'ai'}
-                size="sm"
-                dot
-              >
-                {statusLabel}
-              </Badge>
-            </div>
+            {variant !== 'streamlined' && (
+              <div className="bien-chatbox__header-badges">
+                <Badge variant="ai" size="sm">
+                  {agentModeLabel}
+                </Badge>
+                <Badge
+                  variant={status === 'error' ? 'error' : 'ai'}
+                  size="sm"
+                  dot
+                >
+                  {statusLabel}
+                </Badge>
+              </div>
+            )}
           </div>
 
           {(capabilities && capabilities.length > 0) || onClearConversation ? (
