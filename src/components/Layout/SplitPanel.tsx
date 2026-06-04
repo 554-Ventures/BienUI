@@ -12,6 +12,8 @@ export interface SplitPanelProps {
   minSize?: number
   /** Maximum size for first panel in pixels */
   maxSize?: number
+  /** Minimum size for second panel in pixels */
+  minSecondSize?: number
   /** Whether the split is resizable */
   resizable?: boolean
   /** Whether the second (right/bottom) panel can be collapsed */
@@ -38,6 +40,7 @@ export function SplitPanel({
   initialSize = 50,
   minSize = 100,
   maxSize,
+  minSecondSize = 0,
   resizable = true,
   collapsibleSecondPanel = false,
   secondPanelCollapsed,
@@ -115,14 +118,21 @@ export function SplitPanel({
       const containerSize =
         direction === 'horizontal' ? rect.width : rect.height
       const minPercent = (minSize / containerSize) * 100
-      const maxPercent = maxSize ? (maxSize / containerSize) * 100 : 100
+      const maxPercentFromFirst = maxSize
+        ? (maxSize / containerSize) * 100
+        : 100
+      const maxPercentFromSecond = 100 - (minSecondSize / containerSize) * 100
+      const maxPercent = Math.max(
+        minPercent,
+        Math.min(maxPercentFromFirst, maxPercentFromSecond)
+      )
 
       newSize = Math.max(minPercent, Math.min(maxPercent, newSize))
 
       setSize(newSize)
       onResize?.(newSize)
     },
-    [isDragging, direction, minSize, maxSize, onResize]
+    [isDragging, direction, minSize, maxSize, minSecondSize, onResize]
   )
 
   const handleMouseUp = useCallback(() => {
@@ -164,8 +174,8 @@ export function SplitPanel({
 
   const secondPanelStyle: React.CSSProperties =
     direction === 'horizontal'
-      ? { width: `${100 - size}%` }
-      : { height: `${100 - size}%` }
+      ? { width: `${100 - size}%`, minWidth: `${minSecondSize}px` }
+      : { height: `${100 - size}%`, minHeight: `${minSecondSize}px` }
 
   const toggleStyle: React.CSSProperties =
     direction === 'horizontal'

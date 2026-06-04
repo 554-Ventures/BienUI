@@ -7,7 +7,6 @@ import { Button } from '../Interactive/Button'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { PaperclipIcon, SendIcon, TrashIcon } from '../Icons'
-import { ThinkingText } from '../Utils/ThinkingText'
 
 export type AIChatRole = 'assistant' | 'user' | 'system'
 
@@ -667,29 +666,14 @@ export function AIChatbox({
           )
         })}
 
-        {(status === 'thinking' || status === 'streaming') && (
-          <div className="bien-chatbox__assistant-state">
-            {assistantState ? (
-              typeof assistantState === 'function' ? (
-                assistantState(status)
-              ) : (
-                assistantState
-              )
-            ) : status === 'thinking' ? (
-              <ThinkingText
-                variant="thinking"
-                text="Thinking through your request..."
-                speed="normal"
-              />
-            ) : (
-              <ThinkingText
-                variant="generating"
-                text="Generating response and streaming tokens..."
-                speed="normal"
-              />
-            )}
-          </div>
-        )}
+        {(status === 'thinking' || status === 'streaming') &&
+          assistantState && (
+            <div className="bien-chatbox__assistant-state">
+              {typeof assistantState === 'function'
+                ? assistantState(status)
+                : assistantState}
+            </div>
+          )}
       </div>
 
       {status === 'error' && (
