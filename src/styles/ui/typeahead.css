@@ -1,0 +1,131 @@
+.bien-typeahead {
+  position: relative;
+  width: 100%;
+}
+
+.bien-typeahead__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: bien-typeahead-dropdown-in var(--duration-fast) var(--easing);
+}
+
+@keyframes bien-typeahead-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bien-typeahead__list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.bien-typeahead__state {
+  padding: 12px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.bien-typeahead__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing);
+}
+
+.bien-typeahead__content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bien-typeahead__option-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.bien-typeahead__option-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bien-typeahead__option:hover,
+.bien-typeahead__option--active {
+  background: var(--color-interactive-hover);
+}
+
+.bien-typeahead__option--selected .bien-typeahead__label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.bien-typeahead__selected-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bien-typeahead__option--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bien-typeahead__option--disabled:hover {
+  background: transparent;
+}
+
+.bien-typeahead__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.bien-typeahead__description {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.bien-typeahead__tags {
+  margin-top: 4px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bien-typeahead__tag {
+  pointer-events: none;
+}

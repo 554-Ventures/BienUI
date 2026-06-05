@@ -31,6 +31,7 @@ export {
   Switch,
   Slider,
   DatePicker,
+  Typeahead,
 } from './components/Forms'
 
 // === NAVIGATION ===
@@ -102,3 +103,4 @@ export * from './components/Icons'
 
 // === TYPES ===
 export type { Theme, Density, ComponentVariant, ComponentSize } from './types'
+export type { TypeaheadOption, TypeaheadProps } from './components/Forms'
