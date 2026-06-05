@@ -47,6 +47,7 @@ export type { PaginationProps } from './components/Navigation'
 // === DISPLAY ===
 export {
   Text,
+  MarkdownText,
   Card,
   Badge,
   Tags,

@@ -1,4 +1,5 @@
 export { Text } from './Text'
+export { MarkdownText } from './MarkdownText'
 export { Card } from './Card'
 export { Badge } from './Badge'
 export { Tags } from './Tags'
