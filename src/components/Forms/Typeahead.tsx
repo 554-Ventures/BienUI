@@ -73,7 +73,6 @@ export const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const [activeIndex, setActiveIndex] = useState(-1)
 
     const containerRef = useRef<HTMLDivElement>(null)
-    const inputRef = useRef<HTMLInputElement>(null)
 
     const selectedOption = useMemo(
       () => options.find((option) => option.value === value) || null,
@@ -191,15 +190,7 @@ export const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     return (
       <div className={classes} ref={containerRef}>
         <Input
-          ref={(node) => {
-            inputRef.current = node
-
-            if (typeof ref === 'function') {
-              ref(node)
-            } else if (ref) {
-              ref.current = node
-            }
-          }}
+          ref={ref}
           id={resolvedInputId}
           label={label}
           hint={hint}
