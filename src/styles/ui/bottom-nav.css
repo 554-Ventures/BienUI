@@ -1,0 +1,133 @@
+/* BottomNav Component */
+
+.bien-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--color-surface-raised);
+  border-top: 1px solid var(--color-border-base);
+  /* Keep items clear of the iOS home indicator */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bien-bottom-nav__list {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bien-bottom-nav__item {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.bien-bottom-nav__button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px; /* comfortable touch target */
+  padding: var(--space-sm) var(--space-xs);
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-family: inherit;
+  transition: color var(--duration-fast) var(--easing);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bien-bottom-nav__button:hover {
+  color: var(--color-text-primary);
+}
+
+.bien-bottom-nav__button--active {
+  color: var(--color-primary);
+}
+
+.bien-bottom-nav__button--active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  background-color: var(--color-primary);
+}
+
+.bien-bottom-nav__button:focus-visible {
+  outline: 2px solid var(--color-brand-base);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+
+.bien-bottom-nav__button[disabled],
+.bien-bottom-nav__button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.bien-bottom-nav__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bien-bottom-nav__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bien-bottom-nav__badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 16px;
+  text-align: center;
+}
+
+.bien-bottom-nav__label {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bien-bottom-nav--icons-only .bien-bottom-nav__button {
+  min-height: 48px;
+}
+
+.bien-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

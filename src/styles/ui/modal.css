@@ -329,6 +329,36 @@
   .bien-modal__footer > * {
     width: 100%;
   }
+
+  /* Bottom-sheet presentation (opt-in via mobileSheet prop) */
+  .bien-modal-overlay--mobile-sheet {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .bien-modal--mobile-sheet {
+    max-height: 90dvh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    animation: bien-modal-sheet-in var(--duration-normal) var(--easing);
+  }
+
+  .bien-modal--mobile-sheet .bien-modal__header--glass-frost,
+  .bien-modal--mobile-sheet .bien-modal__header--glass-tint {
+    border-top-left-radius: var(--radius-xl);
+    border-top-right-radius: var(--radius-xl);
+  }
+}
+
+@keyframes bien-modal-sheet-in {
+  from {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Dark mode adjustments */
