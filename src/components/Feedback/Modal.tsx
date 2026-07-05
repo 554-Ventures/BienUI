@@ -15,6 +15,12 @@ export interface ModalProps {
   gradient?: 'primary' | 'purple' | 'accent' | 'blue' | 'rainbow'
   closeOnOverlayClick?: boolean
   showCloseButton?: boolean
+  /**
+   * Present as a bottom sheet on viewports at or below 768px: anchored to
+   * the bottom edge, full width, sliding up. Desktop presentation is
+   * unchanged.
+   */
+  mobileSheet?: boolean
   className?: string
 }
 
@@ -32,6 +38,7 @@ export function Modal({
   gradient,
   closeOnOverlayClick = true,
   showCloseButton = true,
+  mobileSheet = false,
   className = '',
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -105,6 +112,7 @@ export function Modal({
     `bien-modal--${size}`,
     `bien-modal--${variant}`,
     gradient && `bien-modal--gradient-${gradient}`,
+    mobileSheet && 'bien-modal--mobile-sheet',
     className,
   ]
     .filter(Boolean)
@@ -114,7 +122,13 @@ export function Modal({
 
   const modalContent = (
     <div
-      className={`bien-modal-overlay ${size === 'fullscreen' ? 'bien-modal-overlay--fullscreen' : ''}`}
+      className={[
+        'bien-modal-overlay',
+        size === 'fullscreen' && 'bien-modal-overlay--fullscreen',
+        mobileSheet && 'bien-modal-overlay--mobile-sheet',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       onClick={handleOverlayClick}
     >
       <div className={classes} ref={modalRef} role="dialog" aria-modal="true">

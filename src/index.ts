@@ -1,6 +1,16 @@
 // === STYLES ===
 import './styles/index.css'
 
+// === RESPONSIVE ===
+export {
+  breakpoints,
+  mediaDown,
+  mediaUp,
+  resolveBreakpoint,
+} from './breakpoints'
+export type { Breakpoint } from './breakpoints'
+export { useMediaQuery, useIsMobile, useBreakpoint } from './hooks'
+
 // === PROVIDERS ===
 export { BienProvider } from './components/Providers'
 export { TooltipProvider } from './components/Providers'
@@ -38,11 +48,16 @@ export {
 export {
   Link,
   Breadcrumb,
+  BottomNav,
   Header,
   Sidenav,
   Pagination,
 } from './components/Navigation'
-export type { PaginationProps } from './components/Navigation'
+export type {
+  PaginationProps,
+  BottomNavProps,
+  BottomNavItem,
+} from './components/Navigation'
 
 // === DISPLAY ===
 export {

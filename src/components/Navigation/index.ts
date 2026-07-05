@@ -1,5 +1,7 @@
 export { Link } from './Link'
 export { Breadcrumb } from './Breadcrumb'
+export { BottomNav } from './BottomNav'
+export type { BottomNavProps, BottomNavItem } from './BottomNav'
 export { Header } from './Header'
 export { Sidenav } from './Sidenav'
 export { Pagination } from './Pagination'

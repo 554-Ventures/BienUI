@@ -125,6 +125,14 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
+
+  /* Breakpoints — informational only. Media queries cannot read custom
+     properties, so component CSS uses these pixel values as literals; the
+     canonical source is src/breakpoints.ts and both must stay in sync. */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
 }
 
 /* Dark Theme */

@@ -1,5 +1,7 @@
 import { useRef, useState, useCallback, useEffect, ReactNode } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '../Icons'
+import { Breakpoint, mediaDown } from '../../breakpoints'
+import { useMediaQuery } from '../../hooks'
 
 export interface SplitPanelProps {
   /** Child panels to render - should be exactly 2 elements */
@@ -14,6 +16,12 @@ export interface SplitPanelProps {
   maxSize?: number
   /** Minimum size for second panel in pixels */
   minSecondSize?: number
+  /**
+   * At or below this viewport width the split collapses: only the first
+   * panel renders, full-size. Present the second panel another way on small
+   * screens (e.g. in a Drawer). Pixel min sizes are ignored while collapsed.
+   */
+  collapseBelow?: Breakpoint | number
   /** Whether the split is resizable */
   resizable?: boolean
   /** Whether the second (right/bottom) panel can be collapsed */
@@ -41,6 +49,7 @@ export function SplitPanel({
   minSize = 100,
   maxSize,
   minSecondSize = 0,
+  collapseBelow,
   resizable = true,
   collapsibleSecondPanel = false,
   secondPanelCollapsed,
@@ -53,6 +62,9 @@ export function SplitPanel({
 }: SplitPanelProps) {
   const [size, setSize] = useState(initialSize)
   const [isDragging, setIsDragging] = useState(false)
+  const isViewportCollapsed = useMediaQuery(
+    collapseBelow !== undefined ? mediaDown(collapseBelow) : null
+  )
   const [
     uncontrolledSecondPanelCollapsed,
     setUncontrolledSecondPanelCollapsed,
@@ -151,6 +163,28 @@ export function SplitPanel({
       document.removeEventListener('mouseup', handleMouseUp)
     }
   }, [isDragging, isSecondPanelCollapsed, handleMouseMove, handleMouseUp])
+
+  if (isViewportCollapsed) {
+    const collapsedClasses = [
+      'bien-split-panel',
+      `bien-split-panel--${direction}`,
+      'bien-split-panel--viewport-collapsed',
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <div ref={containerRef} className={collapsedClasses}>
+        <div
+          className="bien-split-panel__first"
+          style={{ width: '100%', height: '100%' }}
+        >
+          {children[0]}
+        </div>
+      </div>
+    )
+  }
 
   const classes = [
     'bien-split-panel',

@@ -94,6 +94,8 @@
   border-right: none;
   transform: translateY(100%);
   transition: transform var(--duration-normal) var(--easing);
+  /* Keep content clear of the iOS home indicator */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .bien-drawer--bottom[data-state='open'] {
