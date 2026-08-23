@@ -68,7 +68,9 @@
     "deploy:storybook": "yarn build-storybook && echo 'Storybook built successfully. Push to main/master to deploy to GitHub Pages.'",
     "publish:dry": "npm publish --dry-run",
     "publish:beta": "npm publish --tag beta",
-    "publish:latest": "npm publish --tag latest"
+    "publish:latest": "npm publish --tag latest",
+    "storybook:mcp": "tsx scripts/storybook-mcp-server.ts",
+    "storybook:mcp:dev": "tsx scripts/storybook-mcp-server.ts --port 13316 --manifestsPath ./storybook-static"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": [
@@ -116,11 +118,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@storybook/addon-a11y": "^8.4.7",
-    "@storybook/addon-essentials": "8.4.7",
-    "@storybook/addon-themes": "^8.6.15",
-    "@storybook/react": "8.4.7",
-    "@storybook/react-vite": "8.4.7",
+    "@storybook/addon-a11y": "10.5.10",
+    "@storybook/addon-docs": "10.5.10",
+    "@storybook/addon-links": "10.5.10",
+    "@storybook/addon-themes": "10.5.10",
+    "@storybook/mcp": "^0.8.0",
+    "@storybook/react": "10.5.10",
+    "@storybook/react-vite": "10.5.10",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
@@ -143,7 +147,9 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "storybook": "8.4.7",
+    "srvx": "^0.12.0",
+    "storybook": "10.5.10",
+    "tsx": "^4.23.12",
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vitest": "^3.0.0"
