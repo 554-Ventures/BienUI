@@ -14,11 +14,7 @@ export interface HeaderProps {
   navigation?: HeaderNavItem[]
   actions?: ReactNode
   variant?:
-    | 'default'
-    | 'transparent'
-    | 'gradient'
-    | 'glass-frost'
-    | 'glass-tint'
+    'default' | 'transparent' | 'gradient' | 'glass-frost' | 'glass-tint'
   sticky?: boolean
   bordered?: boolean
   children?: ReactNode

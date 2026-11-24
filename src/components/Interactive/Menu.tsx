@@ -5,12 +5,7 @@ export interface MenuProps {
   trigger: ReactNode
   /** Placement of the menu relative to trigger */
   placement?:
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'top-start'
-    | 'top-end'
-    | 'left'
-    | 'right'
+    'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' | 'left' | 'right'
   /** Automatically choose best placement based on available space */
   autoPlacement?: boolean
   /** Visual variant */

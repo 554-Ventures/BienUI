@@ -5,12 +5,7 @@ interface PanelContextValue {
   setCollapsed: (collapsed: boolean) => void
   side: 'left' | 'right'
   variant:
-    | 'elevated'
-    | 'outlined'
-    | 'filled'
-    | 'ghost'
-    | 'glass-frost'
-    | 'glass-tint'
+    'elevated' | 'outlined' | 'filled' | 'ghost' | 'glass-frost' | 'glass-tint'
   sidebarWidth: number
   collapsedWidth: number
 }
@@ -29,12 +24,7 @@ export interface PanelGroupProps {
   children: React.ReactNode
   side?: 'left' | 'right'
   variant?:
-    | 'elevated'
-    | 'outlined'
-    | 'filled'
-    | 'ghost'
-    | 'glass-frost'
-    | 'glass-tint'
+    'elevated' | 'outlined' | 'filled' | 'ghost' | 'glass-frost' | 'glass-tint'
   defaultCollapsed?: boolean
   collapsed?: boolean
   onCollapsedChange?: (collapsed: boolean) => void

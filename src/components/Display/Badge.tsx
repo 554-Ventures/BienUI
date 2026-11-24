@@ -3,13 +3,7 @@ import { forwardRef } from 'react'
 export interface BadgeProps {
   children: React.ReactNode
   variant?:
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'info'
-    | 'neutral'
-    | 'primary'
-    | 'ai'
+    'success' | 'error' | 'warning' | 'info' | 'neutral' | 'primary' | 'ai'
   size?: 'sm' | 'md' | 'lg'
   icon?: React.ReactNode
   dot?: boolean

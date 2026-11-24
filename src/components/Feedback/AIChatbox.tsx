@@ -121,8 +121,7 @@ export interface AIChatboxProps {
   fileMultiple?: boolean
   maxHeight?: string | number
   assistantState?:
-    | React.ReactNode
-    | ((status: 'thinking' | 'streaming') => React.ReactNode)
+    React.ReactNode | ((status: 'thinking' | 'streaming') => React.ReactNode)
   variant?: AIChatboxVariant
   className?: string
   style?: React.CSSProperties
