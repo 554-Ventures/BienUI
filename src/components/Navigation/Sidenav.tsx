@@ -27,7 +27,7 @@ export function Sidenav({
   className = '',
 }: SidenavProps) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const collapseTimeoutRef = useRef<number>()
+  const collapseTimeoutRef = useRef<number>(0)
 
   const handleMouseEnter = () => {
     if (collapseTimeoutRef.current) {
